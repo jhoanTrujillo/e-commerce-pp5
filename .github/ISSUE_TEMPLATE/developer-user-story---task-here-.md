@@ -1,5 +1,5 @@
 ---
-name: 'Developer Story: <Issue Template>'
+name: 'Developer User Story: <task here>'
 about: Use to track stories that are important but not part of the user requirements
 title: Developer Story
 labels: ''
