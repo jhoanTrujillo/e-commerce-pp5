@@ -1,7 +1,7 @@
 ---
-name: 'Customer User Story: <feature here>'
+name: 'Customer User Story'
 about: Describe the needs of the users and feature acceptance criteria
-title: User story
+title: 'Customer User Story: <feature here>'
 labels: ''
 assignees: jhoanTrujillo
 

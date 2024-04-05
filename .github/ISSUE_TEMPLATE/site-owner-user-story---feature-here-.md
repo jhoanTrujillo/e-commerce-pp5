@@ -1,7 +1,7 @@
 ---
-name: 'Site Owner User Story: <feature here>'
+name: 'Site Owner User Story'
 about: Describe this issue template's purpose here.
-title: Site Owner Story
+title: 'Site Owner User Story: <feature here>'
 labels: ''
 assignees: jhoanTrujillo
 

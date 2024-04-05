@@ -1,5 +1,5 @@
 ---
-name: 'Bug: <describe bug here>'
+name: 'Bug Issue'
 about: Use template to help track bugs on the site.
 title: "[Bug]"
 labels: bug

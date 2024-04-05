@@ -1,7 +1,7 @@
 ---
-name: 'Developer User Story: <task here>'
+name: 'Developer User Story'
 about: Use to track stories that are important but not part of the user requirements
-title: Developer Story
+title: 'Developer User Story: <task here>'
 labels: ''
 assignees: jhoanTrujillo
 
