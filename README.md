@@ -9,10 +9,10 @@ Here you can find all the content in the docs and links to each individual secti
 -   [Clone and Test](#clone-and-test)
     -   [Cloning](#clone-repo)
     -   [Virtual enviroment (Venv)](#virtual-enviroment-venv)
--   Planning
-    -   Site objective
-    -	Features
-	-	Models
+-   [Planning](#planning)
+    -   [Site objective](#site-objective)
+    -	[Features](#features)
+	-	[Models](#models)
 -   UX design
     -   Wireframe
     -   Color
@@ -60,7 +60,9 @@ In terms of the project, the objective is to test my knowledge of Django and to 
 ### Features
 Below there is a list of features of the main functionalities I thought would be useful for users. They are rank by priority and ranked based on the MoSCoW method prioritisation.
 
-|-------------------------|-------------|------------|-------------|
+<details close>
+<summary>Feature list</summary>
+
 | Feature | Importance | Difficulty | Priority |
 |-------------------------|-------------|------------|-------------|
 | **Account Features** | | | |
@@ -75,7 +77,6 @@ Below there is a list of features of the main functionalities I thought would be
 | Product creation | 5 | 3 | Must have |
 | Product update | 4 | 4 | Should have |
 | Product deletion | 3 | 5 | Could have |
-
 | **Product Features (users)** | | | |
 | Product page | 5 | 4 | Must have |
 | Product Collection | 5 | 3 | Must have |
@@ -95,10 +96,14 @@ Below there is a list of features of the main functionalities I thought would be
 | Comment update | 3 | 3 | Could have |
 | Comment deletion | 3 | 4 | Could have |
 
+</details>
+
 ### Models
 A collection of all the data models.
 
-**UserProfile**
+<details close>
+<summary>UserProfile</summary>
+
 | Key               | Name                     | Type                |
 |-------------------|--------------------------|---------------------|
 | Foreign_Key       | User                     | ForeignKey          |
@@ -110,7 +115,11 @@ A collection of all the data models.
 |                   | Default_County           | CharField           |
 |                   | Default_Postcode         | CharField           |
 
-**Product**
+</details>
+
+<details close>
+<summary>Product</summary>
+
 | Key          | Name            | Type            |
 |--------------|-----------------|-----------------|
 |              | Title           | CharField       |
@@ -124,14 +133,23 @@ A collection of all the data models.
 |              | Updated_Date    | DateTimeField   |
 | Many to Many | Options         | ManyToManyField|
 
-**Options**
+</details>
+
+
+<details close>
+<summary>Options</summary>
+
 | Key          | Name     | Type        |
 |--------------|----------|-------------|
 |              | Title    |CharField    |
 |              | Slug     | SlugField   |
 |              | Options  | ArrayField  |
 
-**Collection** 
+</details>
+
+<details close>
+<summary>Feature list</summary>
+
 | Key          | Name            | Type            |
 |--------------|-----------------|-----------------|
 |              | Name            |CharField(unique)|
@@ -140,7 +158,11 @@ A collection of all the data models.
 |              | Created_Date    | DateTimeField   |
 |              | Updated_Date    | DateTimeField   |
 
-**Order**
+</details>
+
+<details close>
+<summary>Order</summary>
+
 | Key               | Name              | Type            |
 |-------------------|-------------------|-----------------|
 |                   | Order_Number      | CharField       |
@@ -161,7 +183,11 @@ A collection of all the data models.
 |                   | Original_Bag      | TextField       |
 |                   | Stripe_PID        | CharField       |
 
-**LineItem**
+</details>
+
+<details close>
+<summary>LineItem</summary>
+
 | Key          | Name              | Type            |
 |--------------|-------------------|-----------------|
 | Foreign Key  | Order             | ForeignKey      |
@@ -171,7 +197,11 @@ A collection of all the data models.
 | IntegerField | Quantity          | IntegerField    |
 | DecimalField | Lineitem_Total    | DecimalField    |
 
-**DiscountCode**
+</details>
+
+<details close>
+<summary>DiscountCode</summary>
+
 | Key               | Name       | Type        |
 |-------------------|------------|-------------|
 |                   | Code       | CharField   |
@@ -183,7 +213,11 @@ A collection of all the data models.
 |                   | End Date   | DateField   |
 |                   | Active     | BooleanField|
 
-**Blog**
+</details>
+
+<details close>
+<summary>Blog</summary>
+
 | Key               | Name            | Type            |
 |-------------------|-----------------|-----------------|
 | Foreign Key       | User            | ForeignKey      |
@@ -192,7 +226,11 @@ A collection of all the data models.
 |                   | Created Date    | DateTimeField   |
 |                   | Updated Date    | DateTimeField   |
 
-**Comment**
+</details>
+
+<details close>
+<summary>Comment</summary>
+
 | Key               | Name            | Type            |
 |-------------------|-----------------|-----------------|
 | Foreign Key       | User            | ForeignKey      |
@@ -200,5 +238,7 @@ A collection of all the data models.
 |                   | Content         | TextField       |
 |                   | Created Date    | DateTimeField   |
 |                   | Updated Date    | DateTimeField   |
+
+</details>
 
 [Table of content](#table-of-content)
