@@ -147,7 +147,7 @@ A collection of all the data models.
 </details>
 
 <details close>
-<summary>Options</summary>
+<summary>Styles</summary>
 
 | Key          | Name     | Type        |
 |--------------|----------|-------------|
