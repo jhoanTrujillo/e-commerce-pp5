@@ -135,7 +135,6 @@ A collection of all the data models.
 
 </details>
 
-
 <details close>
 <summary>Options</summary>
 
@@ -143,7 +142,16 @@ A collection of all the data models.
 |--------------|----------|-------------|
 |              | Title    |CharField    |
 |              | Slug     | SlugField   |
-|              | Options  | ArrayField  |
+|       FK     | Options  |             |
+
+</details>
+
+<details close>
+<summary>Options</summary>
+
+| Key          | Name     | Type        |
+|--------------|----------|-------------|
+|              | details   |Array(price: DecimalField, sku:CharField)|
 
 </details>
 

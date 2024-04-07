@@ -43,6 +43,8 @@ INSTALLED_APPS = [
 	'allauth',
     'allauth.account',
     'allauth.socialaccount',
+	# Social account
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -128,7 +130,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
@@ -141,3 +142,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Needed by 'django.contrib.sites'
 SITE_ID=1
+
+EMAIL_BACKEND = 'django.core.mail.backend.console.EmailBackend'
+
+# Details for AllAuth authentication
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
+ACCOUNT_USERNAME_MIN_LENGHT = 4
+LOGIN =  '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
