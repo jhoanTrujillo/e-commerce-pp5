@@ -2,18 +2,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	{% block meta %}
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-quiv="X-UA-compatible" content="ie=edge">
+	{% endblock %}
 
-	<title>Document</title>
+	
 
+	{% block core_css %}
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
+	{% endblock %}
 
-	<title>Joe's Crazy Pins</title>
+	{% block core_js %}
+	{% endblock %}
 
+	<title>Joe's Crazy Pins {% block extra_title %}{% endblock %}</title>
 </head>
 <body>
+	{% if messages %}
+	<div class="message">
+		<div class="message-header">
+		  <p>Hello World</p>
+		  <button class="delete" aria-label="delete"></button>
+		</div>
+		<div class="message-body">
+		  
+		</div>
+	</div> <!-- /.message -->
+	{% endif %}
+
+	{% block page_header %}
+
+	{% endblock %}
+
+	{% block content %}
 	
+	{% endblock %}
+
+	{% block postload_js %}
+	
+	{% endblock %}
 </body>
 </html>
