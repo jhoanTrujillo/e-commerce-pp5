@@ -13,10 +13,10 @@ Here you can find all the content in the docs and links to each individual secti
     -   [Site objective](#site-objective)
     -	[Features](#features)
 	-	[Models](#models)
--   UX design
-    -   Wireframe
-    -   Color
-    -   Font, Colors, Accessibility test
+-   [UX design](#ux-design)
+    -   [Wireframe](#wireframe)
+    -   [Color](#color)
+    -   [Accessibility test](#accessibility-test)
 
 > You will find a back to top link at the end of every section.
 
@@ -250,3 +250,33 @@ A collection of all the data models.
 </details>
 
 [Table of content](#table-of-content)
+
+## UX design 
+
+### Wireframe
+[wireframe files](https://github.com/jhoanTrujillo/e-commerce-pp5/tree/main/github_media)
+
+### Color
+
+**Selected colors**
+| Hex | Title|
+|-----|-------|
+| #ffffff: | White |
+|#1C1932: |Midnight Black|
+|#8C52FF: |Royal Purple|
+|#5CE1E6: |Aqua Sky|
+|#FF5757: |Vivid Red|
+
+In designing the color scheme for the e-commerce store, I aimed to infuse it with popping and energetic colors. The vibrant hues of Aqua Sky (#5CE1E6), Vivid Red (#FF5757), and Royal Purple (#8C52FF) were carefully selected to evoke a sense of dynamism and excitement, ensuring that visitors attention is catched.
+
+Moreover, the chosen colors provide a great contrast between sections, facilitating navigation and enhancing visual hierarchy. Whether it's highlighting product categories or drawing attention to promotional offers, the distinct color palette ensures that each section stands out, guiding users seamlessly through their shopping journey.
+
+### Fonts
+
+In designing my online store, I chose the **Barlow** font family—Barlow and **Barlow Condensed**. These fonts are easy to read and strike a balance between friendly and professional. They fit perfectly with my tone—friendly but informative.
+
+**Barlow and Barlow Condensed** go well together and make everything look neat and organized. With lots of different styles to choose from, like bold and regular, I can highlight important stuff without making it hard to read.
+
+Basically, I picked the Barlow fonts because they help me make my online store easy to use and nice to look at. They make it simple for customers to find what they need and enjoy their shopping experience.
+
+### Accessibility test
