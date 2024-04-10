@@ -4,7 +4,7 @@
 <head>
 	{% block meta %}
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-quiv="X-UA-compatible" content="ie=edge">
 	{% endblock %}
 
@@ -25,15 +25,15 @@
 		<div class="message-header">
 		  <p>Hello World</p>
 		  <button class="delete" aria-label="delete"></button>
-		</div>
+		</div> <!-- /.message-header -->
 		<div class="message-body">
 		  
-		</div>
+		</div> <!-- /.message-body -->
 	</div> <!-- /.message -->
 	{% endif %}
 
 	{% block page_header %}
-
+	
 	{% endblock %}
 
 	{% block content %}
@@ -41,7 +41,8 @@
 	{% endblock %}
 
 	{% block postload_js %}
-	
+	<!-- Font awesome icon kit-->
+	<script src="https://kit.fontawesome.com/dd3b9a0c61.js" crossorigin="anonymous"></script>
 	{% endblock %}
 </body>
 </html>
