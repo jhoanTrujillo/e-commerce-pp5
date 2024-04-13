@@ -261,11 +261,11 @@ A collection of all the data models.
 **Selected colors**
 | Hex | Title|
 |-----|-------|
-| #ffffff: | White |
-|#1C1932: |Midnight Black|
-|#8C52FF: |Royal Purple|
-|#5CE1E6: |Aqua Sky|
-|#FF5757: |Vivid Red|
+| #ffffff | White |
+|#1C1932 |Midnight Black|
+|#8C52FF |Royal Purple|
+|#5CE1E6 |Aqua Sky|
+|#FF5757 |Vivid Red|
 
 In designing the color scheme for the e-commerce store, I aimed to infuse it with popping and energetic colors. The vibrant hues of Aqua Sky (#5CE1E6), Vivid Red (#FF5757), and Royal Purple (#8C52FF) were carefully selected to evoke a sense of dynamism and excitement, ensuring that visitors attention is catched.
 

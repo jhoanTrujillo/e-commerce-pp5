@@ -38,16 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 	'django.contrib.sites',
+    # Project apps
+	'home',
 	
-    # Allauth required apps:
+	# Third-party apps
 	'allauth',
     'allauth.account',
     'allauth.socialaccount',
-	# Social account
     'allauth.socialaccount.providers.google',
-	
-    # Custom Apps
-	'home',
 ]
 
 MIDDLEWARE = [
@@ -71,6 +69,7 @@ TEMPLATES = [
         'DIRS': [
 			os.path.join(BASE_DIR, 'templates'),
             os.path.join(BASE_DIR, 'templates', 'allauth'),
+			os.path.join(BASE_DIR, 'includes'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -140,6 +139,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -149,7 +152,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Needed by 'django.contrib.sites'
 SITE_ID=1
 
-EMAIL_BACKEND = 'django.core.mail.backend.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Details for AllAuth authentication
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
@@ -159,3 +162,4 @@ ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_USERNAME_MIN_LENGHT = 4
 LOGIN =  '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
+
