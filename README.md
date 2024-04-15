@@ -118,6 +118,18 @@ A collection of all the data models.
 </details>
 
 <details close>
+<summary>Collection</summary>
+
+| Key          | Name            | Type            |
+|--------------|-----------------|-----------------|
+|              | name            | CharField       |
+|         | user_friendly_name      | slugField       |
+|              | Description     | slugField       |
+
+
+</details>
+
+<details close>
 <summary>Product</summary>
 
 | Key          | Name            | Type            |
@@ -128,30 +140,20 @@ A collection of all the data models.
 |              | Image           | ImageField      |
 | Foreign Key  | Collection      | ForeignKey      |
 |              | Stock           | IntegerField    |
-|              | Slug            | SlugField       |
 |              | Created_Date    | DateTimeField   |
 |              | Updated_Date    | DateTimeField   |
-| Many to Many | Options         | ManyToManyField|
+| Foreign Key  |     Variant     | ForeignKey      |
 
 </details>
 
 <details close>
-<summary>Options</summary>
-
+<summary>Variant</summary>
 | Key          | Name     | Type        |
 |--------------|----------|-------------|
-|              | Title    |CharField    |
-|              | Slug     | SlugField   |
-|       FK     | Options  |             |
-
-</details>
-
-<details close>
-<summary>Styles</summary>
-
-| Key          | Name     | Type        |
-|--------------|----------|-------------|
-|              | details   |Array(price: DecimalField, sku:CharField)|
+|              | Title    | CharField   |
+|              | Price    | DecimalField|
+|              | Image           | ImageField      |
+|              | Stock           | IntegerField    |
 
 </details>
 
