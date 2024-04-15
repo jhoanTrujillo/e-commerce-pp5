@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 	'django.contrib.sites',
     # Project apps
 	'home',
+	'products',
 	
 	# Third-party apps
 	'allauth',
