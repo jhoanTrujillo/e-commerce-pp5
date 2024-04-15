@@ -120,11 +120,13 @@ A collection of all the data models.
 <details close>
 <summary>Collection</summary>
 
-| Key          | Name            | Type            |
-|--------------|-----------------|-----------------|
-|              | name            | CharField       |
-|         | user_friendly_name      | slugField       |
-|              | Description     | slugField       |
+| Field             | Type       | Description                            |
+|-------------------|------------|----------------------------------------|
+| id                | Primary Key| Unique identifier for the collection.  |
+| name              | CharField  | Name of the collection.                |
+| user_friendly_name| CharField  | User-friendly name of the collection.  |
+| description       | TextField  | Description of the collection.         |
+
 
 
 </details>
@@ -132,42 +134,35 @@ A collection of all the data models.
 <details close>
 <summary>Product</summary>
 
-| Key          | Name            | Type            |
-|--------------|-----------------|-----------------|
-|              | Title           | CharField       |
-|              | Description     | TextField       |
-|              | Price           | DecimalField    |
-|              | Image           | ImageField      |
-| Foreign Key  | Collection      | ForeignKey      |
-|              | Stock           | IntegerField    |
-|              | Created_Date    | DateTimeField   |
-|              | Updated_Date    | DateTimeField   |
-| Foreign Key  |     Variant     | ForeignKey      |
+| Field             | Type       | Description                            |
+|-------------------|------------|----------------------------------------|
+| id                | Primary Key| Unique identifier for the product.      |
+| title             | CharField  | Title of the product.                  |
+| description       | TextField  | Description of the product.            |
+| sku               | CharField  | Stock Keeping Unit of the product.     |
+| price             | DecimalField| Price of the product.                  |
+| image             | ImageField | Image of the product.                  |
+| image_url         | URLField   | URL of the image of the product.       |
+| rating            | DecimalField| Rating of the product.                 |
+| collection_id     | ForeignKey | Foreign key to Collection table.        |
+| stock             | IntegerField| Stock quantity of the product.         |
+| created_date      | DateTimeField| Date and time when the product was created.|
+| updated_date      | DateTimeField| Date and time when the product was last updated.|
+
 
 </details>
 
 <details close>
 <summary>Variant</summary>
-| Key          | Name     | Type        |
-|--------------|----------|-------------|
-|              | Title    | CharField   |
-|              | Price    | DecimalField|
-|              | Image           | ImageField      |
-|              | Stock           | IntegerField    |
-
-</details>
-
-<details close>
-<summary>Feature list</summary>
-
-| Key          | Name            | Type            |
-|--------------|-----------------|-----------------|
-|              | Name            |CharField(unique)|
-|              | Description     | TextField       |
-|              | slug            | SlugField       |
-|              | Created_Date    | DateTimeField   |
-|              | Updated_Date    | DateTimeField   |
-
+| Field             | Type       | Description                            |
+|-------------------|------------|----------------------------------------|
+| id                | Primary Key| Unique identifier for the variant.      |
+| product_id        | ForeignKey | Foreign key to Product table.          |
+| title             | CharField  | Title of the variant.                  |
+| price             | DecimalField| Price of the variant.                  |
+| image             | ImageField | Image of the variant.                  |
+| image_url         | URLField   | URL of the image of the variant.       |
+| stock             | IntegerField| Stock quantity of the variant.         |
 </details>
 
 <details close>
