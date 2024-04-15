@@ -1,0 +1,21 @@
+[
+	{
+	  "model": "products.collection",
+	  "pk": 1,
+	  "fields": {
+		"name": "Enamel Pins",
+		"user_friendly_name": "Enamel Pins",
+		"description": "Collection of enamel pins"
+	  }
+	},
+	{
+	  "model": "products.collection",
+	  "pk": 2,
+	  "fields": {
+		"name": "Accessories",
+		"user_friendly_name": "Accessories",
+		"description": "Collection of accessories"
+	  }
+	}
+  ]
+  
