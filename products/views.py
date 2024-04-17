@@ -19,7 +19,7 @@ def product_details(request, product_id):
 	A page that display the details of the each product.
 	"""
 	product = get_object_or_404(Product, pk=product_id)
-	products = Product.objects.filter(collection=1)
+	products = Product.objects.filter(collection=1).exclude(id=product_id)
 
 	context = {
 		'recommended_products': products,

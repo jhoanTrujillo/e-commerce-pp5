@@ -35,8 +35,6 @@
 	<div class="fixed-grid has-3-cols">
 		<div class="grid">
 			{% for option in recommended_products %}
-				{% if option.title == product.title %}
-				{% else %}
 				<div class="card cell">
 					<div class="card-image">
 					<figure class="image is-1by1">
@@ -65,7 +63,6 @@
 						</div> <!-- /.media-content-->
 					</div> <!-- /.card-content-->
 				</div> <!-- /.card cell-->	
-				{% endif %}
 			{% endfor %}
 		</div>
 	</div>
