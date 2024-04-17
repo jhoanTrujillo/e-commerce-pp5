@@ -3,14 +3,14 @@
 {% block content %}
 
 <div class="section">
-	<div class="fixed-grid has-3-col has-1-cols-mobile has-2-cols-tablet">
+	<div class="fixed-grid has-3-cols">
 		<div class="grid">
 		{% for product in products %}
-			<div class="card">
+			<div class="card cell">
 				<div class="card-image">
 				<figure class="image is-1by1">
 					<img
-					src="https://bulma.io/assets/images/placeholders/480x480.png"
+					src="{{ product.image_url }}"
 					alt="Placeholder image"
 					/>
 				</figure>
@@ -23,7 +23,13 @@
 						{{ product.title }}
 						</a>
 					</p>
-					<p class="subtitle is-6">${{ product.price }}</p>
+					{% if product.rating %}
+						<p class="subtitle is-6">Rating: {{ product.rating }}</p>
+					{% else %}
+						<p class="subtitle is-6">Leave a review</p>
+					{% endif %}
+					
+					<p class="subtitle is-5">${{ product.price }}</p>
 					<p class="subtitle is-6">{{ product.description }}</p>
 					</div>
 				</div>
