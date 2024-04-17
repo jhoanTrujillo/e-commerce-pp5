@@ -2,7 +2,7 @@
 {% load static %} 
 {% block content %}
 
-<div class="section">
+<div class="section container">
 	<div class="fixed-grid has-3-cols">
 		<div class="grid">
 		{% for product in products %}
@@ -18,26 +18,25 @@
 
 				<div class="card-content">
 					<div class="media-content">
-					<p class="title is-4">
-						<a href="">
-						{{ product.title }}
-						</a>
-					</p>
-					{% if product.rating %}
-						<p class="subtitle is-6">Rating: {{ product.rating }}</p>
-					{% else %}
-						<p class="subtitle is-6">Leave a review</p>
-					{% endif %}
-					
-					<p class="subtitle is-5">${{ product.price }}</p>
-					<p class="subtitle is-6">{{ product.description }}</p>
-					</div>
-				</div>
-
-			</div>
+						<p class="title is-4">
+							<a href="{% url 'product_details' product.id %}">
+							{{ product.title }}
+							</a>
+						</p>
+						{% if product.rating %}
+							<p class="subtitle is-6">Rating: {{ product.rating }}</p>
+						{% else %}
+							<p class="subtitle is-6">Leave a review</p>
+						{% endif %}
+						
+						<p class="subtitle is-5">${{ product.price }}</p>
+						<p class="subtitle is-6">{{ product.description }}</p>
+					</div> <!-- /.media-content-->
+				</div> <!-- /.card-content-->
+			</div> <!-- /.card cell-->
 		{% endfor %}
-		</div>
-	</div>
-</div>
+		</div> <!-- /.grid-->
+	</div> <!-- /.fixed-grid has-3-cols -->
+</div> <!-- /.section container -->
 
 {% endblock %}
