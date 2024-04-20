@@ -26,17 +26,25 @@
 </head>
 <body>
 	{% if messages %}
-	<div class="message">
-		<div class="message-header">
-		  <p>Hello World</p>
-		  <button class="delete" aria-label="delete"></button>
-		</div> <!-- /.message-header -->
-		<div class="message-body">
-		  
-		</div> <!-- /.message-body -->
-	</div> <!-- /.message -->
+	<div class="modal">
+		<div class="modal-background"></div>
+		<div class="modal-content">
+			<div class="message">
+				<div class="message-header">
+				  <p>Hello World</p>
+				  <button class="delete" aria-label="delete"></button>
+				</div> <!-- /.message-header -->
+				<div class="message-body">
+				  
+				</div> <!-- /.message-body -->
+			</div> <!-- /.message -->
+		</div>
+		<button class="modal-close is-large" aria-label="close"></button>
+	  </div>
 	{% endif %}
 	{% include 'includes/header.html' %}
+	
+
 	{% block page_header %}
 	
 	{% endblock %}
