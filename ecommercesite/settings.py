@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # Project apps
 	'home',
 	'products',
+	'cart',
 	
 	# Third-party apps
 	'allauth',
