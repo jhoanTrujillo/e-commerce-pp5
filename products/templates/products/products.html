@@ -2,8 +2,8 @@
 {% load static %} 
 {% block content %}
 
-<div class="section container">
-	<div class="fixed-grid has-3-cols">
+<div class="section">
+	<div class="fixed-grid has-3-cols has-1-cols-mobile">
 		<div class="grid">
 		{% for product in products %}
 			<div class="card cell">
@@ -30,7 +30,6 @@
 						{% endif %}
 						
 						<p class="subtitle is-5">${{ product.price }}</p>
-						<p class="subtitle is-6">{{ product.description }}</p>
 					</div> <!-- /.media-content-->
 				</div> <!-- /.card-content-->
 			</div> <!-- /.card cell-->

@@ -1,5 +1,82 @@
 {% extends 'base.html' %} 
 {% load static %} 
 {% block content %}
-I'm the cart
+<div class="section">
+	<h2 class="title is-1">Cart</h2>
+	{% if cart_items %}
+	
+	<div class="fixed-grid has-3-cols cart--item-container">
+		{% for item in cart_items %}
+		<div class="grid">
+
+			<div id="info" 
+			class="cell 
+			is-flex 
+			is-flex-direction-column"
+			>
+			
+				<div class="block mr-2">
+					<p class="title is-5">Product info</p>
+				</div>
+				<div class="is-flex is-flex-direction-rows is-align-items-center">
+					<figure class="image is-128x128 is-1by1 mr-2">
+						<img 
+						src="{{ item.product.image.url }}" 
+						alt="{{ item.product.description }}"
+						class="image__rounded-corners" 
+						>
+					</figure>
+					<div class="cell">
+						<p class="is-size-5">{{ item.product.title }}</p>
+						<p>SKU: {{ item.product.sku }}</p>
+						<p>Unit Price: €{{ item.product.price }}</p>
+					</div>
+				</div>	
+			</div> <!-- /#info -->
+
+			<div id="quantity" class="cell is-flex is-flex-direction-column">
+				<div class="block">
+					<p class="title is-5">Quantity</p>
+				</div>
+				<div class="is-flex is-flex-direction-rows is-align-items-center">
+					<div class="cell">
+						<p>{{ item.quantity }}</p>
+					</div>
+				</div>	
+			</div> <!-- /#quantity -->
+
+			<div id="added_total" class="cell is-flex is-flex-direction-column">
+				<div class="block">
+					<p class="title is-5">Total Price</p>
+				</div>
+				<div class="is-flex is-flex-direction-rows is-align-items-center">
+					<div class="cell">
+						<p>${{ item.added_total}}</p>
+					</div>
+				</div>	
+			</div>
+		</div> <!-- /.grid -->
+		{% endfor %}
+	</div> <!-- /.fixed-grid -->
+	
+
+	<div class="section is-flex is-flex-direction-row is-align-content-space-between">
+		<div>
+			<p class="is-size-3">Subtotal: €{{ grand_total }}</p>
+		</div>
+		<div class="is-flex is-align-content-space-between is-flex-direction-row">
+			<a href="{% url 'home' %}" class="button">< Continue Shopping</a>
+			<a href="" class="button">Secure Checkout</a>
+		</div>
+	</div>
+
+	{% else %}
+		<div class="block">
+			<div class="section container">
+				<p class="is-size-1 is-size-3-mobile">No items in cart</p>
+			</div>
+		</div>
+	{%endif%}	
+	
+</div>
 {% endblock %}

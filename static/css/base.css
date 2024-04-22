@@ -1,0 +1,10 @@
+.cart--item-container {
+	overflow-y: scroll;
+	max-height: 40rem;
+	scrollbar-color: black white;
+	scrollbar-width: thick;
+}
+
+.image__rounded-corners {
+	border-radius: 8px;
+}
