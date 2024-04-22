@@ -34,7 +34,7 @@ class QuantitySelector extends HTMLElement {
 			quantityInput.value = intValue;
 		} else {
 			// Prevents value to go below 0
-			if (intValue === 0) return;
+			if (intValue === 1) return;
 
 			intValue -=  quantity;
 			quantityInput.value = intValue;
