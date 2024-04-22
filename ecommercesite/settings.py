@@ -13,8 +13,11 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Project Paths
 BASE_DIR = Path(__file__).resolve().parent.parent
+TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
+ALLAUTH_DIR = os.path.join(BASE_DIR, 'templates', 'allauth')
+INCLUDES_DIR = os.path.join(BASE_DIR, 'includes')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -69,9 +72,9 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-			os.path.join(BASE_DIR, 'templates'),
-            os.path.join(BASE_DIR, 'templates', 'allauth'),
-			os.path.join(BASE_DIR, 'includes'),
+            TEMPLATES_DIR,
+            ALLAUTH_DIR,
+            INCLUDES_DIR,
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -80,6 +83,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+				'cart.contexts.cart_contents',
             ],
         },
     },
@@ -140,7 +144,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 MEDIA_URL = 'media/'
@@ -165,3 +169,5 @@ ACCOUNT_USERNAME_MIN_LENGHT = 4
 LOGIN =  '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 
+FREE_DELIVERY_THRESHOLD = 30
+STANDARD_DELIVERY_PERCENTAGE = 10

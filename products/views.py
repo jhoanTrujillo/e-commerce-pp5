@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
 from .models import Product, Collection
-# Create your views here.
+
+
 def all_products(request):
 	"""
 	Show all products with sorting and search query.

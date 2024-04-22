@@ -1,60 +1,63 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	{% block meta %}
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-quiv="X-UA-compatible" content="ie=edge">
-	{% endblock %}
+    <head>
+        {% block meta %}
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta http-quiv="X-UA-compatible" content="ie=edge" />
+        {% endblock %} {% block core_css %}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css"
+        />
+        <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+        {% endblock %} {% block core_js %}
+        <!-- Font awesome icon kit-->
+        <script
+            src="https://kit.fontawesome.com/dd3b9a0c61.js"
+            crossorigin="anonymous"
+        ></script>
+        {% endblock %}
 
-	
+        <title>Joe's Crazy Pins {% block extra_title %}{% endblock %}</title>
+    </head>
+    <body>
+        {% if messages %}
+        <div class="modal">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <div class="message">
+                    <div class="message-header">
+                        <p>Message</p>
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                    <!-- /.message-header -->
+                    <div class="message-body"></div>
+                    <!-- /.message-body -->
+                </div>
+                <!-- /.message -->
+            </div>
+            <button class="modal-close is-large" aria-label="close"></button>
+        </div>
+        {% endif %} 
 
-	{% block core_css %}
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
-	{% endblock %}
+		{% include 'includes/header.html' %} 
+		{% include 'includes/sliding_announcement.html' %}
+		
+		{% block page_header %} 
+		{%endblock %} 
 
-	{% block core_js %}
-	<!-- Font awesome icon kit-->
-	<script src="https://kit.fontawesome.com/dd3b9a0c61.js" crossorigin="anonymous"></script>
-	{% endblock %}
+		{% block content %} 
+		{% endblock %} 
 
-	<title>Joe's Crazy Pins {% block extra_title %}{% endblock %}</title>
-</head>
-<body>
-	{% if messages %}
-	<div class="modal">
-		<div class="modal-background"></div>
-		<div class="modal-content">
-			<div class="message">
-				<div class="message-header">
-				  <p>Hello World</p>
-				  <button class="delete" aria-label="delete"></button>
-				</div> <!-- /.message-header -->
-				<div class="message-body">
-				  
-				</div> <!-- /.message-body -->
-			</div> <!-- /.message -->
-		</div>
-		<button class="modal-close is-large" aria-label="close"></button>
-	  </div>
-	{% endif %}
-	{% include 'includes/header.html' %}
-	
-
-	{% block page_header %}
-	
-	{% endblock %}
-
-	{% block content %}
-	
-	{% endblock %}
-
-	{% block postload_js %}
-	
-	{% endblock %}
-</body>
+		{% block postload_js %}
+		{% endblock %}
+    </body>
 </html>

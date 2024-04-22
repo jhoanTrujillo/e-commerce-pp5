@@ -1,12 +1,13 @@
 {% extends 'base.html' %} 
-{% load static %} 
+{% load static %}
 {% block content %}
 
-<div class="container section">
-	<div class="fixed-grid has-2-cols">
+<div class="container section block">
+	<div class="fixed-grid has-2-cols  has-1-cols-mobile">
 		<div class="grid">
+			
 			<div class="cell">
-				<div class="card">
+				<div class="block">
 					<div class="card-image">
 					  <figure class="image is-1by1">
 						<img
@@ -17,19 +18,75 @@
 					</div>
 				  </div>
 			</div>
-			<div class="container">
+
+			<div class="cell">
 				<div class="block">
 					<div class="card-content">
 					  <div class="content">
-						<h2 class="title is-1">{{ product.title }}</h3>
+						<h1 class="is-2 is-3-mobile">{{ product.title }}</h1>		
+						<span class="title block is-flex-direction-row is-justify-content-center is-align-content-flex-start">
+							<i class="fa-solid fa-star is-3 is-4-mobile"></i>
+							<i class="fa-solid fa-star is-3 is-4-mobile"></i>
+							<i class="fa-solid fa-star is-3 is-4-mobile"></i>
+							<i class="fa-solid fa-star is-3 is-4-mobile"></i>
+							<i class="fa-solid fa-star is-3 is-4-mobile"></i>
+						</span>
+						<p class="title is-3 mt-5">${{ product.price }}</p>			
+						<hr>	
+						<p class="is-3 mt-5">SKU: {{ product.sku}}</p>
+						<form class="form mt-5 mb-5" action="{% url 'add_to_cart' product.id %}" method="POST">
+							{% csrf_token %}
+							<quantity-selector id="quantitySelector">
+									<div 
+									class="
+									is-flex 
+									is-flex-direction-rows 
+									is-flex-wrap-nowrap 
+									is-justify-content-flex-start 
+									is-align-items-center 
+									is-align-content-space-between">
+										<button class="button" id="minus">-</button>
+										<label for="quantity" hidden>Quantity</label>
+										<input type="number" value="1" min="1" max="99" name="quantity" class="input" id="quantity" data-item-id="{{ product.id }}" value="1">
+										<button class="button" id="plus" class="button">+</button>
+									</div>
+							</quantity-selector>
+							<div 
+							class="is-flex 
+							mt-5 mb-5
+							is-flex-direction-rows 
+							is-flex-wrap-nowrap 
+							is-justify-content-flex-start 
+							is-align-items-center 
+							is-align-content-space-between">
+								<div class="mr-5">
+									<a href="{% url 'products' %}" class="button">
+										<i class="fa-solid fa-chevron-left mr-2"></i>
+										<span>Continue Shopping</span>
+									</a>
+								</div>
+								<div class="m-5 ">
+									<input type="submit" class="button is-primary" value="Add to Cart">
+								</div>
+							</div>
+							<input type="hidden" name="redirect_url" value="{{ request.path }}">
+						</form>
+
+						<div class="product-description">
+							<p class="is-1">Description:</p>
+							<p class="is-1">{{ product.description }}</p>
+						</div>
+
+						
 					  </div>
 					</div>
-				  </div>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
+<!-- Recommended Product list-->
 <div class="block section container">
 	<h3 class="title is-2">Recommended products</h3>
 	<div class="fixed-grid has-3-cols">
@@ -69,4 +126,9 @@
 	
 </div>
 
+
+{% endblock %}
+
+{% block postload_js %}
+<script src="{% static 'js/quantity_selector.js' %}"></script>
 {% endblock %}
