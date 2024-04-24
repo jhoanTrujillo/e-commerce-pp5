@@ -9,10 +9,16 @@
 			<div class="cell">
 				<div class="block">
 					<div class="card-image">
-					  <figure class="image is-1by1">
+					  <figure class="image is-1by1 image__rounded-corners">
 						<img
+						  {% if variant %}
+						  src="{{ variant.image_url}}"
+						  {% else %}
 						  src="{{ product.image_url}}"
+						  {% endif %}
+						  id="product-image"
 						  alt="{{product.description}}"
+						  class="image__rounded-corners"
 						/>
 					  </figure>
 					</div>
@@ -20,10 +26,16 @@
 			</div>
 
 			<div class="cell">
-				<div class="block">
+				<div class="container">
 					<div class="card-content">
 					  <div class="content">
-						<h1 class="is-2 is-3-mobile">{{ product.title }}</h1>		
+						<h1 id="product-title" class="is-2 is-3-mobile">
+							{% if variant %}
+								{{ variant.title }}
+							{%else%}
+								{{ product.title }}
+							{% endif %}
+						</h1>	
 						<span class="title block is-flex-direction-row is-justify-content-center is-align-content-flex-start">
 							<i class="fa-solid fa-star is-3 is-4-mobile"></i>
 							<i class="fa-solid fa-star is-3 is-4-mobile"></i>
@@ -31,10 +43,35 @@
 							<i class="fa-solid fa-star is-3 is-4-mobile"></i>
 							<i class="fa-solid fa-star is-3 is-4-mobile"></i>
 						</span>
-						<p class="title is-3 mt-5">${{ product.price }}</p>			
+						<p id="product-price" class="title is-3 mt-5">
+							{% if variant %}
+								€{{ variant.price }}
+							{%else%}
+								€{{ product.price }}
+							{% endif %}
+						</p>			
 						<hr>	
-						<p class="is-3 mt-5">SKU: {{ product.sku}}</p>
-						<form class="form mt-5 mb-5" action="{% url 'add_to_cart' product.id %}" method="POST">
+						<p class="is-3 mt-5">SKU: {{product.sku}}</p>
+
+						{% if variants %}
+						<div class="block">
+							<p class="is-size-4">Variants</p>
+							<div class="fix-grid has-2-cols">
+								<div role="radiogroup" class="grid">
+									<a href="{% url 'product_details' product.id %}" class="button is-rounded">
+										{{ product.title }}
+									</a>
+									{% for option in variants %}
+									<a href="{% url 'variant_details' product_id=product.id variant_id=option.id %}" class="button is-rounded">
+										{{ option.title }}
+									</a>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+
+						{% endif %}
+						<form id="atc-form" class="form mt-5 mb-5" action="{% url 'add_to_cart' %}" method="POST">
 							{% csrf_token %}
 							<quantity-selector id="quantitySelector">
 									<div 
@@ -47,28 +84,44 @@
 									is-align-content-space-between">
 										<button class="button" id="minus">-</button>
 										<label for="quantity" hidden>Quantity</label>
-										<input type="number" value="1" min="1" max="99" name="quantity" class="input" id="quantity" data-item-id="{{ product.id }}" value="1">
+										<input 
+										type="number" 
+										value="1" min="1" max="99" 
+										name="quantity" 
+										class="input" 
+										id="quantity"
+										{% if variant %}
+										data-item-id="{{ variant.id }}" 
+										{% else %}
+										data-item-id="{{ product.id }}" 
+										{% endif %}  
+										data-item-id="{{ product.id }}" 
+										value="1">
 										<button class="button" id="plus" class="button">+</button>
 									</div>
 							</quantity-selector>
-							<div 
-							class="is-flex 
-							mt-5 mb-5
-							is-flex-direction-rows 
-							is-flex-wrap-nowrap 
-							is-justify-content-flex-start 
-							is-align-items-center 
-							is-align-content-space-between">
+							
+							 <!-- Continue shopping button -->
+							<div class="is-flex mt-5 mb-5">
 								<div class="mr-5">
 									<a href="{% url 'products' %}" class="button">
 										<i class="fa-solid fa-chevron-left mr-2"></i>
 										<span>Continue Shopping</span>
 									</a>
 								</div>
-								<div class="m-5 ">
+								<!-- Add to cart button -->
+								<div class="m-5">
 									<input type="submit" class="button is-primary" value="Add to Cart">
 								</div>
 							</div>
+
+							<!-- Hidden input for variant ID -->
+							{% if variant %}
+								<input type="hidden" name="variant_id" value="{{ variant.id }}">
+							{% else %}
+								<input type="hidden" name="product_id" value="{{ product.id }}">
+							{% endif %}
+							<!-- Hidden input for redirect URL -->
 							<input type="hidden" name="redirect_url" value="{{ request.path }}">
 						</form>
 
@@ -115,7 +168,7 @@
 								<p class="subtitle is-6">Leave a review</p>
 							{% endif %}
 							
-							<p class="subtitle is-5">${{ option.price }}</p>
+							<p class="subtitle is-5">€{{ option.price }}</p>
 							<p class="subtitle is-6">{{ option.description }}</p>
 						</div> <!-- /.media-content-->
 					</div> <!-- /.card-content-->
@@ -126,9 +179,8 @@
 	
 </div>
 
-
 {% endblock %}
 
 {% block postload_js %}
-<script src="{% static 'js/quantity_selector.js' %}"></script>
+<script src="{% static 'js/product_details.js' %}"></script>
 {% endblock %}

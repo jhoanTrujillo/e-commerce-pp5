@@ -1,3 +1,17 @@
+h1, 
+h2, h3, 
+h4, h5 {
+	font-family: "Barlow", sans-serif;
+  	font-weight: 500;
+  	font-style: normal;
+}
+
+p, 
+em, strong {
+	font-family: "Barlow Condensed", sans-serif;
+	font-style: normal;
+}
+
 .cart--item-container {
 	overflow-y: scroll;
 	max-height: 40rem;

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
-from .models import Product, Collection
+from .models import Product, Collection, Variant
 
 
 def all_products(request):
@@ -41,12 +41,33 @@ def product_details(request, product_id):
 	A page that display the details of the each product.
 	"""
 	product = get_object_or_404(Product, pk=product_id)
+	variants = Variant.objects.filter(product=product)
 	# We get all products except from the currently visible product
 	recommended_products = Product.objects.filter(collection=1).exclude(id=product_id)
 
 	context = {
-		'recommended_products': recommended_products,
 		'product': product,
+		'variants' : variants,
+		'recommended_products': recommended_products,
+	}
+
+	return render(request, "products/product_details.html", context)
+
+def variant_details(request, product_id, variant_id):
+	"""
+	A page that display the details of the each product.
+	"""
+	product = get_object_or_404(Product, pk=product_id)
+	variant = get_object_or_404(Variant, pk=variant_id)
+	variants = Variant.objects.filter(product=product)
+	# We get all products except from the currently visible product
+	recommended_products = Product.objects.filter(collection=1).exclude(id=product_id)
+
+	context = {
+		'product': product,
+		'variants' : variants,
+		'variant' : variant,
+		'recommended_products': recommended_products,
 	}
 
 	return render(request, "products/product_details.html", context)
