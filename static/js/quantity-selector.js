@@ -1,7 +1,7 @@
 class QuantitySelector extends HTMLElement {
     constructor() {
         super();
-        this.quantityInput = this.querySelector('#quantity');
+        this.quantityInput = this.querySelector('.quantity');
         this.quantityButtons = this.querySelectorAll('button');
         this.quantity = 1;
     }
@@ -18,4 +18,3 @@ class QuantitySelector extends HTMLElement {
 }
 
 customElements.define("quantity-selector", QuantitySelector);
-
