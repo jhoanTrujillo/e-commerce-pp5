@@ -26,4 +26,4 @@ class tabComponent extends HTMLElement {
     }
 }
 
-customElements.define("tab-component", tabComponent);
+customElements.define("content-tab", tabComponent);
