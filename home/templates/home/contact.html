@@ -1,0 +1,15 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% load crispy_forms_tags %}
+{% block content %}
+<!-- Hero Image -->
+<section class="hero is-halfheight">
+	<div class="container p-4 has-background-primary">
+		<form action="" method="POST">
+			{% csrf_token %}
+			{{ form | crispy }}
+			<input type="submit" class="button is-info my-5">
+		</form>
+	</div>
+</section>
+{% endblock %}
