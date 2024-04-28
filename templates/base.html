@@ -18,6 +18,7 @@
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css"
         />
+        <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'css/base.css' %}" />
         {% endblock %} 
         {% block core_js %}
@@ -50,16 +51,18 @@
         </div>
         {% endif %} 
 
-		{% include 'includes/header.html' %} 
-		{% include 'includes/sliding_announcement.html' %}
-		
-		{% block page_header %} 
-		{%endblock %} 
+        {% include 'includes/header.html' %} 
+        {% include 'includes/sliding_announcement.html' %}
+        {% block page_header %} 
+        {%endblock %} 
 
-		{% block content %} 
-		{% endblock %} 
+        <div id="body-container" class="section">
+            {% block content %} {% endblock %} 
+        </div> 
 
-		{% block postload_js %}
-		{% endblock %}
+        {% include 'includes/footer.html' %} 
+        {% block postload_js %}
+        <script src="{% static 'js/mobile_navbar.js' %}" defer></script>
+        {% endblock %}
     </body>
 </html>
