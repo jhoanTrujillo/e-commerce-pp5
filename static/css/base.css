@@ -1,24 +1,187 @@
+:root {
+	--background: #ffffff; /* White */
+	--foreground: #1C1932; /* Midnight Black */
+	--accent: #8C52FF; /* Royal Purple */
+	--highlight: #5CE1E6; /* Aqua Sky */
+	--alert: #FF5757; /* Vivid Red */
+	--barlow: "Barlow", sans-serif;
+	--barlow-c: "Barlow Condensed", sans-serif;
+  }
+
+/* General styling */
 h1, 
 h2, h3, 
 h4, h5 {
-	font-family: "Barlow", sans-serif;
+	font-family: var(--barlow);
   	font-weight: 500;
   	font-style: normal;
+	color: var(--foreground) !important;
 }
 
 p, 
 em, strong {
-	font-family: "Barlow Condensed", sans-serif;
+	font-family: var(--barlow-c);
 	font-style: normal;
+	color: var(--foreground);
 }
+
+/* Background classes */
+.is-bg {
+	background-color: var(--background);
+}
+
+.is-fg {
+	background-color: var(--foreground);
+}
+
+.is-accent {
+	background-color: var(--accent);
+}
+
+.is-highlight {
+	background-color: var(--highlight);
+}
+
+.is-alert {
+	background-color: var(--alert);
+}
+
+/* Background classes */
+.is-bg,
+.is-fg,
+.is-accent,
+.is-highlight,
+.is-alert {
+  transition: filter 0.3s ease; /* Smooth transition on hover */
+}
+
+/* Hover states */
+.is-bg:hover,
+.is-fg:hover,
+.is-accent:hover,
+.is-highlight:hover,
+.is-alert:hover {
+  filter: brightness(90%); /* Darken colors on hover */
+}
+
+/* Text color classes */
+.is-bg-text {
+color: var(--background);
+}
+
+.is-fg-text {
+color: var(--foreground);
+}
+
+.is-accent-text {
+color: var(--accent);
+}
+
+.is-highlight-text {
+color: var(--highlight);
+}
+
+.is-alert-text {
+color: var(--alert);
+}  
+
 
 .cart--item-container {
 	overflow-y: scroll;
 	max-height: 40rem;
-	scrollbar-color: black white;
+	scrollbar-color: #1C1932 white;
 	scrollbar-width: thick;
 }
 
-.image__rounded-corners {
-	border-radius: 8px;
+.is-image-rounded {
+	border-radius: 8px !important;
 }
+
+/* Quantity input */
+.quantity--input {
+	text-align: center;
+	max-width: 10rem;
+	width: 6rem;
+	background: lightgray;
+}
+
+/** Mobile Style **/
+@media only screen and (max-width: 768px) {
+	/** Mobile Navbar **/
+	.is-mobile-menu {
+		position: fixed;
+		background: #fff;
+		width: 90%;
+		right: 0;
+		height: 100vh;
+		padding: 1em;
+		transform: translateX(100%);
+		display: block !important;
+		z-index: 5;
+	}
+	
+	.nav-divider-mobile { 
+		display: inline-flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		margin-inline-start: auto;
+		margin-inline-end: .375em;
+	}
+
+	/* Mobile Animation */
+	.has-slide-animation-open {
+		animation: slideIn 1s forwards;
+	}
+
+	.has-slide-animation-close {
+		animation: slideOut 1s forwards;
+	}
+}
+
+/* Animation */
+.bounce-in {
+	opacity: 0;
+	animation: bounceIn 0.5s ease forwards;
+}
+
+/* keyframes */
+@keyframes bounceIn {
+	0% {
+		opacity: 0;
+		transform: translateY(-20px);
+	}
+	50% {
+		opacity: 1;
+		transform: translateY(5px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes slideIn {
+	0% {
+	  transform: translateX(100%); /* Initial position */
+	}
+	70% {
+	  transform: translateX(1%); /* Slide in */
+	}
+	100% {
+	  transform: translateX(2%); /* Final position */
+	}
+  }
+  
+  @keyframes slideOut {
+	0% {
+	  transform: translateX(0); /* Initial position */
+	}
+	70% {
+	  transform: translateX(100%); /* Slide out */
+	}
+	100% {
+	  transform: translateX(100%); /* Final position */
+	}
+  }
+

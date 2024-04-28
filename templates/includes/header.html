@@ -1,50 +1,65 @@
-<nav class="navbar" role="navigation" aria-label="main navigation">
+<nav class="navbar py-2" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-        <a class="navbar-item" href="{% url 'home' %}">
-            <h1 class="title is-1">Joe's Pins</h1>
-        </a>
-
-        <a
+        <div class="navbar-start">
+            <a class="navbar-item" href="{% url 'home' %}">
+                <h1 class="title is-size-3">Joe's Pins</h1>
+            </a>  
+        </div>
+        <div class="nav-divider-mobile">
+            <a href="{% url 'view_cart' %}" class="is-hidden-desktop mr-4 button is-rounded is-primary is-bg-text">
+                <i class="fa-solid fa-cart-shopping is-large mr-2"></i>
+                Cart
+            </a>
+            <a
             role="button"
+            id="navbar-burger" 
             class="navbar-burger"
             aria-label="menu"
             aria-expanded="false"
-            data-target="navbarBasicExample"
+            data-target="mobile-navbar"
         >
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
         </a>
-    </div>
-    <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-            
         </div>
-        <div>
+    </div>
+    <div id="mobile-navbar" class="is-mobile-menu navbar-menu">
+
+        <div class="navbar-start">
+            <a class="navbar-item is-hidden-mobile" href="{% url 'home' %}">
+                <h1 class="title is-size-3 is-hidden-tablet">Joe's Pins</h1>
+            </a>  
+        </div>
+
+        <div class="my-auto">
             <form action="{% url 'products' %}" method="GET">
-                <div>
+                <div class="is-flex">
                     <input 
                     type="text" 
                     name="q" 
                     id="q"
-                    placeholder="Search for content in our site">
-                    <button type="submit">Search</button>
-                </div>
-            </form>
-        </div>
-        <div class="navbar-end">
+                    class="input is-rounded mr-1 my-auto"
+                    placeholder="Search for content in our site"
+                    >
+                    <button type="submit" class="button is-rounded">
+                        <i class="fa-solid fa-magnifying-glass" aria-label="Submit search form"></i>
+                    </button>
+                </div> <!-- /.is-flex -->
+            </form> 
+        </div> <!-- /.my-auto -->
 
+        <div class="navbar-end">
             <a class="navbar-item" href="{% url 'products' %}?collection=enamel_pins">Enamel Pins</a>
             <a class="navbar-item" href="{% url 'products' %}?collection=accessories">Accessories</a>
-            <a class="navbar-item" href="{% url 'products' %}">All</a>
 
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link">More</a>
 
                 <div class="navbar-dropdown">
                     <a class="navbar-item"> About </a>
-                    <a class="navbar-item is-selected"> Blog </a>
+                    <a class="navbar-item"> Blog </a>
                     <a class="navbar-item"> Contact </a>
                 </div>
             </div>
@@ -53,31 +68,29 @@
                 <div class="buttons">
                     {% if request.user.is_authenticated %}
                         {% if request.user.is_superuser%}
-                            <a href="" class="button is-primary">
-                                Product Management
+                            <a href="" class="button is-fg-text is-rounded">
+                                <i class="fa-solid fa-plus mr-1"></i>
+                                Product
                             </a>
-                            <a href="{% url 'account_logout' %}" class="button is-light">
-                                Sign out
-                            </a>
+                            <a href="{% url 'account_logout' %}" class="button is-danger is-rounded" aria-label="Logout Button"> 
+                                <i class="fa-solid fa-right-from-bracket"></i>
                         {% else %}
-                            <a href="" class="button is-primary">
-                                Profile
-                            </a>
-                            <a href="{% url 'account_logout' %}" class="button is-light"> 
-                                Sign out
+                            <a href="{% url 'account_logout' %}" class="button is-bg-text"> 
+                                <i class="fa-solid fa-right-from-bracket"></i>
                             </a>
                         {% endif %}
                     {% else %}
-                        <a href="{% url 'account_signup' %}" class="button is-primary">
-                            <strong>Sign up</strong>
-                        </a>
-                        <a href="{% url 'account_login' %}" class="button is-danger"> Sign in</a>
+                        <a href="{% url 'account_login' %}" class="button is-rounded is-fg-text" aria-label="Login Button">
+                            <i class="fa-solid fa-user mr-2"></i>
+                            Login
+                        </a> 
                     {% endif %}
-                    <a href="{% url 'view_cart' %}">
-						<i class="fa-solid fa-cart-shopping is-large"></i>
+                    <a href="{% url 'view_cart' %}" class="button is-primary is-rounded is-bg-text is-hidden-tablet" aria-label="Cart button">
+						<i class="fa-solid fa-cart-shopping is-large mr-2"></i>
+                        Cart
 					</a>
                 </div>
             </div> <!-- /.navbar-item-->
         </div> <!-- /.navbar-end -->
-    </div> <!-- /.navbar-brand-->
+    </div> <!-- /.is-mobile-menu navbar-menu -->
 </nav> <!-- /nav -->
