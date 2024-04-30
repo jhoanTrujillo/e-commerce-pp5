@@ -8,12 +8,19 @@
 		{% for product in products %}
 			<div class="card cell">
 				<div class="card-image">
-				<figure class="image is-1by1">
+				<a href="{% url 'product_details' product.id %}">
+				<figure class="image is-1by1 is-hoverable">
 					<img
-					src="{{ product.image_url }}"
-					alt="Placeholder image"
+						{% if product.image %}
+						src="{{ product.image.url}}"
+						{% else %}
+						src="{{ product.image_url }}"
+						{% endif %}
+						alt="Placeholder image"
+						class="is-hoverable"
 					/>
 				</figure>
+				</a>
 				</div>
 
 				<div class="card-content">
