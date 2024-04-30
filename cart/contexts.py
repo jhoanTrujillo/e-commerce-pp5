@@ -16,19 +16,24 @@ def cart_contents(request):
         
         # Fetch the appropriate product or variant
         if 'variant' in cart_key:
+            is_variant = True
             product_or_variant = get_object_or_404(Variant, pk=item_id)
         else:
+            is_variant = False
             product_or_variant = get_object_or_404(Product, pk=item_id)
         
         added_total = product_or_variant.price * quantity
-        total += added_total
         product_count += quantity
         cart_items.append({
             'item_id': item_id,
             'quantity': quantity,
             'product_or_variant': product_or_variant,
             'added_total': added_total,
+            'is_variant' : is_variant,
         })
+
+    for item in cart_items:
+        total += item['product_or_variant'].price * item['quantity']
 
     if total < settings.FREE_DELIVERY_THRESHOLD:
         delivery = total * Decimal(settings.STANDARD_DELIVERY_PERCENTAGE / 100)

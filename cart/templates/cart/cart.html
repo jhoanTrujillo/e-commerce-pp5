@@ -44,7 +44,33 @@
 				
 				<div class="is-flex is-flex-direction-rows is-align-items-center">
 					<div class="cell">
-						<p>{{ item.quantity }}</p>
+
+						<form action="" method="POST" class="update-form form" data-product-form="{% if item.is_variant %}variant{%else%}product{% endif %}_{{ item.product_or_variant.id }}">
+							{% csrf_token %}
+							<quantity-selector id="quantitySelector">
+								<div class="is-flex is-flex-direction-rows is-flex-wrap-nowrap is-justify-content-flex-start is-align-items-center is-align-content-space-between">
+									<button class="button" id="minus">-</button>
+									<label for="quantity" hidden>Quantity</label>
+									<input type="number" value="{{ item.quantity }}" 
+									min="1" max="99" name="quantity" 
+									class="quantity input" value="1">
+									<button class="button" id="plus" class="button">+</button>
+								</div>
+							</quantity-selector>
+
+							<input type="hidden" name="item-key" value="{% if item.is_variant %}variant{%else%}product{% endif %}_{{ item.product_or_variant.id }}">
+
+							<a data-action-type="remove" class="button is-danger is-inverted">
+								Remove
+							</a>
+							<a data-action-type="update" class="button is-info update-link">
+								Update
+							</a>
+							
+							<!--   -->
+							<input type="text" name="item" value="{% if item.is_variant %}variant{%else%}product{% endif %}_{{ item.product_or_variant.id }}" hidden>
+						</form>
+						
 					</div>
 				</div>	
 			</div> <!-- /#quantity -->
@@ -80,4 +106,10 @@
 	{%endif%}	
 	
 </div>
+{% endblock %}
+
+{% block postload_js %}
+{{ block.super }}
+<script src="{% static 'js/quantity_selector.js' %}" defer></script>
+<script src="{% static 'js/cart_line_item_form.js' %}" defer></script>
 {% endblock %}
