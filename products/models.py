@@ -2,6 +2,7 @@ from django.db import models
 
 class Collection(models.Model):
 	name =  models.CharField(max_length=100)
+	image = models.ImageField(null=True, blank=True)
 	user_friendly_name = models.CharField(max_length=100)
 	description = models.TextField()
 	
