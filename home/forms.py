@@ -18,7 +18,7 @@ class ContactForm(forms.ModelForm):
 			}),
 			'subject':forms.TextInput(attrs={
 				'class':'input',
-				'placeholder' : '*You can add a subject'
+				'placeholder' : 'You can add a subject'
 			}),
 			'message': forms.TextInput(attrs={
 				'class':'textarea',

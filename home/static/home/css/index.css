@@ -1,0 +1,22 @@
+.is-divider {
+	height: 2px;
+	width: 100%;
+}
+
+.is-overlay-text {
+	position: relative;
+	top: 75%;
+}
+
+.is-img-container {
+	max-width: 445px;
+	height: 445px;
+	width: 40vw;
+}
+
+@media only screen and (max-width: 946px) {
+	.is-img-container {
+		height: 27rem;
+		width: 75vw;
+	}
+}
