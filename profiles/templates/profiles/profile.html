@@ -30,7 +30,74 @@
 				<!-- Order History -->
 				<div class="column">
 					<h2>Order History</h2>
+					<table class="table">
+						<!-- Table Header -->
+						<thead>
+							<tr>
+							  <th><abbr title="Order number">Order#</abbr></th>
+							  <th>Date</th>
+							  <th>Items</th>
+							  <th>Total</th>
+							  <th>Grand total</th>
+							</tr>
+						  </thead>
 
+						  <!-- Table Body -->
+						  <tbody>
+							{% for order in orders %}
+								<tr>
+									<td>
+										<a href="{% url 'order_history' order.order_number%}" title="{{ order.order_numbe }}">
+											{{ order.order_number | truncatechars:6 }}
+										</a>
+									</td>
+									<td>
+										<p>
+											{{ order.date }}
+										</p>
+									</td>
+									<td>
+										<ul>
+											<!-- Is there are products added -->
+											{% if order.productlineitem %}
+												{% for item in order.productlineitem.all %}
+													<li>{{ item.product.title | truncatechars:10}}</li>
+												{% endfor %}
+											{% endif %}
+
+											<!-- If there are variants added -->
+											{% if order.variantlineitem %}
+												{% for item in order.variantlineitem.all %}
+													<li>{{ item.variant.title | truncatechars:10}}</li>
+												{% endfor %}
+											{% endif %}
+										</ul>
+									</td>
+									<td>
+										<ul>
+											<!-- Is there are products added -->
+											{% if order.productlineitem %}
+												{% for item in order.productlineitem.all %}
+													<li>€{{ item.lineitem_total }}</li>
+												{% endfor %}
+											{% endif %}
+											
+											<!-- If there are variants added -->
+											{% if order.variantlineitem %}
+												{% for item in order.variantlineitem.all %}
+													<li>€{{ item.lineitem_total}}</li>
+												{% endfor %}
+											{% endif %}
+										</ul>
+									</td>
+									<td>
+										<p>€{{ order.grand_total }}</p>
+									</td>
+								</tr>
+							{% endfor %}
+						  </tbody>
+						  <!-- End of table -->
+					</table>
 				</div> <!-- column -->
 			</div>
 		</div> <!-- /.container -->
