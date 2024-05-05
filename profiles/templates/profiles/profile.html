@@ -1,16 +1,64 @@
 {% extends 'base.html' %} 
 {% load static %} 
+{% load crispy_forms_tags %} 
 
 {% block extra_css %}
 
 {% endblock %}
 
 {% block content %}
-<div class="section">
-	<div class="container">
-		<h2 class="is-title is-size-3 is-size-3-mobile">Order Summary</h2>
-		
-	</div> <!-- /.container -->
-</div> <!-- /.section -->
+<div class="hero is-halfheight">
+	<h2 class="is-title is-size-1 is-size-3-mobile">Profile</h2>
+	<hr>
+	<div class="hero-body is-align-items-flex-start">
+		<div class="container">
+			<div class="columns">
 
+				<!-- Default Shipping Address -->
+				<div class="column">
+					<h2>Default Delivery Information</h2>
+					<form action="{% url 'profile' %}" id="profile-update-form" method="POST">
+						{% csrf_token %}
+						{{ form | crispy }}
+						<p id="error-message" class="subtitle is-danger"></p>
+						<button type="submit" class="button is-primary">
+							Update details
+						</button>
+					</form>
+				</div> <!-- column -->
+
+				<!-- Order History -->
+				<div class="column">
+					<h2>Order History</h2>
+
+				</div> <!-- column -->
+			</div>
+		</div> <!-- /.container -->
+	</div>
+</div>
 {% endblock%}
+
+{% block postload_js %}
+<script>
+    const countryField = document.getElementById('id_default_country');
+    // Get a reference to the error message container
+    const errorMessage = document.getElementById('error-message');
+
+    // Add event listener for form submission
+    document.getElementById('profile-update-form').addEventListener('submit', function(event) {
+        // Get the selected option
+        const selectedOption = countryField.options[countryField.selectedIndex];
+        
+        // Get the text content of the selected option
+        const selectedText = selectedOption.textContent;
+
+        // Check if the selected option is "Country *"
+        if (selectedText === 'Country *') {
+            // Prevent form submission
+            event.preventDefault();
+            // Add the error message to the error message container
+            errorMessage.textContent = 'Please select a value other than "Country *".';
+        }
+    });
+</script>
+{% endblock %}
