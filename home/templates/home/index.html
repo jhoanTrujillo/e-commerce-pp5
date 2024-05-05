@@ -1,25 +1,81 @@
 {% extends 'base.html' %} 
 {% load static %} 
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'home/css/index.css' %}">
+{% endblock %}
+
 {% block content %}
 <!-- Hero Image -->
+<section id="hero-img-container" class="hero is-halfheight">
+	<div class="hero-body">
+		<img src="" alt="">
+		<div>
+			<h2 class="title">Half height hero</p>
+			<p class="subtitle">Half height subtitle</p>
+		</div>
+	</div>
+</section>
+
+<div class="is-divider my-5 is-alert"></div>
+
+<!-- collection -->
 <section class="hero is-halfheight">
+	<div class="mb-5 has-text-centered">
+		<h2 class="title is-size-1 is-size-3-mobile">Collections</h2>
+	</div>
+	<div class="columns">
+		{% for collection in collections %}
+			{% if forloop.counter == 2 %}
+				<div class="column m-auto  has-text-centered">
+					<p class="title is-fg-text">Check out all products</p>
+					<a href="{% url 'products' %}" class="button is-info is-fg-text">Shop all</a>
+				</div>
+			{% endif %}
+			<style>
+				#is-img-container-{{ collection.name }} {
+					background-image: url("{{ collection.image.url }}");
+					background-repeat: no-repeat;
+					background-position: center;
+					background-size: cover;
+				}
+			</style>
+			<div class="column">
+				<div id="is-img-container-{{ collection.name }}" class="is-img-container mx-auto has-border-rounded">
+					<div class="is-overlay-text m-5">
+						<a href="{% url 'products' %}?collection={{ collection.name }}" class="is-hoverable is-clickable">
+							<p class="is-size-3 is-bg-text ">
+								{{ collection.user_friendly_name }}
+							</p>
+						</a> 
+					</div> <!-- /.is-overlay-text m-5 -->
+				</div> <!-- /.is-img-container has-border-rounded -->
+			</div> <!-- /.column -->
+		{% endfor %}
+	</div>
+</section>
+
+<div class="is-divider my-5 is-alert"></div>
+<!-- Product Carousel -->
+<section class="is-halfheight">
 
 </section>
 
 <!-- Latest Products -->
-<section class="hero is-halfheight">
-
+<section class="hero is-halfheight container my-4">
+	<h2 class="title">Latest Product</h2>
+	<div class="columns">
+		<!--  -->
+		{% for product in latest_products %}
+			{% include 'includes/product_card.html' %}
+		{% endfor %}
+	  </div>
 </section>
-<!-- collection carousel -->
-<section class="hero is-halfheight">
 
-</section>
-<!-- categories -->
-<section class="hero is-halfheight">
-
-</section>
 <!-- Reviews -->
-<section class="hero is-halfheight">
+<section class="is-halfheight">
 
 </section>
+
+
 {% endblock %}
