@@ -1,26 +1,24 @@
 from pathlib import Path
+from dotenv import load_dotenv, find_dotenv
 import os
 
 # Project Paths
+load_dotenv(find_dotenv()) # take environment variables from .env
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 ALLAUTH_DIR = os.path.join(BASE_DIR, 'templates', 'allauth')
 INCLUDES_DIR = os.path.join(BASE_DIR, 'includes')
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-k$vu6x2bqzf($rbwl*o7om!0yu6g*r=m84d%h(v0pkh(vbxg$b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
+DEBUG = os.getenv('DEBUG', '')
 ALLOWED_HOSTS = ['127.0.0.1']
 
-
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -141,10 +139,7 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-STATICFILES_DIRS = (
-	os.path.join(BASE_DIR, 'static'),
-	)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 
 # Default primary key field type
@@ -171,3 +166,8 @@ STANDARD_DELIVERY_PERCENTAGE = 10
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = ("bulma",)
 CRISPY_TEMPLATE_PACK = "bulma"
+
+# Stripe
+STRIPE_CURRENCY = 'usd'
+STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
