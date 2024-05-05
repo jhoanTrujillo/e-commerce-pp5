@@ -33,6 +33,7 @@ class Product(models.Model):
 class Variant(models.Model):
 	product = models.ForeignKey(Product, on_delete=models.CASCADE)
 	title = models.CharField(max_length=100)
+	sku = models.CharField(max_length=100, null=True, blank=True)
 	price = models.DecimalField(max_digits=6, decimal_places=2)
 	image = models.ImageField(null=True, blank=True)
 	image_url = models.URLField(max_length=1024, null=True, blank=True)
