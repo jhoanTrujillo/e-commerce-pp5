@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+{% endblock %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2 class="title is-size-1 is-size-3-mobile">Thank you for your order!</h2>
+        <p class="subtitle is-size-3 is-size-5-mobile">Your order details can be found below, and you should have received and email confirmation.</p>
+        <hr>
+    </div>
+    <div class="container">
+        <!-- Order details -->
+        <div class="columns">
+            <!-- Product details card -->
+            <div class="column">
+                <div class="card py-4">
+
+                    <div class="columns is-clickable is-mobile">
+                        <div class="column">
+                            <p class="label is-size-3 is-size-4-mobile ml-3">Product Details</p>
+                        </div>
+                        <div class="column has-text-centered">
+                            <i class="fa-solid fa-arrow-down is-size-3 is-size-4-mobile"></i>
+                        </div>
+                    </div>
+
+                    <hr class="mt-1">
+                    {% for line_item in product_line_items %}
+                    <div class="media">
+                        <figure class="image is-64x64">
+                            <img 
+                            src="
+                            {% if line_item.product.image %}
+                            {{ line_item.product.image.url }}
+                            {% else %}
+                            {{ line_item.product.image_url }}
+                            {% endif %}
+                            " 
+                            alt="Image for product {{ line_item.product.title }}"
+                            >
+                        </figure>
+                        <div class="media-content">
+                            <div class="content">
+                            <p>
+                                <strong>{{ line_item.product.title |truncatechars:20 }}</strong>
+                                <br />
+                                SKU: {{ line_item.product.sku }}
+                                <br />
+                                Total: €{{ line_item.lineitem_total }}
+                            </p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    {% for line_item in variant_line_items %}
+                    <div class="media">
+                        <figure class="image is-64x64">
+                            <img 
+                            src="
+                            {% if line_item.variant.image %}
+                            {{ line_item.variant.image.url }}
+                            {% else %}
+                            {{ line_item.variant.image_url }}
+                            {% endif %}
+                            " 
+                            alt="Image for variant {{ line_item.variant.title }}"
+                            >
+                        </figure>
+                        <div class="media-content">
+                            <div class="content">
+                            <p>
+                                <strong>{{ line_item.variant.title |truncatechars:20 }}</strong>
+                                <br />
+                                SKU: {{ line_item.variant.sku }}
+                                <br />
+                                Total: €{{ line_item.lineitem_total }}
+                            </p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <hr>
+                    <div class="columns is-clickable">
+                        <h3 class="label is-size-3 is-size-4-mobile ml-3">Order Total: € {{ order.grand_total  }}</h3>
+                    </div> 
+                </div> <!-- /.box -->
+            </div> <!-- /.column -->
+
+            <!-- Shipping details card  -->
+            <div class="column">
+                <div class="card py-4">
+                    <p class="label title is-size-3 is-size-4-mobile ml-4">Shipping Details</p>
+                    <!-- Country and postcode holder -->
+                    <fieldset id="contact" class="p-3">
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+                                <div class="field">
+                                    <p class="control is-expanded has-icons-left">
+                                        <label class="label" for="full_name">Full name</label>
+                                        <input type="text" name="full_name" class="input" value="{{order.full_name}}" disabled>
+                                    </p> <!-- /.control -->
+                                </div> <!-- /.field -->
+
+                                <div class="field">
+                                    <p class="control">
+                                        <label class="label" for="email">Email Address</label>
+                                        <input type="text" class="input" name="email" value="{{order.email }}" disabled>
+                                    </p> <!-- /.control -->
+                                </div> <!-- /.field -->
+
+                            </div> <!-- /.field-body -->
+                        </div> <!-- /.field is-horizontal -->
+
+                        <div class="field mb-4">
+                            <p class="control">
+                                <label class="label" for="phone_number">phone number</label>
+                                <input type="phone2numeric" class="input" name="phone_number" value="{{order.phone_number}}" disabled>
+                            </p> <!-- /.control -->
+                        </div> <!-- /.field -->
+
+                    </fieldset>  <!-- /#contact -->
+
+                    <fieldset id="address" class="p-3 mt-5">
+                        <legend class="label">Delivery</legend>
+                        <div class="field mb-4">
+                            <p class="control">
+                                <label class="label" for="street_address1">Street address 1</label>
+                                <input type="text" class="input" name="street_address1" value="{{order.street_address1}}" disabled>
+                            </p> <!-- /.control -->
+                        </div> <!-- /.field -->
+                        
+                        <div class="field mb-4">
+                            <p class="control">
+                                <label class="label" for="street_address2">Street address 2</label>
+                                <input type="text" class="input" name="street_address2" value="{{order.street_address2}}" disabled>
+                            </p> <!-- /.control -->
+                        </div> <!-- /.field -->
+
+                        <div class="field mb-4">
+                            <p class="control">
+                                <label class="label" for="county">County</label>
+                                <input type="text" class="input" name="county" value="{{order.county}}" disabled>
+                            </p> <!-- /.control -->
+                        </div> <!-- /.field -->
+
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+                                <div class="field">
+                                    <p class="control">
+                                        <label class="label" for="town_or_city">Town/City</label>
+                                        <input type="text" class="input" name="town_or_city" value="{{order.town_or_city}}" disabled>
+                                    </p> <!-- /.control -->
+                                </div> <!-- /.field -->
+
+                                <div class="field">
+                                    <p class="control">
+                                        <label class="label" for="postcode">postcode</label>
+                                        <input type="text" class="input" name="postcode " value="{{order.postcode }}" disabled>
+                                    </p> <!-- /.control -->
+                                </div> <!-- /.field -->
+
+                                <div class="field">
+                                    <p class="control">
+                                        <label class="label" for="country">Country</label>
+                                        <input type="text" class="input" name="postcode" value="{{order.country}}" disabled>
+                                    </p> <!-- /.control -->
+                                </div> <!-- /.field -->
+
+                            </div> <!-- /.field-body -->
+                        </div> <!-- /.field is-horizontal -->
+                    </fieldset>  <!-- /#address -->
+                </div> <!-- /.card py-4 -->
+            </div> <!-- /.column -->
+
+        </div> <!-- /.columns -->
+	</div> <!-- /.container -->
+{% endblock %}
