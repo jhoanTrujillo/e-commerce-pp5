@@ -1,0 +1,22 @@
+{% if request.user.is_authenticated %}
+	{% if request.user.is_superuser %}
+		<div class="block">
+			<div class="is-flex mt-2">
+				{% if variant.id %}
+					<a href="{% url 'edit_product_or_variant' variant.id %}?is-variant=true" class="button is-outlined is-link mr-3">
+						<i class="fa-solid fa-pencil"></i>
+					<a href="{% url 'delete_product_or_variant' variant.id %}?is-variant=true" class="button is-outlined is-danger">
+						<i class="fa-solid fa-trash-can"></i>
+					</a>
+				{% else %}
+					<a href="{% url 'edit_product_or_variant' product.id %}" class="button is-outlined is-link mr-3" aria-label="Delete product icon">
+						<i class="fa-solid fa-pencil"></i>
+					</a>
+					<a href="{% url 'delete_product_or_variant' product.id %}" class="button is-outlined is-danger" aria-label="Delete product icon">
+						<i class="fa-solid fa-trash-can"></i>
+					</a>
+				{% endif %}
+			</div>
+		</div> <!-- /.block -->
+	{% endif %}
+{% endif %}

@@ -1,5 +1,14 @@
 {% extends 'base.html' %} 
 {% load static %}
+
+{% block extra_title %}
+	{% if variant %}
+	| {{ variant.title }}
+	{% else %}
+	| {{ product.title }}
+	{% endif %}
+{% endblock %}
+
 {% block content %}
 
 <div id="product-details" class="container section my-5">

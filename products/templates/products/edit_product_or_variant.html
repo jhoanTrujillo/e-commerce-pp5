@@ -1,0 +1,182 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% load crispy_forms_tags %}
+
+{% block extra_title %}
+| Product Management
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	
+	{% if is_variant %}
+
+		<h2 class="mt-4 is-title is-size-3 is-size-3-mobile">Create a new variant</h2>
+		<p class="subtitle">This form lets you connect and create a variant that is link to any existing product</p>
+		<hr>
+
+		<form action="{% url 'edit_product_or_variant' item.id %}?is_variant=True" class="my-5" method="POST" id="product-creation-form" type="multipart/form-data">
+			{% csrf_token %}
+			<div class="card py-4">
+				<fieldset class="p-3">
+					<div class="field is-horizontal">
+						<div class="field-body">
+							<div class="field">
+								<p class="control is-expanded has-icons-left">
+									{{ form.title | as_crispy_field }}
+								</p> <!-- /.control -->
+							</div> <!-- /.field -->
+
+							<div class="field">
+								<p class="control">
+									{{ form.sku | as_crispy_field }}
+								</p> <!-- /.control -->
+							</div> <!-- /.field -->
+
+						</div> <!-- /.field-body -->
+					</div> <!-- /.field is-horizontal -->
+
+					<div class="field is-horizontal">
+						<div class="field-body">
+							<div class="field">
+								<p class="control">
+									{{ form.stock | as_crispy_field }}
+								</p> <!-- /.control -->
+							</div> <!-- /.field -->
+
+							<div class="field">
+								<p class="control">
+									{{ form.price | as_crispy_field }}
+								</p> <!-- /.control -->
+							</div> <!-- /.field -->
+							
+							<div class="field">
+								<p class="control is-expanded has-icons-left">
+									{{ form.product | as_crispy_field }}
+								</p> <!-- /.control -->
+							</div> <!-- /.field -->
+
+						</div> <!-- /.field-body -->
+					</div> <!-- /.field is-horizontal -->
+
+
+					<div class="field mb-4">
+						<p class="control">
+							{{ form.image| as_crispy_field }}
+						</p> <!-- /.control -->
+					</div> <!-- /.field -->
+
+					<div class="field">
+						<p class="control">
+							{{ form.image_url | as_crispy_field }}
+						</p> <!-- /.control -->
+					</div> <!-- /.field -->
+				</fieldset> 
+					
+				<button type="submit" class="button is-primary is-inverted my-5 mx-4">
+					Edit Variant
+				</button>
+			</div>
+		</form>	
+
+	{% else %}
+
+		<h2 class="is-title is-size-3 is-size-3-mobile">Create a new product</h2>
+		<p class="subtitle">The form below wen submitted will create a new product in the database to check in the store.</p>
+		<hr>
+		<form action="{% url 'edit_product_or_variant' item.id %}" class="form mb-5" method="POST" id="variant-creation-form" type="multipart/form-data">
+			{% csrf_token %}
+			<div class="card py-4">
+				<!-- Country and postcode holder -->
+				<fieldset id="product-details" class="p-3">
+					<legend class="label is-size-4 is-size-4-mobile">New product details</legend>
+					<div class="field is-horizontal">
+						<div class="field-body">
+							<div class="field">
+								<p class="control is-expanded has-icons-left">
+									{{ form.title | as_crispy_field }}
+								</p> <!-- /.control -->
+							</div> <!-- /.field -->
+
+						</div> <!-- /.field-body -->
+					</div> <!-- /.field is-horizontal -->
+
+					<div class="field is-horizontal">
+						<div class="field-body">
+							<div class="field">
+								<p class="control">
+									{{ form.stock | as_crispy_field }}
+								</p> <!-- /.control -->
+							</div> <!-- /.field -->
+
+							<div class="field">
+								<p class="control">
+
+									{{ form.price | as_crispy_field }}
+								</p> <!-- /.control -->
+							</div> <!-- /.field -->
+							
+							<div class="field">
+								<p class="control">
+									{{ form.sku | as_crispy_field }}
+								</p> <!-- /.control -->
+							</div> <!-- /.field -->
+
+						</div> <!-- /.field-body -->
+					</div> <!-- /.field is-horizontal -->
+					
+					<div class="field is-horizontal">
+						<div class="field-body">
+
+							<p class="control">
+								{{ form.rating | as_crispy_field }}
+							</p> <!-- /.control -->
+
+							<p class="control">
+								{{ form.collection | as_crispy_field }}
+							</p> <!-- /.control -->
+
+						</div> <!-- /.field-body -->
+					</div> <!-- /.field -->
+
+					<div class="field">
+						<p class="control">
+							{{ form.description | as_crispy_field }}
+						</p> <!-- /.control -->
+					</div> <!-- /.field -->
+
+					<div class="field mb-4">
+						<p class="control">
+							{{ form.image| as_crispy_field }}
+						</p> <!-- /.control -->
+					</div> <!-- /.field -->
+
+					<div class="field">
+						<p class="control">
+							{{ form.image_url | as_crispy_field }}
+						</p> <!-- /.control -->
+					</div> <!-- /.field -->
+				</fieldset>  <!-- /#contact -->
+				
+				
+				<button type="submit" class="button is-primary is-inverted my-5 mx-4">
+					Edit Product
+				</button>
+				{% if request.user.is_authenticated %}
+					{% if request.user.is_superuser or request.user.is_staff %}	
+					<a href="{% url 'add_product_or_variant' %}" class="button is-link is-outlined my-5 mx-4" aria-label="Link to product creation page">
+						Create product or variant
+					</a>
+					{% endif %}
+				{% endif %}
+			</div>
+		</form> 
+
+	{% endif %}
+
+</div> <!-- /.container -->	
+{% endblock%}
+
+{% block postload_js %}
+	<script src="{% static 'products/js/form.js' %}"></script>
+{% endblock %}

@@ -6,40 +6,84 @@
 	<div class="fixed-grid has-3-cols has-1-cols-mobile">
 		<div class="grid">
 		{% for product in products %}
-			<div class="card cell">
-				<div class="card-image">
-				<a href="{% url 'product_details' product.id %}">
-				<figure class="image is-1by1 is-hoverable">
-					<img
-						{% if product.image %}
-						src="{{ product.image.url}}"
-						{% else %}
-						src="{{ product.image_url }}"
-						{% endif %}
-						alt="Placeholder image"
-						class="is-hoverable"
-					/>
-				</figure>
-				</a>
-				</div>
+			<div class="cell">
+				<div class="card">
+					<div class="card-image">
+					<a href="{% url 'product_details' product.id %}">
+					<figure class="image is-1by1 is-hoverable">
+						<img
+							{% if product.image %}
+							src="{{ product.image.url}}"
+							{% else %}
+							src="{{ product.image_url }}"
+							{% endif %}
+							alt="Placeholder image"
+							class="is-hoverable"
+						/>
+					</figure>
+					</a>
+					</div>
 
-				<div class="card-content">
-					<div class="media-content">
-						<p class="title is-4">
+					<div class="card-content">
+						<div class="media-content">
+							<p class="title is-4">
+								<a href="{% url 'product_details' product.id %}">
+								{{ product.title }}
+								</a>
+							</p>
+							{% if product.rating %}
+								<p class="subtitle is-6">Rating: {{ product.rating }}/5</p>
+							{% else %}
+								<p class="subtitle is-6">Rate tis product</p>
+							{% endif %}
+							<p class="subtitle is-5">${{ product.price }}</p>
+						</div> <!-- /.media-content-->
+						{% include 'includes/update_delete_product.html' %}
+					</div> <!-- /.card-content-->
+				</div> <!-- /.card cell-->
+			</div> <!-- /.cell-->
+
+			{% if product.variant_set %}
+				{% for variant in product.variant_set.all  %}
+					<div class="cell">
+						<div class="card">
+							<div class="card-image">
 							<a href="{% url 'product_details' product.id %}">
-							{{ product.title }}
+							<figure class="image is-1by1 is-hoverable">
+								<img
+									{% if variant.image %}
+									src="{{ variant.image.url}}"
+									{% else %}
+									src="{{ variant.image_url }}"
+									{% endif %}
+									alt="Placeholder image"
+									class="is-hoverable"
+								/>
+							</figure>
 							</a>
-						</p>
-						{% if product.rating %}
-							<p class="subtitle is-6">Rating: {{ product.rating }}</p>
-						{% else %}
-							<p class="subtitle is-6">Leave a review</p>
-						{% endif %}
-						
-						<p class="subtitle is-5">${{ product.price }}</p>
-					</div> <!-- /.media-content-->
-				</div> <!-- /.card-content-->
-			</div> <!-- /.card cell-->
+							</div>
+		
+							<div class="card-content">
+								<div class="media-content">
+									<p class="title is-4">
+										<a href="{% url 'variant_details' product.id variant.id %}">
+										{{ product.title }}
+										</a>
+									</p>
+									{% if product.rating %}
+										<p class="subtitle is-6">Rating: {{ product.rating }}/5</p>
+									{% else %}
+										<p class="subtitle is-6">Rate tis product</p>
+									{% endif %}
+									<p class="subtitle is-5">${{ variant.price }}</p>
+								</div> <!-- /.media-content-->
+								{% include 'includes/update_delete_product.html' %}
+							</div> <!-- /.card-content-->
+						</div> <!-- /.card cell-->
+					</div> <!-- /.cell-->
+				{% endfor%}
+			{% endif %}
+
 		{% endfor %}
 		</div> <!-- /.grid-->
 	</div> <!-- /.fixed-grid has-3-cols -->
