@@ -1,0 +1,120 @@
+[
+   {
+      "model": "products.collection",
+      "pk": 1,
+      "fields": {
+         "name": "enamel_pins",
+         "image": "dragon_soft_enemal_pin_mkFhRzR.webp",
+         "user_friendly_name": "Enamel Pins",
+         "description": "Collection of unique and stylish enamel pins to accessorize your outfits and accessories."
+      }
+   },
+   {
+      "model": "products.collection",
+      "pk": 2,
+      "fields": {
+         "name": "accessories",
+         "image": "beanie_guy.png",
+         "user_friendly_name": "Accessories",
+         "description": "Collection of trendy and versatile accessories to enhance your style and functionality."
+      }
+   },
+   {
+      "model": "products.product",
+      "pk": 1,
+      "fields": {
+         "title": "Marigold - Soft Enamel Pin",
+         "description": "Add a touch of whimsy to your ensemble with our Marigold soft enamel pin featuring a delightful depiction of a little girl surrounded by yellow blooms. Perfect for lapels, backpacks, and more.",
+         "sku": "MARIGOLD-SEP",
+         "price": "9.99",
+         "image": "marigold_soft_enemal_pin.webp",
+         "image_url": "https://cdn.midjourney.com/1ee854e7-224c-483b-b75f-f1fde3e5dfdc/0_0.webp",
+         "rating": "5.00",
+         "collection": 1,
+         "stock": 50,
+         "created_date": "2023-04-15T12:00:00Z",
+         "updated_date": "2024-04-17T05:21:42.556Z"
+      }
+   },
+   {
+      "model": "products.product",
+      "pk": 2,
+      "fields": {
+         "title": "V-boy - Soft Enamel Pin",
+         "description": "Make a statement with our V-boy soft enamel pin, featuring a playful rendition of a tiny virus. Crafted with high-quality enamel and vibrant colors, this pin is both stylish and socially conscious.",
+         "sku": "VBOY-SEP",
+         "price": "7.99",
+         "image": "vboy_soft_enemal_pin.webp",
+         "image_url": "https://cdn.midjourney.com/c91adfce-f8db-4c68-b53a-444fd673f7d6/0_3.webp",
+         "rating": "4.80",
+         "collection": 1,
+         "stock": 30,
+         "created_date": "2023-04-15T12:00:00Z",
+         "updated_date": "2024-04-25T21:06:09.216Z"
+      }
+   },
+   {
+      "model": "products.product",
+      "pk": 3,
+      "fields": {
+         "title": "Pio - Soft Enamel Pin",
+         "description": "Embrace your inner alien with our Pio soft enamel pin featuring a charming black alien character. Perfect for sci-fi enthusiasts and those with a quirky sense of style.",
+         "sku": "PIO-SEP",
+         "price": "6.99",
+         "image": "pio_soft_enemal_pin.webp",
+         "image_url": "https://cdn.midjourney.com/c0d5cbe9-7d5b-4a5e-b200-b204f88a5590/0_2.webp",
+         "rating": "4.70",
+         "collection": 1,
+         "stock": 40,
+         "created_date": "2023-04-15T12:00:00Z",
+         "updated_date": "2024-04-16T05:13:59.712Z"
+      }
+   },
+   {
+      "model": "products.product",
+      "pk": 4,
+      "fields": {
+         "title": "Dragon - Soft Enamel Pin",
+         "description": "Channel your inner fire with our Dragon soft enamel pin featuring a majestic red dragon. Ideal for fantasy enthusiasts and those seeking to add a touch of mythical flair to their accessories.",
+         "sku": "DRAGON-SEP",
+         "price": "8.99",
+         "image": "dragon_soft_enemal_pin.webp",
+         "image_url": "https://cdn.midjourney.com/9130ec9c-d2b5-41f6-8848-8a78f6a00a95/0_1.webp",
+         "rating": "4.90",
+         "collection": 1,
+         "stock": 60,
+         "created_date": "2023-04-15T12:00:00Z",
+         "updated_date": "2024-04-17T05:22:29.864Z"
+      }
+   },
+   {
+      "model": "products.product",
+      "pk": 5,
+      "fields": {
+         "title": "Beanie",
+         "description": "Stay warm and stylish with our Beanie, the perfect accessory for chilly weather. Crafted with soft and cozy materials, this beanie keeps you comfortable while adding a pop of color to your outfit.",
+         "sku": "beanie-sep",
+         "price": "19.99",
+         "image": "beanie_image.png",
+         "image_url": null,
+         "rating": "0.00",
+         "collection": 2,
+         "stock": 50,
+         "created_date": "2024-04-20T11:33:52.791Z",
+         "updated_date": "2024-04-28T15:38:45.608Z"
+      }
+   },
+   {
+      "model": "products.variant",
+      "pk": 1,
+      "fields": {
+         "product": 3,
+         "title": "Piu - Soft Enemal Pin",
+         "sku": "sku-ieuas2",
+         "price": "5.99",
+         "image": "miow_soft_enemal_pin_tEbB2Wi.webp",
+         "image_url": "https://cdn.midjourney.com/c0d5cbe9-7d5b-4a5e-b200-b204f88a5590/0_0.webp",
+         "stock": 100
+      }
+   }
+]

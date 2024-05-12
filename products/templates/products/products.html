@@ -52,9 +52,9 @@
 							<figure class="image is-1by1 is-hoverable">
 								<img
 									{% if variant.image %}
-									src="{{ variant.image.url}}"
+										src="{{ variant.image.url}}"
 									{% else %}
-									src="{{ variant.image_url }}"
+										src="{{ variant.image_url }}"
 									{% endif %}
 									alt="Placeholder image"
 									class="is-hoverable"
@@ -67,13 +67,13 @@
 								<div class="media-content">
 									<p class="title is-4">
 										<a href="{% url 'variant_details' product.id variant.id %}">
-										{{ product.title }}
+											{{ variant.title }}
 										</a>
 									</p>
 									{% if product.rating %}
 										<p class="subtitle is-6">Rating: {{ product.rating }}/5</p>
 									{% else %}
-										<p class="subtitle is-6">Rate tis product</p>
+										<p class="subtitle is-6">Rate this product</p>
 									{% endif %}
 									<p class="subtitle is-5">${{ variant.price }}</p>
 								</div> <!-- /.media-content-->

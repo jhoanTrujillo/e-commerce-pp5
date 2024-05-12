@@ -1,5 +1,7 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q, Prefetch
 from .models import Product, Collection, Variant
 from .forms import ProductForm, VariantForm
@@ -74,21 +76,28 @@ def variant_details(request, product_id, variant_id):
 
 	return render(request, "products/product_details.html", context)
 
+@login_required
 def add_product_or_variant(request):
 	""" Add a product or variant to the store"""
+	if not request.user.is_superuser:
+		messages.failed(request, 'Your account don\'t count with the permission required')
+		return redirect(reverse('home'))
+
 	# If post generate both forms in one page
 	if request.method == 'POST':
 		product_form = ProductForm(request.POST, request.FILES)
 		variant_form = VariantForm(request.POST, request.FILES)
 
-		if variant_form.is_valid():  # Check if variant form is valid
-			variant_instance = variant_form.save()  # Save variant form (product association will be handled automatically)
+		if variant_form.is_valid():  
+			variant_instance = variant_form.save()  
 			messages.success(request, 'Successfully added variant!')
-			return redirect('add_product')  # Redirect to the same page after successfully adding a variant
-		elif product_form.is_valid():  # Check if product form is valid
-			product_instance = product_form.save()  # Save product form
+			product_id = variant_instance.product.id
+			variant_id = variant_instance.id
+			return redirect('variant_details', product_id=product_id, variant_id=variant_id)
+		elif product_form.is_valid():  
+			product_instance = product_form.save()  
 			messages.success(request, 'Successfully added product!')
-			return redirect('add_product')  # Redirect to the same page after successfully adding a product
+			return redirect('product_details', product_id=product_instance.id)
 		else:
 			messages.error(request, 'Failed to add product or variant. Please ensure the form is valid.')
 
@@ -98,17 +107,20 @@ def add_product_or_variant(request):
 
 	template = 'products/add_product.html'
 	context = {
-	'product_form': product_form,
-	'variant_form': variant_form,
+		'product_form': product_form,
+		'variant_form': variant_form,
 	}
 
 	return render(request, template, context)
 
-
+@login_required
 def edit_product_or_variant(request, item_id):
 	""" Edit a product or variant in the store """
-	is_variant = request.GET.get('is-variant', False)
+	if not request.user.is_superuser:
+		messages.failed(request, 'Your account don\'t count wit the permission required')
+		return redirect(reverse('home'))
 
+	is_variant = request.GET.get('is-variant', False)
 	if is_variant:
 		product_or_variant = get_object_or_404(Variant, pk=item_id)
 	else:
@@ -124,8 +136,8 @@ def edit_product_or_variant(request, item_id):
 			form.save()
 			messages.success(request, 'Successfully updated product!')
 			if is_variant:
-				product_id=product_or_variant.product.id
-				variant_id=product_or_variant.id
+				product_id = product_or_variant.product.id
+				variant_id = product_or_variant.id
 				return redirect(reverse('variant_details', args=[product_id, variant_id]))
 			else:
 				return redirect('product_details', product_id=product_or_variant.id)
@@ -141,25 +153,34 @@ def edit_product_or_variant(request, item_id):
 
 	template = 'products/edit_product_or_variant.html'
 	context = {
-	'form': form,
-	'item': product_or_variant,
-	'is_variant': is_variant,
+		'form': form,
+		'item': product_or_variant,
+		'is_variant': is_variant,
 	}
 
 	return render(request, template, context)
 
+@login_required
 def delete_product_or_variant(request, item_id):
 	""" Delete a product or variant from the store """
-	is_variant = request.GET.get('is_variant', False)
+	if not request.user.is_superuser:
+		messages.error(request, 'Your account doesn\'t have the required permission')
+		return redirect('home')
+
+	is_variant = request.GET.get('is-variant', False)
 
 	if is_variant:
 		product_or_variant = get_object_or_404(Variant, pk=item_id)
+		print(f"Variant ID: {item_id}")
 	else:
 		product_or_variant = get_object_or_404(Product, pk=item_id)
+		print(f"Product ID: {item_id}")
+
 	try:
 		product_or_variant.delete()
 		messages.success(request, 'Successfully deleted product or variant!')
 	except Exception as e:
 		messages.error(request, 'Unable to delete product or variant. Please try again.')
+		print(f"Exception: {e}")
 
-	return redirect(reverse('products'))  # Redirect to the product list page after deleting a product or a variant
+	return redirect('products')
