@@ -6,23 +6,6 @@
 	--alert: #FF5757; /* Vivid Red */
 	--barlow: "Barlow", sans-serif;
 	--barlow-c: "Barlow Condensed", sans-serif;
-  }
-
-/* General styling */
-h1, 
-h2, h3, 
-h4, h5 {
-	font-family: var(--barlow);
-  	font-weight: 500;
-  	font-style: normal;
-	color: var(--foreground) !important;
-}
-
-p, 
-em, strong {
-	font-family: var(--barlow-c);
-	font-style: normal;
-	color: var(--foreground);
 }
 
 /* Background classes */
@@ -66,7 +49,7 @@ em, strong {
 
 /* Text color classes */
 .is-bg-text {
-color: var(--background);
+color: var(--background) !important;
 }
 
 .is-fg-text {
@@ -93,7 +76,7 @@ color: var(--alert);
 	scrollbar-width: thick;
 }
 
-.is-image-rounded {
+.has-border-rounded {
 	border-radius: 8px !important;
 }
 
@@ -105,47 +88,44 @@ color: var(--alert);
 	background: lightgray;
 }
 
-/** Tablet and below **/
-@media only screen and (max-width: 1366px) {
-	/** Mobile Navbar **/
-	.is-mobile-menu {
-		position: fixed;
-		background: #fff;
-		width: 90vw;
-		right: 0;
-		height: 100vh;
-		padding: 1rem 3rem 1rem 1rem; 
-		transform: translateX(100%);
-		display: block !important;
-		z-index: 5;
-	}
-	
-	.nav-divider-mobile { 
-		display: inline-flex;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
-		margin-inline-start: auto;
-		margin-inline-end: .375em;
-	}
+/** Footer Styling **/
+ul.is-footer-linklist {
+	list-style: none;
+}
 
-	/* Mobile Animation */
-	.has-slide-animation-open {
-		animation: slideIn 1s forwards;
-	}
+ul.is-footer-linklist li a {
+	color: var(--background);
+	font-weight: bold;
+	text-decoration: underline;
+}
 
-	.has-slide-animation-close {
-		animation: slideOut 1s forwards;
-	}
+#message-container {
+	position: absolute;
+    height: 100vh;
+    width: 100vw;
+}
 
-	.non-scrolling {
-		overflow: hidden;
-    	position: fixed;
-	}
+.message {
+	z-index: 50;
+	position: relative;
+	display: block;
+	top: 5rem;
+	max-width: 25rem;
+	margin: auto;
+}
 
-	.nav-end-mobile {
-		margin-top: 1rem;
+
+@media screen and (max-width: 1023px) {
+	.navbar-menu.is-active {
+		position: absolute;
+		width: 100%;
 	}
+}
+
+.is-divider {
+	height: 2px;
+	width: 100%;
+	color: var(--alert);
 }
 
 /* Animation */
@@ -153,6 +133,7 @@ color: var(--alert);
 	opacity: 0;
 	animation: bounceIn 0.5s ease forwards;
 }
+
 
 /* keyframes */
 @keyframes bounceIn {

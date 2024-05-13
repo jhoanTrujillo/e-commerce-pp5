@@ -1,0 +1,74 @@
+
+@media only screen and (min-width: 768px) {
+	.card {
+		max-width: 40vw;
+	}
+}
+
+.card {
+	background-color: var(--foreground);
+	margin: auto
+}
+
+.card-content p {
+	font-size: 1.3em;
+}
+
+.card-content 
+h1, h2,
+h3, h4,
+h5, p, 
+strong {
+	color: var(--background) !important;
+}
+
+.card-content
+h1 {
+	font-size: 3em;
+	font-family: var(--barlow-c);
+	margin-bottom: 0.5em;
+}
+
+.card-content
+form p {
+	margin: .25em;
+}
+
+.card-content
+form label {
+	font-size: 1.3em;
+}
+
+.card-content
+form input {
+	border: none;
+	padding: .3em;
+	border-radius: 8px;
+	margin-left: 1em;
+}
+
+span.helptext {
+	display: block;
+	margin: .25em;
+}
+
+.card-content
+button {
+	border: 1px solid var(--background);
+	border-radius: 8px;
+	background-color: var(--background);
+	padding: 1em;
+	margin-top: 1em;
+}
+
+.card-content
+button:hover {
+	background-color: hsl(0, 0%, 86%);
+	color: hsl(0, 0%, 18%);
+}
+
+div.box p {
+	font-size: 2em;
+	font-family: var(--barlow-c);
+	font-weight: 200;
+}
