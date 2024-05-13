@@ -4,10 +4,10 @@
 		<a href="{% url 'product_details' product.id %}">
 		<figure class="image is-1by1 is-hoverable">
 			<img
-				{% if product.image %}
-				src="{{ product.image.url}}"
+				{% if variant.image %}
+					src="{{ variant.image.url}}"
 				{% else %}
-				src="{{ product.image_url }}"
+					src="{{ variant.image_url }}"
 				{% endif %}
 				alt="Placeholder image"
 				class="is-hoverable"
@@ -19,25 +19,25 @@
 		<div class="card-content">
 			<div class="media-content">
 				<p class="title is-size-4 is-size-5-mobile">
-					<a href="{% url 'product_details' product.id %}" class="has-text-black-ter">
-					{{ product.title }}
+					<a href="{% url 'variant_details' product.id variant.id %}" class="has-text-black-ter">
+					{{ variant.title }}
 					</a>
 				</p>
 				<p class="subtitle is-size-5 is-size-6-mobile mb-2">
-					Price: ${{ product.price }}
+					Price: ${{ variant.price }}
 				</p>
 				{% if product.rating %}
-				<p class="tag is-primary mb-2">
-					Rating: {{ product.rating|floatformat:"1"  }}/5
-				</p>
+					<p class="tag is-primary mb-2">
+						Rating: {{ product.rating|floatformat:"1"  }}/5
+					</p>
 				{% else %}
-				<p class="tag is-light mb-2">
-					Rating not found
-				</p>
+					<p class="tag is-light mb-2">
+						Rating not found
+					</p>
 				{% endif %}
 				<p>{{ product.description|truncatechars:80 }}</p>
 			</div> <!-- /.media-content-->
 			{% include 'includes/update_delete_product.html' %}
 		</div> <!-- /.card-content-->
 	</div> <!-- /.card cell-->
-</div>
+</div> <!-- /.cell-->
