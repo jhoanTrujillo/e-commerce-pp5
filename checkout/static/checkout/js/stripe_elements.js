@@ -32,11 +32,43 @@ const form = document.getElementById('payment-form');
 form.addEventListener('submit', (ev) => {
     ev.preventDefault();
 
+    // Get te data from te form and convert to a easily accessible Json file
+    const formData = new FormData(ev.target);
+    const formDataJSON = {};
+    formData.forEach((value, key) => {
+        formDataJSON[key] = value.trim();
+    });
+
     card.update({ 'disabled': true});
     document.getElementById('submit-button').setAttribute('disabled', 'disabled');
     stripe.confirmCardPayment(clientSecret, {
         payment_method: {
             card: card,
+            // billing_details: {
+            //     name: formDataJSON.full_name,
+            //     phone:  formDataJSON.phone_number,
+            //     email: formDataJSON.email,
+            //     address: {
+            //         line1: formDataJSON.street_address1,
+            //         line2: formDataJSON.street_address2,
+            //         city: formDataJSON.town_or_city,
+            //         country: formDataJSON.country,
+            //         state: formDataJSON.county,
+            //     }
+            // },
+            // shipping: {
+            //     name: formDataJSON.full_name,
+            //     phone:  formDataJSON.phone_number,
+            //     email: formDataJSON.email,
+            //     address: {
+            //         line1: formDataJSON.street_address1,
+            //         line2: formDataJSON.street_address2,
+            //         city: formDataJSON.town_or_city,
+            //         country: formDataJSON.country,
+            //         state: formDataJSON.county,
+            //         postal_code: formDataJSON.postcode,
+            //     }
+            // },
         }
     }).then((result) => {
         if (result.error) {
@@ -57,3 +89,4 @@ form.addEventListener('submit', (ev) => {
         }
     });
 });
+

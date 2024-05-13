@@ -140,18 +140,18 @@
                                 <input type="text" class="input" name="street_address1" value="{{order.street_address1}}" disabled>
                             </p> <!-- /.control -->
                         </div> <!-- /.field -->
-                        
+                        {% if order.street_address2 %}
                         <div class="field mb-4">
                             <p class="control">
                                 <label class="label" for="street_address2">Street address 2</label>
-                                <input type="text" class="input" name="street_address2" value="{{order.street_address2}}" disabled>
+                                <input type="text" class="input" name="street_address2" value="{{ order.street_address2 }}" disabled>
                             </p> <!-- /.control -->
                         </div> <!-- /.field -->
-
+                        {% endif %}
                         <div class="field mb-4">
                             <p class="control">
                                 <label class="label" for="county">County</label>
-                                <input type="text" class="input" name="county" value="{{order.county}}" disabled>
+                                <input type="text" class="input" name="county" value="{{ order.county }}" disabled>
                             </p> <!-- /.control -->
                         </div> <!-- /.field -->
 
@@ -163,14 +163,14 @@
                                         <input type="text" class="input" name="town_or_city" value="{{order.town_or_city}}" disabled>
                                     </p> <!-- /.control -->
                                 </div> <!-- /.field -->
-
+                                {% if order.postcode%}
                                 <div class="field">
                                     <p class="control">
                                         <label class="label" for="postcode">postcode</label>
                                         <input type="text" class="input" name="postcode " value="{{order.postcode }}" disabled>
                                     </p> <!-- /.control -->
                                 </div> <!-- /.field -->
-
+                                {% endif %}
                                 <div class="field">
                                     <p class="control">
                                         <label class="label" for="country">Country</label>
