@@ -8,20 +8,39 @@
 
 {% block content %}
 <div class="hero is-halfheight">
-	<h2 class="is-title is-size-1 is-size-3-mobile">Profile</h2>
+	<h2 class="is-title is-size-1 is-size-3-mobile">{{ user.username }}'s profile</h2>
 	<hr>
 	<div class="hero-body is-align-items-flex-start">
 		<div class="container">
-			<div class="columns">
 
+			{% if request.user.is_authenticated %}
+				{% if request.user.is_superuser or request.user.is_staff %}
+					<div class="mb-5">
+						<h2 class="subtitle is-size-4">
+							Staff Options
+						</h2>
+						<div>
+							<p class="subtitle is-size-3 is-size-4-mobile">
+								<a href="{% url 'add_product_or_variant'%}" class="button is-link is-outlined" aria-label="Link to product creation page">
+									Create product or variant
+								</a>
+							</p>
+						</div>
+					</div>
+				{% endif %}
+			{% endif %}
+
+			<div class="columns">
 				<!-- Default Shipping Address -->
 				<div class="column">
-					<h2>Default Delivery Information</h2>
+					<h2 class="subtitle is-size-4">
+						Default Delivery Information
+					</h2>
 					<form action="{% url 'profile' %}" id="profile-update-form" method="POST">
 						{% csrf_token %}
 						{{ form | crispy }}
 						<p id="error-message" class="subtitle is-danger"></p>
-						<button type="submit" class="button is-primary">
+						<button type="submit" class="button is-info is-inverted">
 							Update details
 						</button>
 					</form>
@@ -29,7 +48,9 @@
 
 				<!-- Order History -->
 				<div class="column">
-					<h2>Order History</h2>
+					<h2 class="subtitle is-size-4">
+						Order History
+					</h2>
 					<table class="table">
 						<!-- Table Header -->
 						<thead>
@@ -99,10 +120,11 @@
 						  <!-- End of table -->
 					</table>
 				</div> <!-- column -->
-			</div>
+
+			</div> <!-- /.columns -->
 		</div> <!-- /.container -->
-	</div>
-</div>
+	</div> <!-- /.hero-body is-align-items-flex-start -->
+</div> <!-- /.hero is-halfheight -->
 {% endblock%}
 
 {% block postload_js %}
