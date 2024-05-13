@@ -32,9 +32,6 @@ def cart_contents(request):
             'is_variant' : is_variant,
         })
 
-    for item in cart_items:
-        total += item['product_or_variant'].price * item['quantity']
-
     if total < settings.FREE_DELIVERY_THRESHOLD:
         delivery = total * Decimal(settings.STANDARD_DELIVERY_PERCENTAGE / 100)
         free_delivery_delta = settings.FREE_DELIVERY_THRESHOLD - total
@@ -42,6 +39,10 @@ def cart_contents(request):
         delivery = 0
         free_delivery_delta = 0
 
+    # Loops over cart item added_total to generate the cart total
+    for item in cart_items:
+        total += item['added_total']
+    
     grand_total = delivery + total
     # Ensure values are rounded to a maximum of 2 decimal points
     shortened_grand_total = Decimal(str(grand_total)).quantize(Decimal('0.00'), rounding=ROUND_HALF_UP)
