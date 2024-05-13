@@ -1,96 +1,127 @@
-<nav class="navbar py-2" role="navigation" aria-label="main navigation">
+<nav class="navbar bounce-in" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-        <div class="navbar-start">
-            <a class="navbar-item" href="{% url 'home' %}">
-                <h1 class="title is-size-3">Joe's Pins</h1>
-            </a>  
-        </div>
-        <div class="nav-divider-mobile">
-            <a href="{% url 'view_cart' %}" class="is-hidden-desktop mr-4 button is-rounded is-primary is-bg-text">
-                <i class="fa-solid fa-cart-shopping is-large mr-2"></i>
-                Cart
-            </a>
-            <a
-            role="button"
-            id="navbar-burger" 
-            class="navbar-burger"
-            aria-label="menu"
-            aria-expanded="false"
-            data-target="mobile-navbar"
-        >
+        <a class="navbar-item" href="{% url 'home' %}">
+        <h1 class="title is-size-4">Joe's Crazy Pins</h1>
+        </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
         </a>
-        </div>
     </div>
-    <div id="mobile-navbar" class="is-mobile-menu navbar-menu">
-
+  
+    <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
-            <a class="navbar-item is-hidden-mobile" href="{% url 'home' %}">
-                <h1 class="title is-size-3 is-hidden-tablet">Joe's Pins</h1>
-            </a>  
-        </div>
+                <a href="{% url 'products' %}?collection=enamel_pins" class="navbar-item">
+                    Enamel Pins
+                </a>
 
-        <div class="my-auto">
-            <form action="{% url 'products' %}" method="GET">
-                <div class="is-flex">
-                    <input 
-                    type="text" 
-                    name="q" 
-                    id="q"
-                    class="input is-rounded mr-1 my-auto"
-                    placeholder="Search for content in our site"
-                    >
-                    <button type="submit" class="button is-rounded">
-                        <i class="fa-solid fa-magnifying-glass" aria-label="Submit search form"></i>
-                    </button>
-                </div> <!-- /.is-flex -->
-            </form> 
-        </div> <!-- /.my-auto -->
-
-        <div class="navbar-end">
-            <a class="navbar-item" href="{% url 'products' %}?collection=enamel_pins">Enamel Pins</a>
-            <a class="navbar-item" href="{% url 'products' %}?collection=accessories">Accessories</a>
+                <a href="{% url 'products' %}?collection=accessories" class="navbar-item">
+                    Accessories
+                </a>
 
             <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">More</a>
+                <a class="navbar-link">
+                More
+                </a>
 
                 <div class="navbar-dropdown">
-                    <a class="navbar-item"> About </a>
-                    <a class="navbar-item"> Blog </a>
-                    <a class="navbar-item"> Contact </a>
-                </div>
-            </div>
-
+                    <a href="{% url 'home' %}" class="navbar-item">
+                        About
+                    </a>
+                    <a href="{% url 'contact_page' %}" class="navbar-item">
+                        Contact
+                    </a>
+                </div> <!-- /.navbar-dropdown -->
+            </div> <!-- /.navbar-item -->
+        </div> <!-- /.navbar-menu -->
+  
+        <div class="navbar-end">
             <div class="navbar-item">
                 <div class="buttons">
+                    <div class="my-auto">
+                        <form action="{% url 'products' %}" method="GET">
+                            <div class="is-flex">
+                                <input 
+                                type="text" 
+                                name="q" 
+                                id="q"
+                                class="input is-rounded mr-1 my-auto"
+                                placeholder="Search for content in our site"
+                                >
+                                <button type="submit" class="button is-rounded">
+                                    <i class="fa-solid fa-magnifying-glass" aria-label="Submit search form"></i>
+                                </button>
+                            </div> <!-- /.is-flex -->
+                        </form> 
+                    </div> <!-- /.my-auto -->
                     {% if request.user.is_authenticated %}
                         {% if request.user.is_superuser%}
-                            <a href="" class="button is-fg-text is-rounded">
-                                <i class="fa-solid fa-plus mr-1"></i>
-                                Product
+                            <a href="{% url 'view_cart' %}" 
+                            class="is-flex is-flex-direction-column is-align-items-center mr-3 button {% if grand_total > 0 %}is-outlined is-primary{% endif %}" 
+                            aria-label="Cart button"
+                            >
+                                <i class="fa-solid fa-cart-shopping is-large mr-2"></i>
+                                €{{ grand_total }}
                             </a>
-                            <a href="{% url 'account_logout' %}" class="button is-danger is-rounded" aria-label="Logout Button"> 
+                            <a href="{% url 'profile' %}" 
+                            class="is-flex is-flex-direction-column is-align-items-center mr-3 button is-info is-outlined" 
+                            aria-label="Logout from account"
+                            >
+                                <i class="fa-solid fa-user"></i>
+                                Account
+                            </a>
+                            <a href="{% url 'account_logout' %}" 
+                            class="is-flex is-flex-direction-column is-align-items-center mr-3 button is-danger is-outlined" 
+                            aria-label="Logout from account"
+                            > 
                                 <i class="fa-solid fa-right-from-bracket"></i>
+                                Logout
+                            </a>
                         {% else %}
-                            <a href="{% url 'account_logout' %}" class="button is-bg-text"> 
+                            <a href="{% url 'view_cart' %}" 
+                            class="is-flex is-flex-direction-column is-align-items-center mr-3 button {% if grand_total > 0 %}is-outlined is-primary{% endif %}" 
+                            aria-label="Cart button"
+                            >
+                                <i class="fa-solid fa-cart-shopping is-large mr-2"></i>
+                                €{{ grand_total }}
+                            </a>
+                            <a href="{% url 'profile' %}" 
+                            class="is-flex is-flex-direction-column is-align-items-center mr-3 button is-info is-outlined" 
+                            aria-label="Logout from account"
+                            >
+                                <i class="fa-solid fa-user"></i>
+                                Account
+                            </a>
+                            <a href="{% url 'account_logout' %}" 
+                            class="is-flex is-flex-direction-column is-align-items-center mr-3 button is-danger is-outlined" 
+                            aria-label="Logout from account"
+                            > 
                                 <i class="fa-solid fa-right-from-bracket"></i>
+                                Logout
                             </a>
                         {% endif %}
                     {% else %}
-                        <a href="{% url 'account_login' %}" class="button is-rounded is-fg-text" aria-label="Login Button">
-                            <i class="fa-solid fa-user mr-2"></i>
-                            Login
-                        </a> 
+                        <a href="{% url 'view_cart' %}" 
+                        class="is-flex is-flex-direction-column is-align-items-center mr-3 button {% if grand_total > 0 %}is-outlined is-primary{% endif %}" 
+                        aria-label="Cart button"
+                        >
+                            <i class="fa-solid fa-cart-shopping is-large mr-2"></i>
+                            €{{ grand_total }}
+                        </a>
+                        <a href="{% url 'profile' %}" 
+                            class="is-flex is-flex-direction-column is-align-items-center mr-3 button is-info is-outlined" 
+                            aria-label="Logout from account"
+                            >
+                                <i class="fa-solid fa-user"></i>
+                                Account
+                            </a>
                     {% endif %}
-                    <a href="{% url 'view_cart' %}" class="button is-primary is-rounded is-bg-text is-hidden-tablet" aria-label="Cart button">
-						<i class="fa-solid fa-cart-shopping is-large mr-2"></i>
-                        Cart
-					</a>
-                </div>
-            </div> <!-- /.navbar-item-->
+                </div>  <!-- /.buttons -->
+            </div> <!-- /.navbar-item -->
         </div> <!-- /.navbar-end -->
-    </div> <!-- /.is-mobile-menu navbar-menu -->
-</nav> <!-- /nav -->
+
+    </div> <!-- /.navbar-menu -->
+  </nav>

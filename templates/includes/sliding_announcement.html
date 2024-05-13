@@ -1,5 +1,49 @@
-<div class="scroll-container">
+<div class="scroll-container is-fg">
 	<div class="scroll-text">
-		Free Shipping on orders over €{{ free_delivery_delta }}
+		{% for _ in "1234567"|make_list %}
+		<div class="is-flex is-flex-direction-row">
+			<p class="is-bg-text">Free shipping on €50 or above</p>
+			<img src="" alt="" class="image is-1by1 is-64by64">
+		</div>
+		
+		{% endfor %}
 	</div>
 </div>
+
+<style>
+	.scroll-container {
+		position: relative;
+		overflow: hidden;
+		width: 100%;
+		height: auto;
+	  }
+	  
+	  .scroll-text {
+		position: relative;
+		white-space: nowrap;
+		display: flex;
+    	flex-direction: row;
+    	text-align: center;
+    	justify-content: center;
+		animation: scroll 20s linear infinite; /* Adjust animation duration */
+	  }
+	  
+	  /* Style for the title paragraph */
+	  .scroll-text p {
+		font-size: 1.25rem; /* Adjust font size */
+		font-weight: normal; /* Adjust font weight */
+		font-family: 'Barlow', sans-serif; /* Adjust font family */
+		display: inline-block;
+		margin: 0;
+		line-height: 50px; /* Match the container height */
+		padding-right: 20px; /* Add spacing between repetitions */
+	  }
+	  
+	  /* Style for the emoji */
+	  .scroll-text i {
+		margin-left: 5px; /* Adjust margin as needed */
+		vertical-align: middle;
+	  }
+	
+	  
+</style>

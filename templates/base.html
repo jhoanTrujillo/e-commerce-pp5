@@ -21,48 +21,58 @@
         <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'css/base.css' %}" />
         {% endblock %} 
+
+        {% block extra_css %}{% endblock %}
+
         {% block core_js %}
         <!-- Font awesome icon kit-->
         <script
             src="https://kit.fontawesome.com/dd3b9a0c61.js"
             crossorigin="anonymous"
         ></script>
+        <!-- Stripe -->
+        <script src="https://js.stripe.com/v3/"></script>
         {% endblock %}
-
+        
         <title>Joe's Crazy Pins {% block extra_title %}{% endblock %}</title>
     </head>
-    <body>
-        {% if messages %}
-        <div class="modal">
-            <div class="modal-background"></div>
-            <div class="modal-content">
-                <div class="message">
-                    <div class="message-header">
-                        <p>Message</p>
-                        <button class="delete" aria-label="delete"></button>
-                    </div>
-                    <!-- /.message-header -->
-                    <div class="message-body"></div>
-                    <!-- /.message-body -->
-                </div>
-                <!-- /.message -->
-            </div>
-            <button class="modal-close is-large" aria-label="close"></button>
+    <body class="has-background-white-bis">
+        <div id="message-container">
+            {% if messages %}
+            {% for message in messages %}
+                {% with message.level as level %}
+                    {% if level == 40 %}
+                        {% include 'includes/toasts/toast_error.html' %}
+                    {% elif level == 30 %}
+                        {% include 'includes/toasts/toast_warning.html' %}
+                    {% elif level == 25 %}
+                        {% include 'includes/toasts/toast_success.html' %}
+                    {% else %}
+                        {% include 'includes/toasts/toast_info.html' %}
+                    {% endif %}
+                {% endwith %}
+            {% endfor %}
+        {% endif %}
         </div>
-        {% endif %} 
-
+        <!-- Nav and annoucement bar -->
         {% include 'includes/header.html' %} 
-        {% include 'includes/sliding_announcement.html' %}
+        {% comment %} {% include 'includes/sliding_announcement.html' %} {% endcomment %}
+        
         {% block page_header %} 
         {%endblock %} 
 
-        <div id="body-container" class="section">
+        <!-- Body content -->
+        <div id="body-container">
             {% block content %} {% endblock %} 
         </div> 
 
+        <!-- Footer -->
         {% include 'includes/footer.html' %} 
+
+        <!-- Post page load javascript-->
         {% block postload_js %}
         <script src="{% static 'js/mobile_navbar.js' %}" defer></script>
+        <script src="{% static 'js/base.js' %}" defer></script>
         {% endblock %}
     </body>
 </html>
