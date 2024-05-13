@@ -9,20 +9,28 @@
 <!-- Hero Image -->
 <section id="hero-img-container" class="hero is-halfheight">
 	<div class="hero-body">
-		<img src="" alt="">
-		<div>
-			<h2 class="title">Half height hero</p>
-			<p class="subtitle">Half height subtitle</p>
+		<div class="card p-5 has-background-white-bis bounce-in">
+			<h2 class="title is-size-1 is-size-3-mobile has-text-black-ter">Handcrafted with love.</h2>
+			<p class="subtitle is-size-3 is-size-5-mobile h has-text-black-ter">Each our pins are made with care up to the highest standard.</p>
+			<a href="{% url 'products' %}" class="button is-success is-size-4 is-size-5-mobile">Shop Now</a>
 		</div>
 	</div>
 </section>
 
-<div class="is-divider my-5 is-alert"></div>
+<style>
+	#hero-img-container {
+		background-image: url({% static 'home/media/pin_hero_image.png' %});
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: cover;
+	}
+</style>
 
 <!-- collection -->
-<section class="hero is-halfheight">
-	<div class="mb-5 has-text-centered">
-		<h2 class="title is-size-1 is-size-3-mobile">Collections</h2>
+<section class="hero is-halfheight container my-4">
+	<div class="mb-5">
+		<h2 class="title is-size-1">Collections</h2>
+		<p class="subtitle is-hidden-mobile">Browse by category and craft your experience to see just what you want</p>
 	</div>
 	<div class="columns">
 		{% for collection in collections %}
@@ -64,6 +72,9 @@
 <!-- Latest Products -->
 <section class="hero is-halfheight container my-4">
 	<h2 class="title">Latest Product</h2>
+	<p class="subtitle">
+		Browse the latest additions to our line of products
+	</p>
 	<div class="columns">
 		<!--  -->
 		{% for product in latest_products %}

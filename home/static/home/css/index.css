@@ -1,6 +1,7 @@
 .is-divider {
 	height: 2px;
 	width: 100%;
+	color: var(--alert);
 }
 
 .is-overlay-text {
