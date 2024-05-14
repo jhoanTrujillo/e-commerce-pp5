@@ -11,129 +11,130 @@
 
 {% block content %}
 
-<div id="product-details" class="container section my-5">
-
-	<div id="product-info" class="fixed-grid has-2-cols has-1-cols-mobile bounce-in">
-		<div class="grid">
-			
-			<div class="cell">
-				<div class="card-image">
-					<figure class="image is-1by1">
-					<img
-						{% if variant %}
-							{% if variant.image %}
-							src="{{ variant.image.url }}"
-							{% else %}
-							src="{{ variant.image_url }}"
-							{% endif %}
-						{% else %}
-							{% if product.image %}
-							src="{{ product.image.url}}"
-							{% else %}
-							src="{{ product.image_url }}"
-							{% endif %}
-						{% endif %}
-
-						id="product-image"
-						alt="{{ product.description | truncatechars_html:50}}"
-						class="is-border-rounded"
-					/>
-					</figure>
-				</div> <!-- /.card-image -->
-			</div> <!-- /.cell -->
-
-			<div class="cell">
-				<div class="container">
-					<div class="card-content">
-					  <div class="content">
-						<h1 id="product-title" class="is-2 is-3-mobile">
-							{% if variant %}
-								{{ variant.title }}
-							{%else%}
-								{{ product.title }}
-							{% endif %}
-						</h1>	
-						<div class="block mb-2">
-							<!-- <i class="fa-solid fa-star is-3 is-4-mobile"></i> -->
-							<p class="is-size-4 is-size-5-mobile mb-2 has-text-weight-regular mb-0">Rating: {{ product.rating }}</p>
-							<p id="product-price" class="is-size-3 is-size-4-mobile has-text-weight-bold mb-0">
+<div id="product-details" class="section my-5">
+	<div class="container ">
+		<div id="product-info" class="fixed-grid has-2-cols has-1-cols-mobile bounce-in">
+			<div class="grid">
+				
+				<div class="cell">
+					<div class="card-image">
+						<figure class="image is-1by1">
+							<img
 								{% if variant %}
-									€{{ variant.price }}
+									{% if variant.image %}
+									src="{{ variant.image.url }}"
+									{% else %}
+									src="{{ variant.image_url }}"
+									{% endif %}
 								{% else %}
-									€{{ product.price }}
+									{% if product.image %}
+									src="{{ product.image.url}}"
+									{% else %}
+									src="{{ product.image_url }}"
+									{% endif %}
 								{% endif %}
-							</p>			
-						</div>
-						
-						<!-- used to check for a list of variants -->
-						{% if variants %}
-						<div class="block">
-							<p class="is-size-3 is-size-5-mobile mb-2">Variants:</p>
-							<div class="fix-grid has-2-cols">
-								<div role="radiogroup" class="grid">
-									<a href="{% url 'product_details' product.id %}" 
-									class="button is-rounded {% if not variant.id %}is-accent is-bg-text{% endif %}">
-										{{ product.title }}
-									</a>
-									{% for option in variants %}
-									<a href="{% url 'variant_details' product_id=product.id variant_id=option.id %}" 
-									class="button is-rounded {% if option.id == variant.id  %}is-accent is-bg-text{% endif %}">
-										{{ option.title }}
-									</a>
-									{% endfor %}
+
+								id="product-image"
+								alt="{{ product.description | truncatechars_html:50}}"
+								class="is-border-rounded"
+							/>
+						</figure>
+					</div> <!-- /.card-image -->
+				</div> <!-- /.cell -->
+
+				<div class="cell">
+					<div class="container">
+						<div class="card-content">
+						<div class="content">
+							<h1 id="product-title" class="is-2 is-3-mobile">
+								{% if variant %}
+									{{ variant.title }}
+								{%else%}
+									{{ product.title }}
+								{% endif %}
+							</h1>	
+							<div class="block mb-2">
+								<!-- <i class="fa-solid fa-star is-3 is-4-mobile"></i> -->
+								<p class="is-size-4 is-size-5-mobile mb-2 has-text-weight-regular mb-0">Rating: {{ product.rating }}</p>
+								<p id="product-price" class="is-size-3 is-size-4-mobile has-text-weight-bold mb-0">
+									{% if variant %}
+										€{{ variant.price }}
+									{% else %}
+										€{{ product.price }}
+									{% endif %}
+								</p>			
+							</div>
+							
+							<!-- used to check for a list of variants -->
+							{% if variants %}
+							<div class="block">
+								<p class="is-size-3 is-size-5-mobile mb-2">Variants:</p>
+								<div class="fix-grid has-2-cols">
+									<div role="radiogroup" class="grid">
+										<a href="{% url 'product_details' product.id %}" 
+										class="button is-rounded {% if not variant.id %}is-accent is-bg-text{% endif %}">
+											{{ product.title }}
+										</a>
+										{% for option in variants %}
+										<a href="{% url 'variant_details' product_id=product.id variant_id=option.id %}" 
+										class="button is-rounded {% if option.id == variant.id  %}is-accent is-bg-text{% endif %}">
+											{{ option.title }}
+										</a>
+										{% endfor %}
+									</div>
 								</div>
 							</div>
-						</div>
 
-						{% endif %}
-						<form id="atc-form" class="form" action="{% url 'add_to_cart' %}" method="POST">
-							{% csrf_token %}
-							<quantity-selector id="quantitySelector">
-							<p class="is-size-4 is-size-5-mobile mb-2">Quantity: </p>
-									<div >
-										<button class="button is-accent is-bg-text" id="minus">-</button>
-										<label for="quantity" hidden>Quantity</label>
-										<input 
-										type="number" value="1" min="1" max="99" 
-										name="quantity" class="input quantity quantity-input" value="1">
-										<button class="button is-accent is-bg-text" id="plus" class="button">+</button>
-									</div>
-							</quantity-selector>
-							
-
-
-							<div class="mt-5">
-								<input type="submit" class="button is-danger is-size-4" value="Add to Cart">
-							</div>
-
-							<!-- Hidden input for variant ID -->
-							{% if variant %}
-								<input type="hidden" name="variant_id" value="{{ variant.id }}">
-							{% else %}
-								<input type="hidden" name="product_id" value="{{ product.id }}">
 							{% endif %}
-							<!-- Hidden input for redirect URL -->
-							<input type="hidden" name="redirect_url" value="{{ request.path }}">
-						</form>
-				</div>
+							<form id="atc-form" class="form" action="{% url 'add_to_cart' %}" method="POST">
+								{% csrf_token %}
+								<quantity-selector id="quantitySelector">
+								<p class="is-size-4 is-size-5-mobile mb-2">Quantity: </p>
+										<div >
+											<button class="button is-accent is-bg-text" id="minus">-</button>
+											<label for="quantity" hidden>Quantity</label>
+											<input 
+											type="number" value="1" min="1" max="99" 
+											name="quantity" class="input quantity quantity-input" value="1">
+											<button class="button is-accent is-bg-text" id="plus" class="button">+</button>
+										</div>
+								</quantity-selector>
+								
 
-				<content-tab>
-					<div class="tabs">
-						<ul>
-						<li class="is-active tab" data-content="{% if variant %}{{ variant.description }}{% else %}{{ product.description }}{% endif %}">
-							<a>Description</a>
-						</li>
-						<li class="tab" data-content="{{ product.sku }}"><a>SKU</a></li>
-						</ul>
+
+								<div class="mt-5">
+									<input type="submit" class="button is-danger is-size-4" value="Add to Cart">
+								</div>
+
+								<!-- Hidden input for variant ID -->
+								{% if variant %}
+									<input type="hidden" name="variant_id" value="{{ variant.id }}">
+								{% else %}
+									<input type="hidden" name="product_id" value="{{ product.id }}">
+								{% endif %}
+								<!-- Hidden input for redirect URL -->
+								<input type="hidden" name="redirect_url" value="{{ request.path }}">
+							</form>
 					</div>
-					<div class="pl-4">
-						<p class="is-size-6">{{ product.description }}</p>
-					</div>
-				</content-tab>
-			</div>
-			</div> <!-- /.cell -->
-		</div> <!-- /#grid -->
-	</div> <!-- /#product-info -->
+
+					<content-tab>
+						<div class="tabs">
+							<ul>
+							<li class="is-active tab" data-content="{% if variant %}{{ variant.description }}{% else %}{{ product.description }}{% endif %}">
+								<a>Description</a>
+							</li>
+							<li class="tab" data-content="{{ product.sku }}"><a>SKU</a></li>
+							</ul>
+						</div>
+						<div class="pl-4">
+							<p class="is-size-6">{{ product.description }}</p>
+						</div>
+					</content-tab>
+				</div>
+				</div> <!-- /.cell -->
+			</div> <!-- /#grid -->
+		</div> <!-- /#product-info -->
+	</div>
 </div> <!-- #product-details -->
 
 <!-- Recommended Product list-->

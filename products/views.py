@@ -14,31 +14,31 @@ def all_products(request):
         Prefetch('variant_set', queryset=Variant.objects.select_related('product'))
     )
     query = None
-    collection = None
+    collection_name = request.GET.get('collection')  # Get collection name from query parameter
+    current_collection = None
+    current_template = 'products/products.html'  # Specify the current template name
 
-    # Checks for a get request
-    if request.GET:
-        if 'collection' in request.GET:
-            collections = request.GET['collection'].split(',')
-            products = products.filter(collection__name__in=collections)
-            collections = Collection.objects.filter(name__in=collections)
+    if collection_name:
+        current_collection = get_object_or_404(Collection, name=collection_name)
+        products = products.filter(collection__name=collection_name)
 
-        if 'q' in request.GET:
-            query = request.GET['q']
-            if not query:
-                messages.error(request, "You didn't enter any search criteria")
-                return redirect(reverse('products'))
+    if request.GET.get('q'):
+        query = request.GET['q']
+        if not query:
+            messages.error(request, "You didn't enter any search criteria")
+            return redirect(reverse('products'))
 
-            queries = Q(title__icontains=query) | Q(description__icontains=query)
-            products = products.filter(queries)
+        queries = Q(title__icontains=query) | Q(description__icontains=query)
+        products = products.filter(queries)
 
     context = {
         'products': products,
         'search_term': query,
-        'current_collections': collection,
+        'current_template': current_template,
+        'current_collection': current_collection,
     }
 
-    return render(request, "products/products.html", context)
+    return render(request, current_template, context)
 
 def product_details(request, product_id):
 	"""
