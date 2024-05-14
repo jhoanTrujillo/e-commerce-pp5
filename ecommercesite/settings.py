@@ -150,10 +150,10 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 if 'USE_AWS' in os.environ:
     AWS_STORAGE_BUCKET_NAME = 'ci-project-5-joe-pins-be851091e775'
-    AWS_S3_REGION_NAME = 'Europe (Stockholm) eu-north-1'
+    AWS_S3_REGION_NAME = 'eu-north-1'
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
     AWS_ACCESS_SECRET_KEY_ID = os.environ.get('AWS_ACCESS_SECRET_KEY_ID', '')
-    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3-website.{AWS_S3_REGION_NAME}.amazonaws.com'
 
     # Static and media files
     STATICFILES_STORAGE = 'custom_storages.StaticStorage'
