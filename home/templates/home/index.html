@@ -10,12 +10,71 @@
 <section id="hero-img-container" class="hero is-halfheight">
 	<div class="hero-body">
 		<div class="card p-5 has-background-white-bis bounce-in">
-			<h2 class="title is-size-1 is-size-3-mobile has-text-black-ter">Handcrafted with love.</h2>
-			<p class="subtitle is-size-3 is-size-5-mobile h has-text-black-ter">Each our pins are made with care up to the highest standard.</p>
-			<a href="{% url 'products' %}" class="button is-success is-size-4 is-size-5-mobile">Shop Now</a>
+			<h2 class="title is-size-2 is-size-3-mobile has-text-black-ter">Discover unique enamel pins.</h2>
+			<p class="subtitle is-size-4 is-size-5-mobile h has-text-black-ter">From cute animals to trendy pop culture, find pins for every taste.</p>
+			<a href="{% url 'products' %}" class="button is-success is-size-5 is-size-5-mobile">Shop Now</a>
 		</div>
 	</div>
 </section>
+
+<!-- Latest Products -->
+<section class="section">
+	<div class="container">
+		<div class="block">
+			<h2 class="title is-size-2 is-size-3-mobile has-text-black-ter">
+				Latest releases
+			</h2>
+			<p class="subtitle is-size-4 is-size-5-mobile h has-text-black-ter">
+				The hottest and newest
+			</p>
+		</div> <!-- /.block -->
+	</div> <!-- /.container -->
+
+	<div class="container">
+		<div class="fixed-grid has-3-cols has-1-cols-mobile">
+			<div class="grid">
+				{% for product in latest_products %}
+					{% include 'includes/product_card.html' %}
+				{% endfor %}
+			</div> <!-- /.grid -->
+		</div> <!-- /.fixed-grid -->
+	</div> <!-- /.section -->
+
+</section>
+
+<!-- Partners section -->
+<div class="section">
+	<div class="container">
+		<div class="block has-text-centered">
+			<h2 class="title is-size-2 is-size-3-mobile has-text-black-ter">
+				Partners & Distributors
+			</h2>
+		</div> <!-- /.block -->
+		<div class="columns">
+
+			<div class="column">
+				<figue class="image is-128x128 mx-auto is-square">
+					<a href="https://www.apple.com/" rel="noopener noreferrer">
+						<img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Apple_logo_grey.svg" alt="Apple logo">
+					</a>
+				</figue>
+			</div> <!-- /.column -->
+
+			<div class="column">
+				<figue class="image is-128x128 mx-auto is-square">
+					<a href="https://www.apple.com/" rel="noopener noreferrer">
+						<img src="https://1000logos.net/wp-content/uploads/2023/11/Temu-Logo.png" alt="Temu logo">
+					</a>
+				</figue>
+			</div> <!-- /.column -->
+
+			<div class="column">
+
+			</div> <!-- /.column -->
+
+		</div> <!-- /.columns -->
+	</div> <!-- /.container -->
+</div> <!-- /.section -->
 
 <style>
 	#hero-img-container {
@@ -27,65 +86,44 @@
 </style>
 
 <!-- collection -->
-<section class="hero is-halfheight container my-4">
-	<div class="mb-5">
-		<h2 class="title is-size-1">Collections</h2>
-		<p class="subtitle is-hidden-mobile">Browse by category and craft your experience to see just what you want</p>
-	</div>
-	<div class="columns">
-		{% for collection in collections %}
-			{% if forloop.counter == 2 %}
-				<div class="column m-auto  has-text-centered">
-					<p class="title is-fg-text">Check out all products</p>
-					<a href="{% url 'products' %}" class="button is-info is-fg-text">Shop all</a>
-				</div>
-			{% endif %}
-			<style>
-				#is-img-container-{{ collection.name }} {
-					background-image: url("{{ collection.image.url }}");
-					background-repeat: no-repeat;
-					background-position: center;
-					background-size: cover;
-				}
-			</style>
-			<div class="column">
-				<div id="is-img-container-{{ collection.name }}" class="is-img-container mx-auto has-border-rounded">
-					<div class="is-overlay-text m-5">
-						<a href="{% url 'products' %}?collection={{ collection.name }}" class="is-hoverable is-clickable">
-							<p class="is-size-3 is-bg-text ">
-								{{ collection.user_friendly_name }}
-							</p>
-						</a> 
-					</div> <!-- /.is-overlay-text m-5 -->
-				</div> <!-- /.is-img-container has-border-rounded -->
-			</div> <!-- /.column -->
-		{% endfor %}
-	</div>
-</section>
-
-<div class="is-divider my-5 is-alert"></div>
-<!-- Product Carousel -->
-<section class="is-halfheight">
-
-</section>
-
-<!-- Latest Products -->
-<section class="hero is-halfheight container my-4">
-	<h2 class="title">Latest Product</h2>
-	<p class="subtitle">
-		Browse the latest additions to our line of products
-	</p>
-	<div class="columns">
-		<!--  -->
-		{% for product in latest_products %}
-			{% include 'includes/product_card.html' %}
-		{% endfor %}
-	  </div>
-</section>
-
-<!-- Reviews -->
-<section class="is-halfheight">
-
+<section class="section">
+	<div class="container">
+		<div class="mb-5">
+			<h2 class="title is-size-2 is-size-3-mobile has-text-black-ter">Collections</h2>
+			<p class="subtitle is-size-4 is-size-5-mobile h has-text-black-ter">
+				Browse products by collection
+			</p>
+		</div>
+		<div class="columns">
+			{% for collection in collections %}
+				{% if forloop.counter == 2 %}
+					<div class="column m-auto  has-text-centered">
+						<p class="subtitle is-size-2 is-size-3-mobile has-text-black-ter">Check out all products</p>
+						<a href="{% url 'products' %}" class="button is-primary is-size-5 is-size-5-mobile">Shop all</a>
+					</div>
+				{% endif %}
+				<style>
+					#is-img-container-{{ collection.name }} {
+						background-image: url("{{ collection.image.url }}");
+						background-repeat: no-repeat;
+						background-position: center;
+						background-size: cover;
+					}
+				</style>
+				<div class="column">
+					<div id="is-img-container-{{ collection.name }}" class="is-img-container mx-auto has-border-rounded">
+						<div class="is-overlay-text m-5">
+							<a href="{% url 'products' %}?collection={{ collection.name }}" class="is-hoverable is-clickable">
+								<p class="is-size-3 is-bg-text ">
+									{{ collection.user_friendly_name }}
+								</p>
+							</a> 
+						</div> <!-- /.is-overlay-text m-5 -->
+					</div> <!-- /.is-img-container has-border-rounded -->
+				</div> <!-- /.column -->
+			{% endfor %}
+		</div> <!-- /.columns -->
+	</div> <!-- /. container -->
 </section>
 
 
