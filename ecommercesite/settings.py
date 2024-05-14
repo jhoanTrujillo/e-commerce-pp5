@@ -17,7 +17,7 @@ INCLUDES_DIR = os.path.join(BASE_DIR, 'includes')
 SECRET_KEY = 'django-insecure-k$vu6x2bqzf($rbwl*o7om!0yu6g*r=m84d%h(v0pkh(vbxg$b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', '')
+DEBUG = os.environ.get('DEBUG', False)
 ALLOWED_HOSTS = ['ci-project-5-joe-pins-be851091e775.herokuapp.com','.herokuapp.com','localhost','127.0.0.1']
 
 # Application definition
@@ -148,8 +148,26 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 
+if 'USE_AWS' in os.environ:
+    AWS_STORAGE_BUCKET_NAME = 'ci-project-5-joe-pins-be851091e775'
+    AWS_S3_REGION_NAME = 'Europe (Stockholm) eu-north-1'
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
+    AWS_ACCESS_SECRET_KEY_ID = os.environ.get('AWS_ACCESS_SECRET_KEY_ID', '')
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+    # Static and media files
+    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+    STATICFILES_LOCATION = 'static'
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+    MEDIAFILES_LOCATION = 'media'
+
+    # Override static and media URLs in production
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+
 # Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+# https://docs.djangoproject.com/en/5.0/ref/settings/#de
+# fault-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
