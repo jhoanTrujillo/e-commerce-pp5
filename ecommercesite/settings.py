@@ -2,7 +2,7 @@ import os
 import dj_database_url
 from pathlib import Path
 from dotenv import load_dotenv, find_dotenv
-
+import django_heroku
 
 # Project Paths
 load_dotenv(find_dotenv()) # take environment variables from .env
@@ -148,6 +148,9 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
@@ -209,3 +212,5 @@ else:
     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
     DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+
+django_heroku.settings(locals())
