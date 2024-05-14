@@ -147,15 +147,6 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-STORAGES = {
-    "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
-
 if 'USE_AWS' in os.environ:
     # Bucket Config
     AWS_STORAGE_BUCKET_NAME = 'ci-project-5-joe-pins-be851091e775'
@@ -167,7 +158,7 @@ if 'USE_AWS' in os.environ:
     # Static and media files
     STATICFILES_STORAGE = 'custom_storages.StaticStorage'
     STATICFILES_LOCATION = 'static'
-    STORAGE = 'custom_storages.MediaStorage'
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
     MEDIAFILES_LOCATION = 'media'
 
     # Override static and media URLs in production
