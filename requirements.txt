@@ -19,6 +19,7 @@ django-storages==1.14.3
 gunicorn==22.0.0
 idna==3.6
 jmespath==1.0.1
+mailchimp-marketing==3.0.80
 oauthlib==3.2.2
 packaging==24.0
 pillow==10.3.0
