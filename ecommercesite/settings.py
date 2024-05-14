@@ -41,8 +41,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-	"crispy_forms",
-    "crispy_bulma",
+	'crispy_forms',
+    'crispy_bulma',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -53,7 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-	
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     # Allauth account middleware:
     "allauth.account.middleware.AccountMiddleware",
 ]
