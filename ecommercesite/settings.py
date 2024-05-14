@@ -11,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-k$vu6x2bqzf($rbwl*o7om!0yu6g*r=m84d%h(v0pkh(vbxg$b'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG')
@@ -140,18 +140,30 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
 if 'USE_AWS' in os.environ:
+    # Cache control
+    AWS_S3_OBJECT_PARAMETERS = {
+        'Expires' : 'Thu, 31 Dec 2099 20:00:00 GMT',
+        'CacheControl' : 'max-age=94608000'
+    }
+    # Bucket Config
     AWS_STORAGE_BUCKET_NAME = 'ci-project-5-joe-pins-be851091e775'
     AWS_S3_REGION_NAME = 'eu-north-1'
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
-    AWS_ACCESS_SECRET_KEY_ID = os.environ.get('AWS_ACCESS_SECRET_KEY_ID', '')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_ACCESS_SECRET_KEY_ID', '')
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
     # Static and media files
