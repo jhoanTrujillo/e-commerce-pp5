@@ -1,0 +1,28 @@
+{% comment %}
+This template should only be use on sections where the view provides a 
+latest_product element that holds the last three elements added to the store
+{% endcomment %}
+{% if latest_products %}
+	<section class="section">
+		<div class="container">
+			<div class="block">
+				<h2 class="title is-size-2 is-size-3-mobile has-text-black-ter">
+					Latest releases
+				</h2>
+				<p class="subtitle is-size-4 is-size-5-mobile h has-text-black-ter">
+					The hottest and newest
+				</p>
+			</div> <!-- /.block -->
+		</div> <!-- /.container -->
+
+		<div class="container">
+			<div class="fixed-grid has-3-cols has-1-cols-mobile">
+				<div class="grid">
+					{% for product in latest_products %}
+						{% include 'includes/product_card.html' %}
+					{% endfor %}
+				</div> <!-- /.grid -->
+			</div> <!-- /.fixed-grid -->
+		</div> <!-- /.section -->
+	</section>
+{% endif %}

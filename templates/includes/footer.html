@@ -1,4 +1,6 @@
-<footer class="footer is-fg">
+{% comment %}
+{% include 'includes/newsletter_signup.html' %}
+<footer class="footer is-primary">
 	<div class="content">
 		<div class="is-flex is-flex-direction-row-reverse is-flex-wrap-wrap-reverse">
 			<!-- Footer Form -->
@@ -56,4 +58,68 @@
 			</div>
 		</div>
 	</div> <!-- /.content  -->
-  </footer> <!-- /.footer -->
+  </footer> <!-- /.footer --> {% endcomment %}
+
+  <footer class="footer has-background-primary-dark">
+	<div class="section">
+		<div class="container">
+			<div class="content">
+				<div class="columns">
+					<div class="column">
+						<div class="block mr-5">
+							<h3 class="is-size-3 is-size-4-mobile has-text-primary">Links</h3>
+							<ul class="is-footer-linklist ml-0 has-text-primary-light">
+								<li>
+									<a href="{% url 'products' %}?collection=enamel_pins">
+										Enemal pins
+									</a>
+								</li>
+								<li>
+									<a href="{% url 'products' %}?collection=accessories">
+										Accessories
+									</a>
+								</li>
+								<li>
+									<a href="{% url 'products' %}">
+										All
+									</a>
+								</li>
+								<li>
+									<a href="{% url 'contact_page' %}">
+										Contact
+									</a>
+								</li>
+								<li>
+									<a href="">
+										About
+									</a>
+								</li>
+							</ul>
+						</div> <!-- /.block-->
+
+						<div class="block">
+							<div>
+								<a href="https://github.com/jhoanTrujillo" rel="noopener">
+									<i class="fa-brands fa-github-alt is-size-4 is-size-5-mobile button is-outlined is-primary"></i>
+								</a>
+								<a href="https://github.com/jhoanTrujillo" rel="noopener">
+									<i class="fa-brands fa-facebook is-size-4 is-size-5-mobile button is-outlined is-info"></i>
+								</a>
+							</div>
+						</div>
+					</div> <!-- /.column -->	
+					<div class="column">
+						<div class="is-flex is-flex-direction-column">
+							{% include 'includes/newsletter_signup.html' %}
+							<div>
+								<p class="subtitle is-size-5 is-size-6-mobile mt-2 has-text-primary">
+									<strong class="has-text-primary-light">Copyright © 2024</strong> by <strong class="has-text-link-light">Jhoan Trujillo</strong>. All rights reserved.
+								</p>
+							</div>
+						</div>
+					</div> <!-- /.column -->	
+				</div> <!-- /.columns -->		
+			</div> <!-- /.content -->
+		</div> <!-- /.container -->
+	</div> <!-- /.section -->
+  </footer>
