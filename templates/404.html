@@ -1,6 +1,15 @@
 {% extends 'base.html' %} 
 {% load static %} 
 {% block content %}
-404 error. 
-Go back to <a href="{% url 'home'%}">home page</a>.
-{% endblock %}
+
+<section class="hero is-halfheight">
+	<div class="hero-body">
+		<div class="block">
+			<h2 class="title is-size-2 is-size 3-mobile">
+				404 error - Page not found
+			</h2>
+			<p>Go back to <a href="{% url 'home'%}">home page</a>.</p>	
+		</div>
+	</div>
+</section>
+{% endblock %} 

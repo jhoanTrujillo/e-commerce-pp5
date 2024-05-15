@@ -1,6 +1,12 @@
 {% extends 'base.html' %} 
 {% load static %} 
 {% block content %}
-500 error - page not found. 
-Go back to <a href="{% url 'home'%}">home page</a>.
+<section class="hero is-fullheight">
+	<div class="hero-body">
+		<div class="block">
+			<h2 class="title is-size-2 is-size 3-mobile">500 - Server error</h2>
+			<p>Go back to <a href="{% url 'home'%}">home page</a>.</p>	
+		</div>
+	</div>
+</section>
 {% endblock %}

@@ -13,14 +13,32 @@
     </div>
   
     <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-                <a href="{% url 'products' %}?collection=enamel_pins" class="navbar-item">
-                    Enamel Pins
-                </a>
+        <div class="navbar-start p-4">
 
-                <a href="{% url 'products' %}?collection=accessories" class="navbar-item">
-                    Accessories
-                </a>
+            <div class="mb-4 is-hidden-desktop">
+                <form action="{% url 'products' %}" method="GET">
+                    <div class="is-flex">
+                        <input 
+                        type="text" 
+                        name="q" 
+                        id="q"
+                        class="input is-rounded mr-1 my-auto"
+                        placeholder="Search for content in our site"
+                        >
+                        <button type="submit" class="button is-rounded">
+                            <i class="fa-solid fa-magnifying-glass" aria-label="Submit search form"></i>
+                        </button>
+                    </div> <!-- /.is-flex -->
+                </form> 
+            </div> <!-- /.my-auto -->
+
+            <a href="{% url 'products' %}?collection=enamel_pins" class="navbar-item">
+                Enamel Pins
+            </a>
+
+            <a href="{% url 'products' %}?collection=accessories" class="navbar-item">
+                Accessories
+            </a>
 
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link">
@@ -36,12 +54,13 @@
                     </a>
                 </div> <!-- /.navbar-dropdown -->
             </div> <!-- /.navbar-item -->
+
         </div> <!-- /.navbar-menu -->
   
         <div class="navbar-end">
             <div class="navbar-item">
-                <div class="buttons">
-                    <div class="my-auto">
+                <div class="buttons is-justify-content-center">
+                    <div class="my-auto is-hidden-mobile is-hidden-tablet-only">
                         <form action="{% url 'products' %}" method="GET">
                             <div class="is-flex">
                                 <input 
