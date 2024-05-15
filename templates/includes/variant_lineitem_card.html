@@ -1,0 +1,30 @@
+<div class="box">
+	<article class="media">
+		<div class="media-left">
+			<figure class="image is-64x64">
+				<img 
+				src="
+				{% if line_item.variant.image %}
+					{{ line_item.variant.image.url }}
+				{% else %}
+					{% include 'media/no_image_found'%}
+				{% endif %}" 
+				alt="image of product {{ line_item.variant.title|truncatechars:10 }}"
+				class="has-border-rounded" 
+				/>
+			</figure>
+		</div> <!-- /.media-left -->
+
+		<div class="media-content">
+			<div class="content">
+				<p>
+					<strong>{{ line_item.variant.title |truncatechars:20 }}</strong> 
+					<br />
+					SKU: {{ line_item.variant.sku }}
+					<br />
+					Total: €{{ line_item.lineitem_total }}
+				</p>
+			</div> <!-- /.content -->
+		</div> <!-- /.media-content -->
+	</article> <!-- /.media -->     
+</div> <!-- /.box -->

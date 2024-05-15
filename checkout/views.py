@@ -55,6 +55,7 @@ def checkout(request):
             'street_address2': request.POST['street_address2'],
             'county': request.POST['county'],
         }
+        
         order_form = OrderForm(form_data)
         if order_form.is_valid():
             order = order_form.save(commit=False)
@@ -63,33 +64,42 @@ def checkout(request):
             order.stripe_pid = pid
             order.original_cart = json.dumps(cart)
             order.save()
+            
+            # Check if the item is a variant or a product
             for item_key, item_data in cart.items():
                 try:
-                    # Attempt to get a Variant or product object with the given item_id
                     if 'variant' in item_key:
+                        # If it's a variant, get the variant object
                         product_or_variant_item = Variant.objects.get(id=item_data['item_id'])
+                        # Create a VariantLineItem for the order
                         order_line_item = VariantLineItem(
                             order=order,
                             variant=product_or_variant_item,
                             quantity=item_data['quantity'],
                         )
                     else:
+                        # If it's a product, get the product object
                         product_or_variant_item = Product.objects.get(id=item_data['item_id'])
+                        # Create a ProductLineItem for the order
                         order_line_item = ProductLineItem(
                             order=order,
                             product=product_or_variant_item,
                             quantity=item_data['quantity'],
                         )
+                    
+                    # Save each order line item within the loop
+                    order_line_item.save()
 
+                # Handle the case where the item is not found in the database
                 except ObjectDoesNotExist:
                     messages.error(request, (
                         "One of the items in your cart wasn't found in our database. "
                         "Please call us for assistance.")
                     )
+                     # Delete the order and redirect to the view cart page
                     order.delete()
                     return redirect(reverse('view_cart'))
-
-            order_line_item.save()
+            # Set session variable and redirect to the checkout success page
             request.session['save_info'] = 'save-info' in request.POST
             return redirect(reverse('checkout_success', args=[order.order_number]))
 
@@ -148,6 +158,24 @@ def checkout_success(request, order_number):
     """
     save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
+    line_items = [] 
+
+    # Creates boolean value to check if line items exist
+    product_line_items_exist = order.productlineitem.exists()
+    variant_line_items_exist = order.variantlineitem.exists()
+
+    # If they do adds them to an array
+    if product_line_items_exist or variant_line_items_exist:
+        if product_line_items_exist:
+            line_items += list(order.productlineitem.all())
+        if variant_line_items_exist:
+            line_items += list(order.variantlineitem.all())
+        
+    else:
+        # Error message should be display to pinpoint something odd
+        messages.error(request, "Please contact us. Something might have gone wrong with the order. \
+                       Since no line items are associated with your order.")
+
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
         # Attach the user's profile to the order
@@ -179,6 +207,7 @@ def checkout_success(request, order_number):
     template = 'checkout/checkout_success.html'
     context = {
         'order': order,
+        'line_items' : line_items,
     }
 
     return render(request, template, context)
