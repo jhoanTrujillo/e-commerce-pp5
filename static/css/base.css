@@ -43,25 +43,52 @@ ul.is-footer-linklist li a {
 
 #message-container {
 	position: absolute;
-    height: 100vh;
     width: 100vw;
 }
 
-.message {
+message-box {
 	z-index: 50;
-	position: relative;
+	position: absolute;
 	display: block;
 	top: 5rem;
+	right: 10%;
 	max-width: 25rem;
 	margin: auto;
 }
 
 
+#is-order-summary-card {
+	overflow-y: scroll;
+	max-height: 33rem;
+	height: 50rem;
+}
+
+#profile-pic {
+	max-width: 50%;
+	margin: auto;
+}
+
 @media screen and (max-width: 1023px) {
+	#profile-pic {
+		max-width: 90%;
+		margin: auto;
+	}
+
 	.navbar-menu.is-active {
 		position: absolute;
 		width: 100%;
 	}
+
+	#line-item-container {
+		overflow-y: scroll;
+	}
+
+	#is-order-summary-card {
+		max-height: 17rem;
+		height: 17rem;
+	}
+	
+	
 }
 
 .is-divider {
@@ -76,8 +103,15 @@ ul.is-footer-linklist li a {
 	animation: bounceIn 0.5s ease forwards;
 }
 
-
+.fade-out {
+	animation: fadeOut 0.5s ease forwards;
+}
 /* keyframes */
+@keyframes fadeOut {
+	from { opacity: 1; }
+	to { opacity: 0; }
+}
+
 @keyframes bounceIn {
 	0% {
 		opacity: 0;

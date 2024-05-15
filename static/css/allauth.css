@@ -1,74 +1,73 @@
-
-@media only screen and (min-width: 768px) {
-	.card {
-		max-width: 40vw;
-	}
-}
-
+/* Base styles */
 .card {
-	background-color: var(--foreground);
-	margin: auto
+    background-color: var(--foreground);
+    margin: auto;
 }
 
-.card-content p {
-	font-size: 1.3em;
+.card-content p,
+.card-content h1,
+.card-content h2,
+.card-content h3,
+.card-content h4,
+.card-content h5,
+.card-content strong {
+    color: var(--background);
+    font-size: 1.3rem;
 }
 
-.card-content 
-h1, h2,
-h3, h4,
-h5, p, 
-strong {
-	color: var(--background) !important;
+.card-content h1 {
+    font-size: 3em;
+    font-family: var(--barlow-c);
+    margin-bottom: 0.5em;
 }
 
-.card-content
-h1 {
-	font-size: 3em;
-	font-family: var(--barlow-c);
-	margin-bottom: 0.5em;
+.card-content form p {
+    margin: 0.25em;
 }
 
-.card-content
-form p {
-	margin: .25em;
+.card-content form label {
+    font-size: 1rem;
 }
 
-.card-content
-form label {
-	font-size: 1.3em;
+.card-content form input {
+    border: none;
+    padding: 0.3em;
+    border-radius: 8px;
+    margin-left: 1em;
 }
 
-.card-content
-form input {
-	border: none;
-	padding: .3em;
-	border-radius: 8px;
-	margin-left: 1em;
+.card-content form a {
+    font-size: 1rem;
 }
 
 span.helptext {
-	display: block;
-	margin: .25em;
-}
-
-.card-content
-button {
-	border: 1px solid var(--background);
-	border-radius: 8px;
-	background-color: var(--background);
-	padding: 1em;
-	margin-top: 1em;
-}
-
-.card-content
-button:hover {
-	background-color: hsl(0, 0%, 86%);
-	color: hsl(0, 0%, 18%);
+    display: block;
+    margin: 0.25em;
 }
 
 div.box p {
-	font-size: 2em;
-	font-family: var(--barlow-c);
-	font-weight: 200;
+    font-size: 2em;
+    font-family: var(--barlow-c);
+    font-weight: 200;
+}
+
+/* Media query for larger screens */
+@media only screen and (min-width: 768px) {
+    .card {
+        max-width: 40vw;
+    }
+}
+
+/* Button styles */
+.card-content button {
+    border: 1px solid var(--background);
+    border-radius: 8px;
+    background-color: hsl(0, 0%, 96%);
+    padding: 1em;
+    margin-top: 1em;
+}
+
+.card-content button:hover {
+    background-color: hsl(0, 0%, 86%);
+    color: hsl(0, 0%, 18%);
 }
