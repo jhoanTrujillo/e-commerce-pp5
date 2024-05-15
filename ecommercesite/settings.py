@@ -15,7 +15,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-ALLOWED_HOSTS = ['ci-project-5-joe-pins-be851091e775.herokuapp.com','.herokuapp.com','localhost','127.0.0.1']
+ALLOWED_HOSTS = ['ci-project-5-joe-pins-be851091e775.herokuapp.com','*.herokuapp.com','localhost','127.0.0.1']
 
 # Application definition
 INSTALLED_APPS = [
@@ -141,11 +141,13 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 if 'USE_AWS' in os.environ:
+    
     # Bucket Config
     AWS_STORAGE_BUCKET_NAME = 'ci-project-5-joe-pins-be851091e775'
     AWS_S3_REGION_NAME = 'eu-north-1'
@@ -201,8 +203,5 @@ else:
     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
     DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
-
-MAILCHIMP_KEY = os.environ.get('MAILCHIMP_KEY')
-MAILCHIMP_SERVER = os.environ.get('MAILCHIMP_SERVER')
 
 django_heroku.settings(locals())
