@@ -1,0 +1,42 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
+<!-- Hero Image -->
+<section class="hero is-halfheight">
+	<div class="">
+		<div class="section">
+			<div class="container">
+				<div class="section">
+					<div class="card" id="profile-pic">
+						<div class="card-image">
+							<figure class="image is-1by1 is-square">
+							<img
+								src="https://ci-project-5-joe-pins-be851091e775.s3.eu-north-1.amazonaws.com/static/home/media/profile_pic.png"
+								alt="Picture of Jhoan Trujillo page creator"
+							/>
+							</figure>
+						</div> <!-- /.card-image -->
+
+						<div class="card-content">
+							<div class="content">
+								<h2>Jhoan Trujillo</h2>
+								<p>An aspiring full stack developer working on creating full stack applications to make the web better.</p>
+								<p>Experienced in HTML, JavaScript, CSS, Liquid, and Python.</p>
+							</div> <!-- /.content -->
+						</div> <!-- /.card-content -->
+
+						<footer class="card-footer">
+							<a href="https://github.com/jhoanTrujillo" class="card-footer-item" rel="noopener" aria-label=""> 
+								<i class="fa-brands fa-github-alt is-size-4 is-size-5-mobile is-primary"></i>
+							</a>
+							<a href="https://www.linkedin.com/in/jhoan-trujillo-92b03517b" class="card-footer-item" rel="noopener" aria-label="">
+								<i class="fa-brands fa-linkedin is-size-4 is-size-5-mobile is-info"></i>
+							</a>
+						  </footer>
+					</div> <!-- /.card -->
+				</div>
+			</div> <!-- /.container -->
+		</div> <!-- section -->
+	</div> <!-- hero-body -->
+</section> <!-- /.hero -->
+{% endblock %}

@@ -23,6 +23,14 @@ def home(request):
 
 	return render(request, "home/index.html", context)
 
+
+def about(request):
+	"""
+	About page
+	"""
+	# Querying the three latest products. Used in the latest products section the index.html
+	return render(request, "home/about.html")
+
 def contact_page(request):
 	"""
 	View for the contact form of the site
