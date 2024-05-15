@@ -1,73 +1,15 @@
 :root {
-	--background: #ffffff; /* White */
-	--foreground: #1C1932; /* Midnight Black */
-	--accent: #8C52FF; /* Royal Purple */
-	--highlight: #5CE1E6; /* Aqua Sky */
-	--alert: #FF5757; /* Vivid Red */
 	--barlow: "Barlow", sans-serif;
 	--barlow-c: "Barlow Condensed", sans-serif;
 }
 
-/* Background classes */
-.is-bg {
-	background-color: var(--background);
+#mc_embed_signup{
+	background:#fff; 
+	clear:left; 
+	font:14px Helvetica,Arial,sans-serif; 
+	width: 100%;
+	border-radius: 16px;
 }
-
-.is-fg {
-	background-color: var(--foreground);
-}
-
-.is-accent {
-	background-color: var(--accent);
-}
-
-.is-highlight {
-	background-color: var(--highlight);
-}
-
-.is-alert {
-	background-color: var(--alert);
-}
-
-/* Background classes */
-.is-bg,
-.is-fg,
-.is-accent,
-.is-highlight,
-.is-alert {
-  transition: filter 0.3s ease; /* Smooth transition on hover */
-}
-
-/* Hover states */
-.is-bg:hover,
-.is-fg:hover,
-.is-accent:hover,
-.is-highlight:hover,
-.is-alert:hover {
-  filter: brightness(90%); /* Darken colors on hover */
-}
-
-/* Text color classes */
-.is-bg-text {
-color: var(--background) !important;
-}
-
-.is-fg-text {
-color: var(--foreground);
-}
-
-.is-accent-text {
-color: var(--accent);
-}
-
-.is-highlight-text {
-color: var(--highlight);
-}
-
-.is-alert-text {
-color: var(--alert);
-}  
-
 
 .cart--item-container {
 	overflow-y: scroll;
