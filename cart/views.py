@@ -4,10 +4,16 @@ from django.http import HttpResponseBadRequest
 from products.models import Product, Variant
 
 def view_cart(request):
-	"""
-	A view to display the cart content
-	"""
-	return render(request, "cart/cart.html")
+    """
+    A view to display the cart content
+    """
+    latest_products = Product.objects.order_by('-created_date')[:3]
+
+    context = {
+        'latest_products' : latest_products
+    }
+
+    return render(request, "cart/cart.html", context)
 
 def add_to_cart(request):
     """

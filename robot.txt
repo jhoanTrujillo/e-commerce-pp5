@@ -1,5 +1,3 @@
-user-agent: "*"
-disallow: /profile/
-disallow: /cart/
-disallow: /checkout/
+user-agent: *
+disallow: 
 sitemap: https://ci-project-5-joe-pins-be851091e775.herokuapp.com/sitemap.xml

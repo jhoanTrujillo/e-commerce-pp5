@@ -160,7 +160,7 @@ if 'USE_AWS' in os.environ:
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_ACCESS_SECRET_KEY_ID', '')
     
     # Tells Django the location to access the files from
-    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3-website-{AWS_S3_REGION_NAME}.amazonaws.com'
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
     
      # Static and media files
     STATICFILES_STORAGE = 'custom_storages.StaticStorage'

@@ -1,111 +1,139 @@
 {% extends 'base.html' %} 
 {% load static %} 
 {% block content %}
-<div class="section">
-	<h2 class="title is-1">Cart</h2>
+
 	{% if cart_items %}
-	<div class="fixed-grid has-3-cols cart--item-container">
-		<div class="grid">
-			<div class="cell">
-				<p class="title is-5">Product info</p>
-			</div>
-			<div class="cell">
-				<p class="title is-5">Quantity</p>
-			</div>
-			<div class="cell">
-				<p class="title is-5">Total Price</p>
-			</div>
-		</div>
+		<section class="hero is-fullheight">
+			<div class="hero-container">
+				<div class="section">
+					<div class="container">
 
-		{% for item in cart_items %}
-		<div class="grid">
-			<div id="info" 
-			class="cell 
-			is-flex 
-			is-flex-direction-column"
-			>
-				<div class="fixed-grid has-2-cols has-1-cols-mobile cart--item-container">
-					<figure class="image is-128x128 is-1by1 mr-2">
-						<img 
-						src="{{ item.product_or_variant.image.url }}" 
-						alt="{{ item.product_or_variant.description }}"
-						class="image__rounded-corners" 
-						>
-					</figure>
-					<div class="cell">
-						<p class="is-size-5">{{ item.product_or_variant.title }}</p>
-						<p>SKU: {{ item.product_or_variant.sku }}</p>
-						<p>Unit Price: €{{ item.product_or_variant.price }}</p>
-					</div>
-				</div>	
-			</div> <!-- /#info -->
+						<h2 class="title is-1">Cart</h2>
+						<hr>
 
-			<div id="quantity" class="cell is-flex is-flex-direction-column">
-				
-				<div class="is-flex is-flex-direction-rows is-align-items-center">
-					<div class="cell">
+						<div class="fixed-grid has-3-cols cart--item-container">
 
-						<form action="" method="POST" class="update-form form" data-product-form="{% if item.is_variant %}variant{%else%}product{% endif %}_{{ item.product_or_variant.id }}">
-							{% csrf_token %}
-							<quantity-selector id="quantitySelector">
-								<div class="is-flex is-flex-direction-rows is-flex-wrap-nowrap is-justify-content-flex-start is-align-items-center is-align-content-space-between">
-									<button class="button" id="minus">-</button>
-									<label for="quantity" hidden>Quantity</label>
-									<input type="number" value="{{ item.quantity }}" 
-									min="1" max="99" name="quantity" 
-									class="quantity input" value="1">
-									<button class="button" id="plus" class="button">+</button>
+							<div class="grid">
+								<div class="cell">
+									<p class="title is-5">Product info</p>
 								</div>
-							</quantity-selector>
+								<div class="cell">
+									<p class="title is-5">Quantity</p>
+								</div>
+								<div class="cell">
+									<p class="title is-5">Total Price</p>
+								</div>
+							</div> <!-- /.grid -->
 
-							<input type="hidden" name="item-key" value="{% if item.is_variant %}variant{%else%}product{% endif %}_{{ item.product_or_variant.id }}">
+							{% for item in cart_items %}
+							<div class="grid">
+								<div id="info" 
+								class="cell 
+								is-flex 
+								is-flex-direction-column"
+								>
+									<div class="fixed-grid has-2-cols has-1-cols-mobile cart--item-container">
+										<figure class="image is-128x128 is-1by1 mr-2">
+											<img 
+											src="{{ item.product_or_variant.image.url }}" 
+											alt="{{ item.product_or_variant.title }}"
+											class="image__rounded-corners" 
+											>
+										</figure>
+										<div class="cell">
+											<p class="is-size-6-mobile has-text-info-dark">{{ item.product_or_variant.title }}</p>
+											<p class="is-size-7-mobile">SKU: {{ item.product_or_variant.sku }}</p>
+											<p class="is-size-6-mobile">Unit Price: €{{ item.product_or_variant.price }}</p>
+										</div>
+									</div>	
+								</div> <!-- /#info -->
 
-							<a data-action-type="remove" class="button is-danger is-inverted">
-								Remove
-							</a>
-							<a data-action-type="update" class="button is-info update-link">
-								Update
-							</a>
-							
-							<!--   -->
-							<input type="text" name="item" value="{% if item.is_variant %}variant{%else%}product{% endif %}_{{ item.product_or_variant.id }}" hidden>
-						</form>
+								<div id="quantity" class="cell is-flex is-flex-direction-column">
+									
+									<div class="is-flex is-flex-direction-rows is-align-items-center">
+										<div class="cell">
+
+											<form action="" method="POST" class="update-form form" data-product-form="{% if item.is_variant %}variant{%else%}product{% endif %}_{{ item.product_or_variant.id }}">
+												{% csrf_token %}
+												<quantity-selector id="quantitySelector">
+													<div class="is-flex is-flex-direction-rows is-flex-wrap-nowrap is-justify-content-flex-start is-align-items-center is-align-content-space-between">
+														<button class="button" id="minus">-</button>
+														<label for="quantity" hidden>Quantity</label>
+														<input type="number" value="{{ item.quantity }}" 
+														min="1" max="99" name="quantity" 
+														class="quantity input" value="1">
+														<button class="button" id="plus" class="button">+</button>
+													</div>
+												</quantity-selector>
+
+												<input type="hidden" name="item-key" value="{% if item.is_variant %}variant{%else%}product{% endif %}_{{ item.product_or_variant.id }}">
+
+												<a data-action-type="remove" class="button is-danger is-inverted">
+													Remove
+												</a>
+												<a data-action-type="update" class="button is-info update-link">
+													Update
+												</a>
+												
+												<!--   -->
+												<input type="text" name="item" value="{% if item.is_variant %}variant{%else%}product{% endif %}_{{ item.product_or_variant.id }}" hidden>
+											</form>
+											
+										</div>
+									</div>	
+								</div> <!-- /#quantity -->
+
+								<div id="added_total" class="cell is-flex is-flex-direction-column">
+									<div class="is-flex is-flex-direction-rows is-align-items-center">
+										<div class="cell">
+											<p>${{ item.added_total }}</p>
+										</div>
+									</div>	
+								</div>
+							</div> <!-- /.grid -->
+							{% endfor %}
+						</div> <!-- /.fixed-grid -->
 						
-					</div>
-				</div>	
-			</div> <!-- /#quantity -->
+						<!-- Sub total section -->
+						
+						<div class="fixed-grid has-3-cols has-1-cols">
+							<hr>
+							<div>
+								<p class="is-size-3">Subtotal: €{{ grand_total }}</p>
+							</div>
 
-			<div id="added_total" class="cell is-flex is-flex-direction-column">
-				<div class="is-flex is-flex-direction-rows is-align-items-center">
-					<div class="cell">
-						<p>${{ item.added_total }}</p>
-					</div>
-				</div>	
-			</div>
-		</div> <!-- /.grid -->
-		{% endfor %}
-	</div> <!-- /.fixed-grid -->
-	
-	<!-- Sub total section -->
-	<div class="section fixed-grid has-3-cols has-1-cols">
-		<div>
-			<p class="is-size-3">Subtotal: €{{ grand_total }}</p>
-		</div>
-		<div class="is-flex is-align-content-space-between is-flex-direction-row">
-			<a href="{% url 'home' %}" class="button">< Continue Shopping</a>
-			<a href="{% url 'checkout' %}" class="button">Secure Checkout</a>
-		</div>
-	</div>
-
+							<div class="buttons">
+								<a href="{% url 'home' %}" class="button is-outlined is-link"> Continue Shopping</a>
+								<a href="{% url 'checkout' %}" class="button is-primary">Secure Checkout</a>
+							</div>
+						</div>
+					</div> <!-- /.container -->
+				</div> <!-- /.section -->
+			</div> <!-- /. hero-container -->
+		</section>
 	{% else %}
-		<div class="block">
-			<div class="section container">
-				<p class="is-size-1 is-size-3-mobile">No items in cart</p>
-			</div>
-		</div>
-	{%endif%}	
-	
-</div>
+		<section class="hero is-fullheight">
+				<div class="hero-body">
+					<div class="section">
+						<div class="container">
+							<div class="block mt-5">
+									<div class="container">
+										<div class="my-5 bounce-in">
+											<h2 class="title is-size-2 is-size-3-mobile has-text-black-ter">No items in cart</h2>
+											<p class="subtitle is-size-4 is-size-5-mobile h has-text-black-ter">Don't hesitate to browse around our wide variety of enamel pins.</p>
+											<a href="{% url 'products' %}" class="button is-success is-size-5 is-size-5-mobile">Shop All</a>
+										</div>
+									</div> <!-- /.container -->
+							</div> <!-- /.block -->
+						</div> <!-- /.container -->
+					</div> <!-- /.section -->
+				</div> <!-- /.hero-body -->
+		</section>
+
+		<!-- Latest products -->
+		{% include 'includes/latest_products.html' %}
+
+	{% endif %}
 {% endblock %}
 
 {% block postload_js %}

@@ -8,15 +8,16 @@ Here you can find all the content in the docs and links to each individual secti
 
 -   [Clone and Test](#clone-and-test)
     -   [Cloning](#clone-repo)
-    -   [Virtual enviroment (Venv)](#virtual-enviroment-venv)
+    -   [Virtual enviroment](#virtual-enviroment-venv)
 -   [Planning](#planning)
     -   [Site objective](#site-objective)
     -	[Features](#features)
 	-	[Models](#models)
--   [UX design](#ux-design)
     -   [Wireframe](#wireframe)
     -   [Color](#color)
-    -   [Accessibility test](#accessibility-test)
+- [Business Model](#business-model)
+    - [Marketing & Search Engine Optimisation (SEO)](#marketing--search-engine-optimisation-seo)
+    - [Technologies used]()
 
 > You will find a back to top link at the end of every section.
 
@@ -276,4 +277,55 @@ In designing my online store, I chose the **Barlow** font family—Barlow and **
 
 Basically, I picked the Barlow fonts because they help me make my online store easy to use and nice to look at. They make it simple for customers to find what they need and enjoy their shopping experience.
 
-### Accessibility test
+## Business Model
+
+The operational model is straightforward. Our website serves as a platform for selling products directly to consumers, making it a B2C enterprise. Our dedicated team curates and adds new products to our inventory regularly. Customers have the freedom to browse, select items, and proceed to checkout seamlessly. We offer single purchases only.
+
+Our mailing lists are cultivated from the email addresses collected via our newsletter signup form, conveniently located above the footer on our main page. This invaluable resource enables us to conduct targeted customer outreach and marketing campaigns effectively. Additionally, our Facebook business page serves as an interactive platform for sharing content with customers and fostering engagement through comments and messages.
+
+### Marketing & Search Engine Optimisation (SEO)
+
+
+**Keywords**
+- Enamel pins
+- Handcrafted pins
+- Unique pins
+- Lapel pins
+- Pin badges
+- Artisan pins
+- Custom pins
+- Collectible pins
+- Trendy pins
+- Fashion pins
+- Cute pins
+- Pop culture pins
+- - Vintage pins
+- Retro pins
+- Whimsical pins
+- Animal pins
+- Floral pins
+- Minimalist pins
+- Statement pins
+- Pin accessories
+
+
+
+
+
+
+**Sitemap**
+
+**Robot.txt**
+
+### Technologies used
+
+**Languages**
+- HTML
+- CSS
+- JavaScript
+- Python
+
+**Frameworks and Libraries**
+- Django
+- Bulma CSS
+- Stripe
