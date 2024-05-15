@@ -25,25 +25,28 @@ def home(request):
 
 def contact_page(request):
 	"""
-	View to the contact form of the site
+	View for the contact form of the site
 	"""
 	submitted = False
-	# Checks if request is a post and saves form
+
 	if request.method == "POST":
 		form = ContactForm(request.POST)
 
 		if form.is_valid():
 			form.save()
+			messages.success(request, 'Your request has been submitted.')
 			return HttpResponseRedirect('/contact?submitted=True')
-	
-	# Creates new form class and adds placeholders
-	form = ContactForm()
+		else:
+			messages.error(request, 'Something went wrong with the form. Please check the information and try again.')
+	else:
+		form = ContactForm()
+
 	if 'submitted' in request.GET:
 		submitted = True
 
 	context = {
-		'form' : form,
-		'Submitted' : submitted,
+		'form': form,
+		'submitted': submitted,
 	}
 
 	return render(request, "home/contact.html", context)

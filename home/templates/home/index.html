@@ -7,6 +7,14 @@
 
 {% block content %}
 <!-- Hero Image -->
+<style>
+	#hero-img-container {
+		background-image: url({% static 'home/media/pin_hero_image.png' %});
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: cover;
+	}
+</style>
 <section id="hero-img-container" class="hero is-halfheight">
 	<div class="hero-body">
 		<div class="card p-5 has-background-white-bis bounce-in">
@@ -17,31 +25,10 @@
 	</div>
 </section>
 
-<!-- Latest Products -->
-<section class="section">
-	<div class="container">
-		<div class="block">
-			<h2 class="title is-size-2 is-size-3-mobile has-text-black-ter">
-				Latest releases
-			</h2>
-			<p class="subtitle is-size-4 is-size-5-mobile h has-text-black-ter">
-				The hottest and newest
-			</p>
-		</div> <!-- /.block -->
-	</div> <!-- /.container -->
+<!-- Latest products -->
+{% include 'includes/latest_products.html'%}
 
-	<div class="container">
-		<div class="fixed-grid has-3-cols has-1-cols-mobile">
-			<div class="grid">
-				{% for product in latest_products %}
-					{% include 'includes/product_card.html' %}
-				{% endfor %}
-			</div> <!-- /.grid -->
-		</div> <!-- /.fixed-grid -->
-	</div> <!-- /.section -->
-
-</section>
-
+<hr>
 <!-- Partners section -->
 <div class="section">
 	<div class="container">
@@ -54,54 +41,43 @@
 
 			<div class="column">
 				<figue class="image is-128x128 mx-auto is-square">
-					<a href="https://www.apple.com/" rel="noopener noreferrer">
-						<img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Apple_logo_grey.svg" alt="Apple logo">
+					<a href="https://www.uniqlo.com/" rel="noopener noreferrer">
+						<img loading="lazy" src="{% static 'home/media/uniqlo_logo.png' %}" alt="Apple logo">
 					</a>
 				</figue>
 			</div> <!-- /.column -->
 
 			<div class="column">
 				<figue class="image is-128x128 mx-auto is-square">
-					<a href="https://www.apple.com/" rel="noopener noreferrer">
-						<img src="https://1000logos.net/wp-content/uploads/2023/11/Temu-Logo.png" alt="Temu logo">
+					<a href="https://www.thenorthface.com/" rel="noopener noreferrer">
+						<img loading="lazy" src="{% static 'home/media/north_face_logo.png' %}" alt="Apple logo">
 					</a>
 				</figue>
 			</div> <!-- /.column -->
 
 			<div class="column">
-
+				<figue class="image is-128x128 mx-auto is-square">
+					<a href="https://www.vans.com/" rel="noopener noreferrer">
+						<img loading="lazy" src="{% static 'home/media/vans_logo.png' %}" alt="Apple logo">
+					</a>
+				</figue>
 			</div> <!-- /.column -->
 
 		</div> <!-- /.columns -->
 	</div> <!-- /.container -->
 </div> <!-- /.section -->
-
-<style>
-	#hero-img-container {
-		background-image: url({% static 'home/media/pin_hero_image.png' %});
-		background-repeat: no-repeat;
-		background-position: center;
-		background-size: cover;
-	}
-</style>
-
+<hr>
 <!-- collection -->
 <section class="section">
 	<div class="container">
-		<div class="mb-5">
+		<div class="mb-5 has-text-centered">
 			<h2 class="title is-size-2 is-size-3-mobile has-text-black-ter">Collections</h2>
 			<p class="subtitle is-size-4 is-size-5-mobile h has-text-black-ter">
-				Browse products by collection
+				Browse products by <a href="{% url 'products' %}">collection</a>
 			</p>
 		</div>
 		<div class="columns">
 			{% for collection in collections %}
-				{% if forloop.counter == 2 %}
-					<div class="column m-auto  has-text-centered">
-						<p class="subtitle is-size-2 is-size-3-mobile has-text-black-ter">Check out all products</p>
-						<a href="{% url 'products' %}" class="button is-primary is-size-5 is-size-5-mobile">Shop all</a>
-					</div>
-				{% endif %}
 				<style>
 					#is-img-container-{{ collection.name }} {
 						background-image: url("{{ collection.image.url }}");
@@ -114,7 +90,7 @@
 					<div id="is-img-container-{{ collection.name }}" class="is-img-container mx-auto has-border-rounded">
 						<div class="is-overlay-text m-5">
 							<a href="{% url 'products' %}?collection={{ collection.name }}" class="is-hoverable is-clickable">
-								<p class="is-size-3 is-bg-text ">
+								<p class="button is-size-4">
 									{{ collection.user_friendly_name }}
 								</p>
 							</a> 
@@ -125,6 +101,5 @@
 		</div> <!-- /.columns -->
 	</div> <!-- /. container -->
 </section>
-
 
 {% endblock %}
