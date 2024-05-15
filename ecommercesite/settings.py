@@ -14,7 +14,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get('SECRET_KEY')
 ALLOWED_HOSTS = ['ci-project-5-joe-pins-be851091e775.herokuapp.com','*.herokuapp.com','localhost','127.0.0.1']
 
 # Application definition
@@ -25,18 +25,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-	'django.contrib.sites',
-	'allauth',
+    'django.contrib.sites',
+    'allauth',
     'allauth.account',
     'allauth.socialaccount',
-	'home',
-	'products',
-	'cart',
-	'checkout',
-	'profiles',
-	
-	# Third-party apps
-	'crispy_forms',
+    'home',
+    'products',
+    'cart',
+    'checkout',
+    'profiles',
+
+    # Third-party apps
+    'crispy_forms',
     'crispy_bulma',
     'storages',
 ]
@@ -73,8 +73,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-				'cart.contexts.cart_contents',
-				'django.template.context_processors.media',
+                'cart.contexts.cart_contents',
+                'django.template.context_processors.media',
             ]
         },
     },
@@ -94,7 +94,7 @@ WSGI_APPLICATION = 'ecommercesite.wsgi.application'
 
 if 'DATABASE_URL' in os.environ:
     DATABASES = {
-	    'default': dj_database_url.parse(os.getenv('DATABASE_URL', ''))
+        'default': dj_database_url.parse(os.getenv('DATABASE_URL', ''))
     }
 else:
     DATABASES = {
@@ -147,15 +147,22 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 if 'USE_AWS' in os.environ:
-    
+      # Cache control
+    AWS_S3_OBJECT_PARAMETERS = {
+        'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+        'CacheControl': 'max-age=94608000',
+    }
+
     # Bucket Config
     AWS_STORAGE_BUCKET_NAME = 'ci-project-5-joe-pins-be851091e775'
     AWS_S3_REGION_NAME = 'eu-north-1'
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_ACCESS_SECRET_KEY_ID', '')
-    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-
-    # Static and media files
+    
+    # Tells Django the location to access the files from
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3-website-{AWS_S3_REGION_NAME}.amazonaws.com'
+    
+     # Static and media files
     STATICFILES_STORAGE = 'custom_storages.StaticStorage'
     STATICFILES_LOCATION = 'static'
     DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
@@ -186,11 +193,12 @@ LOGIN_REDIRECT_URL = '/'
 FREE_DELIVERY_THRESHOLD = 30
 STANDARD_DELIVERY_PERCENTAGE = 10
 
-# Stripe
+# Stripe Settings 
 STRIPE_CURRENCY = 'eur'
-STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
-STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
-STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
+
+STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY', '')
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', '')
+STRIPE_WH_SECRET = os.environ.get('STRIPE_WH_SECRET', '')
 
 if 'DEVELOPMENT' in os.environ:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
