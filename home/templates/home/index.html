@@ -79,12 +79,21 @@
 		<div class="columns">
 			{% for collection in collections %}
 				<style>
+					{% if collection.image %}
 					#is-img-container-{{ collection.name }} {
 						background-image: url("{{ collection.image.url }}");
 						background-repeat: no-repeat;
 						background-position: center;
 						background-size: cover;
 					}
+					{% else %}
+					#is-img-container-{{ collection.name }} {
+						background-image: url("{% static 'media/no_image_found.png' %}");
+						background-repeat: no-repeat;
+						background-position: center;
+						background-size: cover;
+					}
+					{% endif %}
 				</style>
 				<div class="column">
 					<div id="is-img-container-{{ collection.name }}" class="is-img-container mx-auto has-border-rounded">
