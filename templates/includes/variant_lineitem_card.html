@@ -6,6 +6,8 @@
 				src="
 				{% if line_item.variant.image %}
 					{{ line_item.variant.image.url }}
+				{% elif ine_item.variant.image_url %}
+					{{ line_item.variant.image_url }}
 				{% else %}
 					{% include 'media/no_image_found'%}
 				{% endif %}" 

@@ -6,6 +6,8 @@
 				src="
 				{% if line_item.product.image %}
 					{{ line_item.product.image.url }}
+				{% elif line_item.product.image_url %}
+					{{ line_item.product.image_url }}
 				{% else %}
 					{% include 'media/no_image_found'%}
 				{% endif %}" 

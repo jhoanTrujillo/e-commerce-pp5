@@ -6,8 +6,10 @@
 			<img
 				{% if variant.image %}
 					src="{{ variant.image.url}}"
-				{% else %}
+				{% elif variant.image_url %}
 					src="{{ variant.image_url }}"
+				{% else %}
+					src="https://ci-project-5-joe-pins-be851091e775.s3.eu-north-1.amazonaws.com/static/media/no_image_found.svg"
 				{% endif %}
 				alt="Placeholder image"
 				class="is-hoverable"
