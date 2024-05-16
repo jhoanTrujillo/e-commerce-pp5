@@ -1,5 +1,5 @@
 {% extends 'base.html' %} 
-{% load static %} 
+{% load static %}
 {% load crispy_forms_tags %}
 
 {% block extra_css %}
@@ -12,37 +12,13 @@
 		<h2 class="is-title is-size-3 is-size-3-mobile">Order Summary</h2>
 		<div class="columns">
 			<div class="column">
-				<div class="card p-2">
 					<div id="is-order-summary-card">
 						{% for item in cart_items %}
-						<div class="fixed-grid">
-							<div class="grid">
-								<div class="cell">
-								<figure class="image is-96x96">
-									<img 
-									src="
-									{% if item.product_or_variant.image %}
-									{{ item.product_or_variant.image.url }}
-									{% else %}
-									{{ item.product_or_variant.image_url }}
-									{% endif %}
-									"
-									/>
-								</figure>
-								</div>
-								<div class="cell">
-									<div class="ml-4">
-										<p class="is-subtitle my-auto is-size-5 is-size-6-mobile">Title: {{ item.product_or_variant.title }}</p>
-										<p class="is-subtitle my-auto mx-auto is-size-5 is-size-6-mobile">Qty: {{ item.quantity }}</p>
-										<p class="is-subtitle mx-auto my-auto is-size-5 is-size-6-mobile">Total: €{{ item.added_total }}</p>
-									</div>
-								</div>
-							</div>
-						</div> <!-- /.is-flex -->
+							{% include 'includes/checkout_lineitem_card.html' %}
 						{% endfor %}
 					</div> <!-- /#is-order-summary-card -->
-					<p class="subtitle my-4 is-size-4-mobile is-size-5-mobile">Total to be charge: € {{ grand_total }}</p>
-				</div> <!-- /.card -->
+					<hr />
+					<p class="title is-size-3 is-size-5-mobile">Total to be charge: € {{ grand_total }}</p>
 			</div> <!-- /.column -->
 			
 			<!-- Checkout form -->
