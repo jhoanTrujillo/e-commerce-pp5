@@ -6,14 +6,16 @@
 {% endblock %}
 
 {% block content %}
-<div class="section">
-	<div class="container">
-		<div class="card">
-			<div class="card-content">
-			{% block inner_content %}
-			{% endblock inner_content %}
+	<section class="hero is-halfheight my-5">
+		<div class="section my-5">
+			<div class="container my-5">
+				<div class="card">
+					<div class="card-content has-background-primary">
+					{% block inner_content %}
+					{% endblock inner_content %}
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
+	</section>
 {% endblock %}
