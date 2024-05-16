@@ -1,6 +1,7 @@
 # e-commerce-pp5
-
 Creating an E-commerce store for the project 5 of the code institute.
+
+[Deployed project](https://ci-project-5-joe-pins-be851091e775.herokuapp.com/)
 
 ## Table of content
 
@@ -23,9 +24,9 @@ Here you can find all the content in the docs and links to each individual secti
     - [Amazon AWS](#amazon-aws)
     - [heroku](#heroku)
 - [Testing](#testing)
-    - [Site Speed]()
+    - [Site Speed](#site)
     - [Bugs](#Bugs)
-    - [Current issues](#)
+    - [Current major issues](#)
 - [Credits](#credits)
 
 > You will find a back to top link at the end of every section.
@@ -229,22 +230,11 @@ A collection of all the data models.
 [wireframe files](https://github.com/jhoanTrujillo/e-commerce-pp5/tree/main/github_media)
 
 ### Color
+For ease of use I'm working with the colors that are provided by the bulma framework. This reduces the decision fatigue and ensure the color palette is always on theme. 
 
-**Selected colors**
-| Hex | Title|
-|-----|-------|
-| #ffffff | White |
-|#1C1932 |Midnight Black|
-|#8C52FF |Royal Purple|
-|#5CE1E6 |Aqua Sky|
-|#FF5757 |Vivid Red|
-
-In designing the color scheme for the e-commerce store, I aimed to infuse it with popping and energetic colors. The vibrant hues of Aqua Sky (#5CE1E6), Vivid Red (#FF5757), and Royal Purple (#8C52FF) were carefully selected to evoke a sense of dynamism and excitement, ensuring that visitors attention is catched.
-
-Moreover, the chosen colors provide a great contrast between sections, facilitating navigation and enhancing visual hierarchy. Whether it's highlighting product categories or drawing attention to promotional offers, the distinct color palette ensures that each section stands out, guiding users seamlessly through their shopping journey.
+[Bulma color palette](https://bulma.io/documentation/features/color-palettes/)
 
 ### Fonts
-
 In designing my online store, I chose the **Barlow** font family—Barlow and **Barlow Condensed**. These fonts are easy to read and strike a balance between friendly and professional. They fit perfectly with my tone—friendly but informative.
 
 **Barlow and Barlow Condensed** go well together and make everything look neat and organized. With lots of different styles to choose from, like bold and regular, I can highlight important stuff without making it hard to read.
@@ -252,7 +242,6 @@ In designing my online store, I chose the **Barlow** font family—Barlow and **
 Basically, I picked the Barlow fonts because they help me make my online store easy to use and nice to look at. They make it simple for customers to find what they need and enjoy their shopping experience.
 
 ## Business Model
-
 The operational model is straightforward. Our website serves as a platform for selling products directly to consumers, making it a B2C enterprise. Our dedicated team curates and adds new products to our inventory regularly. Customers have the freedom to browse, select items, and proceed to checkout seamlessly. We offer single purchases only.
 
 Our mailing lists are cultivated from the email addresses collected via our newsletter signup form, conveniently located above the footer on our main page. This invaluable resource enables us to conduct targeted customer outreach and marketing campaigns effectively. Additionally, our Facebook business page serves as an interactive platform for sharing content with customers and fostering engagement through comments and messages.
@@ -298,10 +287,18 @@ To ensure optimal visibility in search engine results and attract the right audi
 
 By strategically incorporating these keywords into our website content, product descriptions, and meta tags, we can improve our search engine rankings and attract organic traffic from users actively searching for these terms. This will help us reach our target audience more effectively and increase the visibility of our products online.
 
-
 **Sitemap**
+I used XML Siteamaps to create a sitemap for the site. The sitemap is submitted to Google Search Console to help with SEO.
 
 **Robot.txt**
+Added a robots.txt file to the site to help with SEO. The robots.txt file is used to tell search engines which pages to crawl and which to ignore. Here is the content of the robots.txt file:
+
+```
+user-agent: *
+disallow: /checkout/
+sitemap: https://ci-project-5-joe-pins-be851091e775.herokuapp.com/sitemap.xml
+```
+
 
 ### Technologies used
 
