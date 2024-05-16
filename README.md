@@ -18,6 +18,15 @@ Here you can find all the content in the docs and links to each individual secti
 - [Business Model](#business-model)
     - [Marketing & Search Engine Optimisation (SEO)](#marketing--search-engine-optimisation-seo)
     - [Technologies used]()
+- [Deployment](#deployment)
+    - [ElephantSQL Database](#elephantsql-database)
+    - [Amazon AWS](#amazon-aws)
+    - [heroku](#heroku)
+- [Testing](#testing)
+    - [Site Speed]()
+    - [Bugs](#Bugs)
+    - [Current issues](#)
+- [Credits](#credits)
 
 > You will find a back to top link at the end of every section.
 
@@ -87,169 +96,134 @@ Below there is a list of features of the main functionalities I thought would be
 | Remove product from cart | 4 | 3 | Should have |
 | See order summary | 4 | 2 | Could have |
 | Pay and complete checkout | 5 | 4 | Must have |
-| **Blog post (Site owner)** | | | |
-| Blog post creation | 5 | 4 | Must have |
-| Blog post update | 4 | 3 | Should have |
-| Blog post deletion | 3 | 3 | Could have |
-| **Blog post (users/registered)** | | | |
-| Like post | 3 | 3 | Could have  |
-| Comment creation | 4 | 3 | Should have |
-| Comment update | 3 | 3 | Could have |
-| Comment deletion | 3 | 4 | Could have |
 
 </details>
 
 ### Models
 A collection of all the data models.
 
-<details close>
-<summary>UserProfile</summary>
-
-| Key               | Name                     | Type                |
-|-------------------|--------------------------|---------------------|
-| Foreign_Key       | User                     | ForeignKey          |
-|                   | Default_Phone_Number     | CharField           |
-|                   | Default_Country          | CountryField        |
-|                   | Default_Street_Address1  | CharField           |
-|                   | Default_Street_Address2  | CharField           |
-|                   | Default_Town_or_City     | CharField           |
-|                   | Default_County           | CharField           |
-|                   | Default_Postcode         | CharField           |
+<details>
+  <summary><strong>Collection Model</strong></summary>
+  
+  **Description:** The `Collection` model represents a group or category of products.
+  
+  | Field Name         | Field Type              | Description                                                                                           |
+  |--------------------|-------------------------|-------------------------------------------------------------------------------------------------------|
+  | name               | CharField(max_length=100) | The name of the collection.                                                                           |
+  | image              | ImageField               | An image associated with the collection.                                                              |
+  | user_friendly_name | CharField(max_length=100) | A user-friendly name for the collection.                                                              |
+  | description        | TextField                | A description of the collection.                                                                      |
 
 </details>
 
-<details close>
-<summary>Collection</summary>
+<details>
+<summary><strong>Product Model</strong></summary>
 
-| Field             | Type       | Description                            |
-|-------------------|------------|----------------------------------------|
-| id                | Primary Key| Unique identifier for the collection.  |
-| name              | CharField  | Name of the collection.                |
-| user_friendly_name| CharField  | User-friendly name of the collection.  |
-| description       | TextField  | Description of the collection.         |
+**Description:** The `Product` model represents individual items available for sale in the store.
 
+| Field Name    | Field Type                              | Description                                                                                      |
+|---------------|-----------------------------------------|--------------------------------------------------------------------------------------------------|
+| title         | CharField(max_length=100)               | The title of the product.                                                                        |
+| description   | TextField                               | A description of the product.                                                                    |
+| sku           | CharField(max_length=100, null=True)    | The stock keeping unit (SKU) of the product.                                                      |
+| price         | DecimalField(max_digits=6, decimal_places=2) | The price of the product.                                                                   |
+| image         | ImageField                              | An image associated with the product.                                                             |
+| image_url     | URLField(max_length=1024, null=True)    | A URL link to an image of the product.                                                            |
+| rating        | DecimalField(max_digits=6, decimal_places=2) | The rating of the product.                                                                |
+| collection    | ForeignKey(Collection, on_delete=models.SET_NULL, null=True) | The collection to which the product belongs.                                        |
+| stock         | IntegerField                            | The current stock level of the product.                                                          |
+| created_date  | DateTimeField(auto_now_add=True)       | The date and time when the product was created.                                                  |
+| updated_date  | DateTimeField(auto_now=True)           | The date and time when the product was last updated.                                             |
+</details>
 
+<details>
+  <summary><strong>Variant Model</strong></summary>
+
+  **Description:** The `Variant` model represents different variations or options for a specific product.
+
+  | Field Name    | Field Type                              | Description                                           |
+  |---------------|-----------------------------------------|-------------------------------------------------------|
+  | product       | ForeignKey(Product, on_delete=models.CASCADE) | The product to which the variant belongs.      |
+  | title         | CharField(max_length=100)               | The title or name of the variant.                     |
+  | sku           | CharField(max_length=100, null=True)    | The stock keeping unit (SKU) of the variant.           |
+  | price         | DecimalField(max_digits=6, decimal_places=2) | The price of the variant.                        |
+  | image         | ImageField                              | An image associated with the variant.                  |
+  | image_url     | URLField(max_length=1024, null=True)    | A URL link to an image of the variant.                |
+  | stock         | IntegerField                            | The current stock level of the variant.               |
 
 </details>
 
-<details close>
-<summary>Product</summary>
+<details>
+  <summary><strong>Contact Model</strong></summary>
 
-| Field             | Type       | Description                            |
-|-------------------|------------|----------------------------------------|
-| id                | Primary Key| Unique identifier for the product.      |
-| title             | CharField  | Title of the product.                  |
-| description       | TextField  | Description of the product.            |
-| sku               | CharField  | Stock Keeping Unit of the product.     |
-| price             | DecimalField| Price of the product.                  |
-| image             | ImageField | Image of the product.                  |
-| image_url         | URLField   | URL of the image of the product.       |
-| rating            | DecimalField| Rating of the product.                 |
-| collection_id     | ForeignKey | Foreign key to Collection table.        |
-| stock             | IntegerField| Stock quantity of the product.         |
-| created_date      | DateTimeField| Date and time when the product was created.|
-| updated_date      | DateTimeField| Date and time when the product was last updated.|
+  **Description:** The `Contact` model stores information about messages sent through the contact form.
 
+  | Field Name | Field Type                     | Description                                      |
+  |------------|--------------------------------|--------------------------------------------------|
+  | sender     | CharField(max_length=100)      | The name of the sender.                          |
+  | email      | EmailField(max_length=100)     | The email address of the sender.                 |
+  | subject    | CharField(max_length=254)      | The subject of the message (optional).           |
+  | message    | TextField                      | The content of the message.                      |
+  | sent_at    | DateTimeField(auto_now_add=True) | The date and time when the message was sent.  |
 
 </details>
 
-<details close>
-<summary>Variant</summary>
-| Field             | Type       | Description                            |
-|-------------------|------------|----------------------------------------|
-| id                | Primary Key| Unique identifier for the variant.      |
-| product_id        | ForeignKey | Foreign key to Product table.          |
-| title             | CharField  | Title of the variant.                  |
-| price             | DecimalField| Price of the variant.                  |
-| image             | ImageField | Image of the variant.                  |
-| image_url         | URLField   | URL of the image of the variant.       |
-| stock             | IntegerField| Stock quantity of the variant.         |
-</details>
+<details>
+  <summary><strong>Order Model</strong></summary>
 
-<details close>
-<summary>Order</summary>
+  **Description:** The `Order` model stores information about customer orders.
 
-| Key               | Name              | Type            |
-|-------------------|-------------------|-----------------|
-|                   | Order_Number      | CharField       |
-| Foreign_Key       | User_Profile      | ForeignKey      |
-|                   | Full_Name         | CharField       |
-|                   | Email             | EmailField      |
-|                   | Phone_Number      | CharField       |
-|                   | Country           | CountryField    |
-|                   | Postcode          | CharField       |
-|                   | Town_or_City      | CharField       |
-|                   | Street_Address1   | CharField       |
-|                   | Street_Address2   | CharField       |
-|                   | County            | CharField       |
-|                   | Date              | DateTimeField   |
-|                   | Delivery_Cost     | DecimalField    |
-|                   | Order_Total       | DecimalField    |
-|                   | Grand_Total       | DecimalField    |
-|                   | Original_Bag      | TextField       |
-|                   | Stripe_PID        | CharField       |
+  | Field Name      | Field Type                                        | Description                                                   |
+  |-----------------|---------------------------------------------------|---------------------------------------------------------------|
+  | order_number    | CharField(max_length=32)                          | The unique order number.                                      |
+  | user_profile    | ForeignKey(UserProfile, on_delete=models.SET_NULL) | The user profile associated with the order (if applicable).   |
+  | full_name       | CharField(max_length=50)                           | The full name of the customer.                                |
+  | email           | EmailField(max_length=254)                         | The email address of the customer.                            |
+  | phone_number    | CharField(max_length=20)                           | The phone number of the customer.                             |
+  | country         | CountryField(blank_label='Country *')              | The country of the customer.                                  |
+  | postcode        | CharField(max_length=20, null=True)                | The postal code of the customer.                              |
+  | town_or_city    | CharField(max_length=40)                           | The town or city of the customer.                             |
+  | street_address1 | CharField(max_length=80)                           | The first line of the street address of the customer.         |
+  | street_address2 | CharField(max_length=80, null=True)                | The second line of the street address of the customer (if applicable). |
+  | county          | CharField(max_length=80, null=True)                | The county or region of the customer (if applicable).         |
+  | date            | DateTimeField(auto_now_add=True)                   | The date and time when the order was placed.                  |
+  | delivery_cost   | DecimalField(max_digits=6, decimal_places=2)       | The cost of delivery for the order.                           |
+  | order_total     | DecimalField(max_digits=10, decimal_places=2)      | The total cost of the order.                                  |
+  | grand_total     | DecimalField(max_digits=10, decimal_places=2)      | The grand total cost of the order.                            |
+  | original_cart   | TextField                                         | The JSON representation of the original cart contents.        |
+  | stripe_pid      | CharField(max_length=254)                         | The payment ID provided by Stripe for the order.              |
 
 </details>
 
-<details close>
-<summary>LineItem</summary>
+<details>
+  <summary><strong>ProductLineItem Model</strong></summary>
 
-| Key          | Name              | Type            |
-|--------------|-------------------|-----------------|
-| Foreign Key  | Order             | ForeignKey      |
-| Foreign Key  | Product           | ForeignKey      |
-| CharField    | Product_Size      | CharField       |
-| TextField    | Selected_Options  | TextField       |
-| IntegerField | Quantity          | IntegerField    |
-| DecimalField | Lineitem_Total    | DecimalField    |
+  **Description:** The `ProductLineItem` model represents line items associated with products in an order.
 
-</details>
-
-<details close>
-<summary>DiscountCode</summary>
-
-| Key               | Name       | Type        |
-|-------------------|------------|-------------|
-|                   | Code       | CharField   |
-|                   | Description| TextField   |
-|                   | Amount     | DecimalField|
-|                   | Percent    | DecimalField|
-|                   | Minimum Purchase | DecimalField|
-|                   | Start Date | DateField   |
-|                   | End Date   | DateField   |
-|                   | Active     | BooleanField|
+  | Field Name      | Field Type                                        | Description                                                   |
+  |-----------------|---------------------------------------------------|---------------------------------------------------------------|
+  | order           | ForeignKey(Order, on_delete=models.CASCADE)      | The order associated with the line item.                      |
+  | product         | ForeignKey(Product, on_delete=models.CASCADE)    | The product associated with the line item.                    |
+  | quantity        | IntegerField                                     | The quantity of the product in the line item.                |
+  | lineitem_total  | DecimalField(max_digits=6, decimal_places=2)      | The total cost of the line item (calculated automatically).  |
 
 </details>
 
-<details close>
-<summary>Blog</summary>
+<details>
+  <summary><strong>VariantLineItem Model</strong></summary>
 
-| Key               | Name            | Type            |
-|-------------------|-----------------|-----------------|
-| Foreign Key       | User            | ForeignKey      |
-|                   | Title           | CharField       |
-|                   | Content         | TextField       |
-|                   | Created Date    | DateTimeField   |
-|                   | Updated Date    | DateTimeField   |
+  **Description:** The `VariantLineItem` model represents line items associated with variants in an order.
 
-</details>
-
-<details close>
-<summary>Comment</summary>
-
-| Key               | Name            | Type            |
-|-------------------|-----------------|-----------------|
-| Foreign Key       | User            | ForeignKey      |
-| Foreign Key       | Blog            | ForeignKey      |
-|                   | Content         | TextField       |
-|                   | Created Date    | DateTimeField   |
-|                   | Updated Date    | DateTimeField   |
+  | Field Name      | Field Type                                        | Description                                                   |
+  |-----------------|---------------------------------------------------|---------------------------------------------------------------|
+  | order           | ForeignKey(Order, on_delete=models.CASCADE)      | The order associated with the line item.                      |
+  | variant         | ForeignKey(Variant, on_delete=models.CASCADE)    | The variant associated with the line item.                    |
+  | quantity        | IntegerField                                     | The quantity of the variant in the line item.                |
+  | lineitem_total  | DecimalField(max_digits=6, decimal_places=2)      | The total cost of the line item (calculated automatically).  |
 
 </details>
 
 [Table of content](#table-of-content)
-
-## UX design 
 
 ### Wireframe
 [wireframe files](https://github.com/jhoanTrujillo/e-commerce-pp5/tree/main/github_media)
@@ -285,32 +259,44 @@ Our mailing lists are cultivated from the email addresses collected via our news
 
 ### Marketing & Search Engine Optimisation (SEO)
 
+At Joe's crazy pins, we aim to maximize our online presence and engage with our audience effectively through a strategic Facebook marketing plan. Here's how we plan to leverage Facebook to drive sales and foster customer relationships:
+
+**Single Product Purchases**: Our focus is on promoting single product purchases, highlighting the unique features and benefits of each item to capture the attention of potential customers.
+
+**Utilizing Facebook Marketing and Mailchimp Newsletter**: We will deploy targeted Facebook ads to reach our desired audience segments, ensuring our products are showcased to those most likely to make a purchase. Additionally, we'll complement our Facebook efforts with a regular newsletter sent via Mailchimp, providing subscribers with updates on our latest products, promotions, and industry trends.
+
+**A/B Testing for Marketing Campaigns**: To optimize our marketing efforts, we'll conduct A/B testing on our Facebook ad campaigns. By testing different ad creatives, copywriting styles, and targeting parameters, we can identify the most effective strategies for driving engagement and conversions.
+
+**SEO Optimization for Increased Discoverability**: In addition to our Facebook initiatives, we'll focus on SEO optimization to increase the discoverability of our brand and products in search engine results. By optimizing our website content, meta tags, and product descriptions with relevant keywords, we'll improve our visibility and attract organic traffic to our online store.
+
+**Showcasing Facebook Page**: We'll prominently display a picture of our Facebook page on our website, inviting visitors to connect with us on social media. This will help us expand our online community and foster brand loyalty among our audience.
+
+![facebook page for joe's crazy pins](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/facebook%20page.png)
+
+Through these strategic initiatives, we aim to enhance brand visibility, drive sales, and cultivate lasting relationships with our customers on Facebook and beyond.
 
 **Keywords**
+To ensure optimal visibility in search engine results and attract the right audience to our website, we have identified a comprehensive list of keywords related to our products:
+
 - Enamel pins
 - Handcrafted pins
 - Unique pins
 - Lapel pins
 - Pin badges
-- Artisan pins
 - Custom pins
 - Collectible pins
 - Trendy pins
 - Fashion pins
 - Cute pins
-- Pop culture pins
-- - Vintage pins
+- Vintage pins
 - Retro pins
 - Whimsical pins
-- Animal pins
 - Floral pins
 - Minimalist pins
 - Statement pins
 - Pin accessories
 
-
-
-
+By strategically incorporating these keywords into our website content, product descriptions, and meta tags, we can improve our search engine rankings and attract organic traffic from users actively searching for these terms. This will help us reach our target audience more effectively and increase the visibility of our products online.
 
 
 **Sitemap**
@@ -329,3 +315,143 @@ Our mailing lists are cultivated from the email addresses collected via our news
 - Django
 - Bulma CSS
 - Stripe
+
+## Deployment
+
+### ElephantSQL Database
+
+This project utilizes [ElephantSQL](https://www.elephantsql.com/) for the PostgreSQL Database.
+
+To obtain your own PostgreSQL Database, sign up with your GitHub account, then follow these steps:
+
+1. Click on "Create New Instance" to initiate a new database.
+2. Provide a name (typically the name of your project, such as "e-commerce-pp5").
+3. Choose the "Tiny Turtle (Free)" plan.
+4. You can leave the Tags field empty.
+5. Select the Region and Data Center that are closest to your location.
+6. Once the database is created, click on its name to access the database URL and Password.
+
+### Amazon AWS
+
+This project utilizes AWS to host media and static files online, as Heroku does not persist this type of data.
+
+Follow these steps to connect your project to AWS after creating an AWS account and logging in to the AWS Management Console:
+
+#### S3 Bucket
+1. Search for S3.
+2. Create a new bucket, giving it a name (typically matching your Heroku app name), and choose the region closest to you.
+3. Untick "Block all public access" and acknowledge that the bucket will be public (required for it to work on Heroku).
+4. Enable ACLs and select "Bucket owner preferred" from Object Ownership.
+5. From the Properties tab, enable static website hosting and specify "index.html" and "error.html" in their respective fields, then click Save.
+6. In the Permissions tab, paste the provided CORS configuration.
+
+```
+[
+ {
+  "AllowedHeaders": [
+   "Authorization"
+  ],
+  "AllowedMethods": [
+   "GET"
+  ],
+  "AllowedOrigins": [
+   "*"
+  ],
+  "ExposeHeaders": []
+ }
+]
+```
+
+7. Copy your ARN string.
+8. In the Bucket Policy tab, use the Policy Generator to create a policy allowing GetObject actions.
+9. Copy the generated Policy and paste it into the Bucket Policy Editor, ensuring to add /* to the end of the Resource key. It tends to look like this but it might be different depending on your needs.
+```
+{
+ "Id": "Policy1234567890",
+ "Version": "2012-10-17",
+ "Statement": [
+  {
+   "Sid": "Stmt1234567890",
+   "Action": [
+    "s3:GetObject"
+   ],
+   "Effect": "Allow",
+   "Resource": "arn:aws:s3:::your-bucket-name/*"
+   "Principal": "*",
+  }
+ ]
+}
+```
+10. Click Save.
+11. In the Access Control List (ACL) section, click "Edit" and enable List for Everyone (public access), accepting any warning prompts.
+
+If the edit button is disabled, ensure that ACLs are enabled in the Object Ownership section.
+
+### IAM Setup
+
+Follow these steps to set up IAM (Identity and Access Management) on AWS:
+
+1. Create a New Group
+   - Name: group-ci-project-5-joe-pins (group name + project name)
+   - Tags (optional, but must be clicked to proceed to the review policy page)
+
+2. Assign Permissions to the Group
+   - Select the newly created group and navigate to the Permissions tab.
+   - Open the Add Permissions dropdown and click Attach Policies.
+   - Select the AmazonS3FullAccess policy and click Add Permissions.
+
+3. Import Managed Policy
+   - Select the Import Managed Policy link from the JSON tab.
+   - Search for S3, choose the AmazonS3FullAccess policy, and then Import.
+   - Paste your S3 Bucket ARN into the "Resources" key on the Policy.
+
+4. Review and Create Policy
+   - Review the policy details.
+   - Name: ci-project-5-joe-pins (policy name + project name)
+   - Description: "Access to S3 Bucket for ci-project-5-joe-pins static files."
+   - Click Create Policy.
+
+5. Attach Policy to Group
+   - Select your "group-ci-project-5-joe-pins" from User Groups.
+   - Click Attach Policy, search for "ci-project-5-joe-pins", and select it.
+
+6. Create a New User
+   - Name: user-ci-project-5-joe-pins (user name + project name)
+   - Select Programmatic Access for "Select AWS Access Type".
+   - Assign the user to the "group-ci-project-5-joe-pins".
+   - Tags (optional, but must be clicked to proceed to the review user page).
+   - Click Create User.
+
+7. Download User Credentials
+   - Download the .csv file containing the user's Access key ID and Secret access key.
+   - Save a copy on your system immediately after download.
+
+Ensure to securely store and manage the user's credentials:
+
+`AWS_ACCESS_KEY_ID` = Access key ID
+`AWS_SECRET_ACCESS_KEY` = Secret access key
+
+
+
+## Credits
+
+### Resources used:
+
+**CODE**
+- [BULMA CSS](https://bulma.io/) - one of the main tools I used. Bulma provided the backbone of the project. The colors, fonts, and other design choices are handling automatically by the framework. 
+
+**Content**
+
+- [Midjourney](https://www.midjourney.com/explore?tab=random) - image generation
+- [Ubersuggest](https://www.midjourney.com/explore?tab=random) - keyword research
+- [CHAT GPT](https://www.midjourney.com/explore?tab=random) - for product description using keywords
+- [XML SITEMAPS](https://www.xml-sitemaps.com/) - for creating a sitemap
+
+**Hosting and deployment**
+
+- [Heroku](https://www.heroku.com/) - For deployment and hosting of site
+- [Mailchimp](https://mailchimp.com/) - Mailchimp for newsletter handling
+- [ElephantSQL](https://www.elephantsql.com/) - ElephantSQL for database
+- [Stripe](https://dashboard.stripe.com/) - Stripe for payment processing
+- [GMAIL](https://mail.google.com/) - used for email submission
+- [Canva](https://www.canva.com/) - For creation of custom images and facebook page images
