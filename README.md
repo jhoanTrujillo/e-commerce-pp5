@@ -24,9 +24,9 @@ Here you can find all the content in the docs and links to each individual secti
     - [Amazon AWS](#amazon-aws)
     - [heroku](#heroku)
 - [Testing](#testing)
-    - [Site Speed](#site)
+    - [Site Speed](#site-speed)
+    - [Manual Testing](#manual-testing)
     - [Bugs](#Bugs)
-    - [Current major issues](#)
 - [Credits](#credits)
 
 > You will find a back to top link at the end of every section.
@@ -91,9 +91,9 @@ Below there is a list of features of the main functionalities I thought would be
 | **Product Features (users)** | | | |
 | Product page | 5 | 4 | Must have |
 | Product Collection | 5 | 3 | Must have |
-| product reviews | 4 | 4 | Should have |
+| product reviews | 4 | 4 | Could have |
 | **Cart/Checkout features** ||||
-| Add product to cart | 5 | 3 | |
+| Add product to cart | 5 | 3 | Must Have |
 | Remove product from cart | 4 | 3 | Should have |
 | See order summary | 4 | 2 | Could have |
 | Pay and complete checkout | 5 | 4 | Must have |
@@ -261,6 +261,7 @@ At Joe's crazy pins, we aim to maximize our online presence and engage with our 
 **Showcasing Facebook Page**: We'll prominently display a picture of our Facebook page on our website, inviting visitors to connect with us on social media. This will help us expand our online community and foster brand loyalty among our audience.
 
 ![facebook page for joe's crazy pins](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/facebook%20page.png)
+> You can access the facebook page via the footer of the website or via .
 
 Through these strategic initiatives, we aim to enhance brand visibility, drive sales, and cultivate lasting relationships with our customers on Facebook and beyond.
 
@@ -299,7 +300,6 @@ disallow: /checkout/
 sitemap: https://ci-project-5-joe-pins-be851091e775.herokuapp.com/sitemap.xml
 ```
 
-
 ### Technologies used
 
 **Languages**
@@ -313,7 +313,7 @@ sitemap: https://ci-project-5-joe-pins-be851091e775.herokuapp.com/sitemap.xml
 - Bulma CSS
 - Stripe
 
-## Deployment
+## Deployment
 
 ### ElephantSQL Database
 
@@ -334,7 +334,8 @@ This project utilizes AWS to host media and static files online, as Heroku does 
 
 Follow these steps to connect your project to AWS after creating an AWS account and logging in to the AWS Management Console:
 
-#### S3 Bucket
+#### S3 Bucket
+
 1. Search for S3.
 2. Create a new bucket, giving it a name (typically matching your Heroku app name), and choose the region closest to you.
 3. Untick "Block all public access" and acknowledge that the bucket will be public (required for it to work on Heroku).
@@ -428,17 +429,122 @@ Ensure to securely store and manage the user's credentials:
 `AWS_ACCESS_KEY_ID` = Access key ID
 `AWS_SECRET_ACCESS_KEY` = Secret access key
 
+## Testing Overview
+Due to time constraints, resolving all testing issues within this project has been challenging. However, I'm committed to documenting and analyzing each testing finding encountered during development, along with potential solutions. While the testing process may not be comprehensive, this section aims to provide insights into the testing journey, highlighting areas for improvement and future iterations.
 
+### Speed Testing
+To evaluate the performance of this project, speed testing was conducted using https://pagespeed.web.dev/. This tool offers insights into the loading speed and optimization of web pages, helping to identify areas for improvement and enhance user experience.
+
+The speed testing was done in the three main pages with big images as content:
+
+**Index page:**
+Based on the performance analysis, the index page achieved a performance score of 61, with accessibility and best practices scoring 91 and 100 respectively. While the SEO score reached 91, there's still room for enhancement across all metrics, particularly in performance. According to site speed analytics, the primary areas for improvement lie in optimizing image delivery and reducing layout shifting on the front page. This can be addressed by adjusting the loading type of certain content to lazy loading and implementing caching mechanisms for the hero image data, thereby enhancing overall page performance and user experience.
+
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/performance_main_page.png)
+
+**Collection page:**
+On the collection page, the performance score stands at 65, with accessibility at 96, best practices at 100, and SEO at 91. Analysis suggests that unused code, particularly in JavaScript, is contributing to performance issues. Additionally, the presence of unused elements from the Bulma library appears to be a significant factor in the page slowdown, closely followed by image optimization. To address this, considering a more lightweight version of Bulma could lead to overall speed improvements and better page performance.
+
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/collection_page_speed.png)
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/collection_page_speed_insight.png)
+**Product page:**
+
+
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/mobile_product_page.png)
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/mobile_product_page_errors.png)
+
+### Manual testing
+
+### Python linter
+This is just a general demonstration and of the 3 major apps and the py code there.
+
+**Product app**
+The majority of the issues in the view for the product app was based around indentation because the code had mixed indentation between tabs
+and spaces. Other issues highlighted was the lines were too long. that was remediated by cutting some lines.
+**Admin.py**
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/products_admin_py.png)
+**Views.py**
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/products_views_py.png)
+**models.py**
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/products_models_py.png)
+**widgets.py**
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/products_widgets_py.png)
+**forms.py**
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/products_forms_py.png)
+
+**Home**
+The home app had several linting errors related to the indentation. I noticed that the main thing I missed was the long strings not breaking in the right place and the spaces between functions. A interesting one was the last line needing a blank space which I missed almost 100% of the times. 
+
+**Admin.py**
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/home_admin_py.png)
+**Views.py**
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/home_views_py.png)
+**models.py**
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/home_models_py.png)
+**urls.py**
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/home_urls_py.png)
+**forms.py**
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/home_forms_py.png)
+
+**Checkout**
+In the case of the checkout app I noticed that there was a bit less to worry about. As the app was made almost at the end with a bit more warmup there was a bit more care in the syntax and the usage of indentation. Not major issues other than a couple of long strings that needed to be cut down.
+
+**Admin.py**
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/checkout_admin_py.png)
+**Views.py**
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/checkout_views_py.png)
+**models.py**
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/checkout_models_py.png)
+**urls.py**
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/checkout_urls_py.png)
+**forms.py**
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/checkout_forms_py.png)
+**Signals**
+
+### Bugs
+Although there are some bugs documented in the project board I thought to bring to light some major or at least the most notable bugs I found here. 
+
+**Major Bug: product image update**
+- When updating products on the site using the super user account, users encounter difficulties uploading images directly into the S3 bucket.
+The issue arises from problems with the required signature for submitting objects as PUT requests.
+
+**Fallback Solution:**
+- As a workaround, users can add the image URL instead of directly uploading images, enabling products to display images effectively.
+This workaround applies to both products and variants.
+
+**Ongoing Investigation:**
+- Efforts are underway to determine the necessary steps to ensure AWS allows PUT access to the project.
+
+---
+
+**Major Bug: email confirmation**
+- Confirmation emails are not being sent when orders are completed, resulting in a 500 page error.
+
+**Fallback Solution:**
+- Despite the email failure, user accounts are still being created, ensuring access to previous orders via the user profile.
+
+**Ongoing Investigation:**
+- Possible cause: Last-minute changes to the confirmation template may have altered the template inheritance, leading to email sending failures.
+
+---
+
+**Major Bug: Order email**
+- When an order is completed, emails containing confirmation details are not being sent, resulting in customers not receiving order confirmations.
+
+**Fallback Solution:**
+- Users experiencing this issue can sign in to their accounts to access previous orders via the user profile, which tracks order history.
+
+**Ongoing Investigation:**
+- The erratic behavior of message windows may be attributed to conflicts between the message-box class code and the code handling forms on the page. Refreshing the page could serve as a temporary workaround until a permanent fix is implemented.
 
 ## Credits
 
 ### Resources used:
-
 **CODE**
 - [BULMA CSS](https://bulma.io/) - one of the main tools I used. Bulma provided the backbone of the project. The colors, fonts, and other design choices are handling automatically by the framework. 
+- [Mailchimp newsletter box](https://mailchimp.com/help/add-a-signup-form-to-your-website/) - mailchimp docs have a embed for newsletter signatures that we use in our footer.
 
 **Content**
-
 - [Midjourney](https://www.midjourney.com/explore?tab=random) - image generation
 - [Ubersuggest](https://www.midjourney.com/explore?tab=random) - keyword research
 - [CHAT GPT](https://www.midjourney.com/explore?tab=random) - for product description using keywords
