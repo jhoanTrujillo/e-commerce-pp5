@@ -12,7 +12,7 @@ class MessageBox extends HTMLElement {
         // Schedule fade-out and deletion after one second
         setTimeout(() => {
             this.fadeOutAndDelete();
-        }, 1000);
+        }, 2000);
     }
 
     fadeOutAndDelete() {
