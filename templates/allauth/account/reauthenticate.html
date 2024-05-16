@@ -1,6 +1,5 @@
-{% extends "account/base_reauthenticate.html" %}
-{% load allauth %}
-{% load i18n %}
+{% extends "account/base.html" %}
+{% load allauth i18n %}
 {% block reauthenticate_content %}
     <p>{% blocktranslate %}Enter your password:{% endblocktranslate %}</p>
     {% url 'account_reauthenticate' as action_url %}
