@@ -46,7 +46,7 @@ ul.is-footer-linklist li a {
     width: 100vw;
 }
 
-message-box {
+div#message-box {
 	z-index: 50;
 	position: absolute;
 	display: block;
