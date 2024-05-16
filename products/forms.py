@@ -1,5 +1,5 @@
 from django import forms
-from .widgets import CustomCLearableFileInput
+from .widgets import CustomClearableFileInput
 from .models import Product, Collection, Variant
 
 
@@ -12,7 +12,7 @@ class ProductForm(forms.ModelForm):
     # Specify the upload path
     image = forms.ImageField(label='Image',
                              required=False,
-                             widget=CustomCLearableFileInput)
+                             widget=CustomClearableFileInput)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -37,7 +37,7 @@ class VariantForm(forms.ModelForm):
     # Specify the upload path
     image = forms.ImageField(label='Image',
                              required=False,
-                             widget=CustomCLearableFileInput)
+                             widget=CustomClearableFileInput)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
