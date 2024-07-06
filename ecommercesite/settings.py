@@ -157,13 +157,13 @@ if 'USE_AWS' in os.environ:
     }
 
     # Bucket Config
-    AWS_STORAGE_BUCKET_NAME = 'myfifthecomprojectbucket'
-    AWS_S3_REGION_NAME = 'eu-north-1'
-    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_ACCESS_SECRET_KEY_ID')
+    AWS_STORAGE_BUCKET_NAME = "myfifthecomprojectbucket"
+    AWS_S3_REGION_NAME = "eu-north-1"
+    AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
 
     # Tells Django the location to access the files from
-    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com'
 
     # Static and media files
     STATICFILES_STORAGE = 'custom_storages.StaticStorage'
@@ -211,4 +211,4 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
 
-django_heroku.settings(locals())
+django_heroku.settings(locals(), staticfiles=False)
