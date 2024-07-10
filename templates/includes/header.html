@@ -1,4 +1,4 @@
-<nav class="navbar bounce-in" role="navigation" aria-label="main navigation">
+<nav class="navbar bounce-in" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="{% url 'home' %}">
         <h1 class="title is-size-4">Joe's Crazy Pins</h1>
@@ -19,13 +19,13 @@
                     <div class="is-flex">
                         <input 
                         type="text" 
-                        name="q" 
-                        id="q"
+                        name="query" 
+                        id="query"
                         class="input is-rounded mr-1 my-auto"
                         placeholder="Search for content in our site"
                         >
                         <button type="submit" class="button is-rounded">
-                            <i class="fa-solid fa-magnifying-glass" aria-label="Submit search form"></i>
+                            <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
                     </div> <!-- /.is-flex -->
                 </form> 
@@ -70,7 +70,7 @@
                                 placeholder="Search for content in our site"
                                 >
                                 <button type="submit" class="button is-rounded">
-                                    <i class="fa-solid fa-magnifying-glass" aria-label="Submit search form"></i>
+                                    <i class="fa-solid fa-magnifying-glass"></i>
                                 </button>
                             </div> <!-- /.is-flex -->
                         </form> 
