@@ -3,27 +3,27 @@
 <html lang="en" data-theme="light">
     <head>
         {% block meta %}
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta http-quiv="X-UA-compatible" content="ie=edge" />
+        <meta charset="UTF-8" >
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-quiv="X-UA-compatible" content="ie=edge">
         <meta name="keywords" content="Enamel pins, Handcrafted pins, Unique pins, Lapel pins, Pin badges, Artisan pins, Custom pins, Collectible pins, Trendy pins, Fashion pins, Cute pins, Pop culture pins, Vintage pins, Retro pins, Whimsical pins, Animal pins, Floral pins, Minimalist pins, Statement pins, Pin accessories">
         <link rel="icon" type="image/x-icon" href="https://ci-project-5-joe-pins-be851091e775.s3.eu-north-1.amazonaws.com/static/media/pin_favicon.png">
         <!-- Add all meta content to site -->
         {% include 'includes/meta.html' %}
         {% endblock %} 
         {% block core_css %}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link
             href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
             rel="stylesheet"
-        />
+        >
         <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css"
-        />
+        >
         <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
-        <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
         {% endblock %} 
 
         {% block extra_css %}{% endblock %}
@@ -43,20 +43,20 @@
     <body class="has-background-white-bis">
         <div id="message-container">
             {% if messages %}
-            {% for message in messages %}
-                {% with message.level as level %}
-                    {% if level == 40 %}
-                        {% include 'includes/toasts/toast_error.html' %}
-                    {% elif level == 30 %}
-                        {% include 'includes/toasts/toast_warning.html' %}
-                    {% elif level == 25 %}
-                        {% include 'includes/toasts/toast_success.html' %}
-                    {% else %}
-                        {% include 'includes/toasts/toast_info.html' %}
-                    {% endif %}
-                {% endwith %}
-            {% endfor %}
-        {% endif %}
+                {% for message in messages %}
+                    {% with message.level as level %}
+                        {% if level == 40 %}
+                            {% include 'includes/toasts/toast_error.html' %}
+                        {% elif level == 30 %}
+                            {% include 'includes/toasts/toast_warning.html' %}
+                        {% elif level == 25 %}
+                            {% include 'includes/toasts/toast_success.html' %}
+                        {% else %}
+                            {% include 'includes/toasts/toast_info.html' %}
+                        {% endif %}
+                    {% endwith %}
+                {% endfor %}
+            {% endif %}
         </div>
         <!-- Nav and annoucement bar -->
         {% include 'includes/header.html' %} 
@@ -75,8 +75,8 @@
 
         <!-- Post page load javascript-->
         {% block postload_js %}
-            <script src="{% static 'js/base.js' %}" defer></script>
-            <script src="{% static 'js/mobile_navbar.js' %}" defer></script>
+            <script src="{% static 'js/base.js' %}"></script>
+            <script src="{% static 'js/mobile_navbar.js' %}"></script>
         {% endblock %}
     </body>
 </html>
