@@ -521,6 +521,11 @@ Here we catalog all the testing done using the W3 tool for HTML.
 #### Index page
 The index page had some minor and major errors regarding HTML. 
 
+#### Contact Page
+The contact page had a missing action to the contact page url path of the app. It still worked but I made sure to fix the error by adding an action to /contact/ to ensure the data transfer don't run into any errors and everything is W3 compliant. 
+
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/contact_page_w3.png)
+
 #### Profile page
 The profile page had some minor issues. One of these was resolved while fixing the index page and was related to an incomplete meta tag added early in development, making it unrelated. Additionally, there was an informational box regarding a trailing slash at the end of a hidden input field. This input field appears to be added by code native to Django, so we will ignore this mention.
 
