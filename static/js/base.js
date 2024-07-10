@@ -9,12 +9,12 @@ const toast = () => {
     const closeToast = () => {
         // Remove the message element from the DOM
         toastElement.remove();
-    }
+    };
 
     closeToastButton.addEventListener("click", () => {
         closeToast();
     });
 
-}
+};
 
 document.addEventListener("DOMContentLoaded", toast);
