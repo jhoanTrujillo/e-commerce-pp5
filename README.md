@@ -521,7 +521,7 @@ Here we catalog all the testing done using the W3 tool for HTML.
 #### Index page
 The index page had some minor and major errors regarding HTML. 
 
-#### Contact Page
+#### Contact Page
 The contact page had a missing action to the contact page url path of the app. It still worked but I made sure to fix the error by adding an action to /contact/ to ensure the data transfer don't run into any errors and everything is W3 compliant. 
 
 ![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/contact_page_w3.png)
@@ -531,10 +531,16 @@ The profile page had some minor issues. One of these was resolved while fixing t
 
 ![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/profile_page_w3.png)
 
-#### Product Creation Page
+#### Product Creation Page
 At the moment of testing the product creation, the issue with the incomplete meta tag wasn't resolved. The warning was fixed once I eliminated the tag, which was just boilerplate. The second message is related to a trailing slash. As before, we will ignore it since it doesn't affect any other piece of HTML and is simply information for future development.
 
 ![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/product_creation_w3.png)
+
+#### Login pages
+
+Out of all the login pages, the only one with errors is the signup page. The signup page is rendering some span tags and a list based on the allauth specifications. Since the code is called from the allauth package for authentication, it won't be edited in this case.
+
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/signup_page_w3.png)
 
 ### W3 CSS - Jigsaw
 The jigsaw test returns several errors due to the usage of a third-party library
