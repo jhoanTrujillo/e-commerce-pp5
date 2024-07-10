@@ -1,8 +1,3 @@
-:root {
-	--barlow: "Barlow", sans-serif;
-	--barlow-c: "Barlow Condensed", sans-serif;
-}
-
 #mc_embed_signup{
 	background:#fff; 
 	clear:left; 
@@ -56,7 +51,16 @@ div#message-box {
 	margin: auto;
 }
 
+.footer {
+	margin-top: 10rem;
+}
 
+@media only screen and (max-width: 780px) {
+	.footer {
+		margin-top: 5rem;
+	}
+}
+/** sumary card **/
 #is-order-summary-card {
 	overflow-y: scroll;
 	max-height: 33rem;

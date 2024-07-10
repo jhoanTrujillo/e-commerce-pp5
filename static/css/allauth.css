@@ -17,7 +17,7 @@
 
 .card-content h1 {
     font-size: 3em;
-    font-family: var(--barlow-c);
+    font-family: Helvetica, Arial, sans-serif;
     margin-bottom: 0.5em;
 }
 
@@ -47,7 +47,7 @@ span.helptext {
 
 div.box p {
     font-size: 2em;
-    font-family: var(--barlow-c);
+    font-family: Helvetica,Arial,sans-serif;
     font-weight: 200;
 }
 
