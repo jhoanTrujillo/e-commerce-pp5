@@ -455,7 +455,7 @@ On the collection page, the performance score stands at 65, with accessibility a
 
 ### Manual testing
 
-### Python linter
+### Python Validator
 This is just a general demonstration and of the 3 major apps and the py code there.
 
 **Product app**
@@ -500,6 +500,23 @@ In the case of the checkout app I noticed that there was a bit less to worry abo
 **forms.py**
 ![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/checkout_forms_py.png)
 **Signals**
+
+### JSHINT - Javascript validator
+The testing of the javascript files in the static folder were done via [jshint.com](https://jshint.com/) since we are using ES6 featur.es the site should be configure to use ES6 new features since failure to do that will return warnings related to ES6 features. 
+
+#### Pre-configuration adjustment
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/jshint_non_es6.png)
+
+#### After configuration adjustment
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/jshint_es6.png)
+
+All files using classes return the same variable missing message when declaring the object. This is due to the file being disconnected from the element until everything is rendered together. The linter don't have access to the full scope of the code including HTML. So the warning is not an error.
+
+#### Product - stripe.js file
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/stripe_js.png)
+In the stripe_js file the only mentioned of an issue is more like an unnasigned variable that is needed for stripe to have in the file. So outside of the context of the linter it is needed.
+
+Other files only triggered a semi-colomn missing message in around two lines.
 
 ### Bugs
 Although there are some bugs documented in the project board I thought to bring to light some major or at least the most notable bugs I found here. 
