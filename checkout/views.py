@@ -134,6 +134,7 @@ def checkout(request):
                 order_form = OrderForm(initial={
                     'full_name': profile.user.get_full_name(),
                     'email': profile.user.email,
+                    'phone_number': profile.default_phone_number,
                     'country': profile.default_country,
                     'town_or_city': profile.default_town_or_city,
                     'postcode': profile.default_postcode,
@@ -191,13 +192,13 @@ def checkout_success(request, order_number):
         # save the user's info
         if save_info:
             profile_data = {
-                'default_phone_number' : order.phone_number,
-                'default_country' : order.country,
-                'default_postcode' : order.postcode,
-                'default_town_or_city' : order.town_or_city,
-                'default_street_address1' : order.street_address1,
-                'default_street_address2' : order.street_address2,
-                'default_county' : order.county,
+                'default_phone_number': order.phone_number,
+                'default_country': order.country,
+                'default_postcode': order.postcode,
+                'default_town_or_city': order.town_or_city,
+                'default_street_address1': order.street_address1,
+                'default_street_address2': order.street_address2,
+                'default_county': order.county,
             }
             user_profile_form = UserProfileForm(profile_data, instance=profile)
             if user_profile_form.is_valid():
@@ -210,14 +211,16 @@ def checkout_success(request, order_number):
     if 'cart' in request.session:
         del request.session['cart']
 
-    # Generate the order summary URL
-    order_summary_url = request.build_absolute_uri(reverse('checkout_success', args=[order_number]))
+    # Generate the order summary URL with the 'summary' parameter
+    order_summary_url = request.build_absolute_uri(reverse('checkout_success', args=[order_number])) + '?summary=true'
 
-    # Send the confirmation email
-    subject = 'Your Order Confirmation'
-    message = f'Thank you for your order. You can view your order summary at the following link: {order_summary_url}'
-    recipient_list = [order.email]
-    send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, recipient_list)
+    # Check if the 'summary' parameter is in the URL
+    if 'summary' not in request.GET:
+        # Send the confirmation email
+        subject = 'Your Order Confirmation'
+        message = f'Thank you for your order. You can view your order summary at the following link: {order_summary_url}'
+        recipient_list = [order.email]
+        send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, recipient_list)
 
     template = 'checkout/checkout_success.html'
     context = {
