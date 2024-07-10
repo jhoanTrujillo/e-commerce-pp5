@@ -448,8 +448,6 @@ On the collection page, the performance score stands at 65, with accessibility a
 ![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/collection_page_speed.png)
 ![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/collection_page_speed_insight.png)
 **Product page:**
-
-
 ![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/mobile_product_page.png)
 ![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/mobile_product_page_errors.png)
 
@@ -499,7 +497,6 @@ In the case of the checkout app I noticed that there was a bit less to worry abo
 ![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/checkout_urls_py.png)
 **forms.py**
 ![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/checkout_forms_py.png)
-**Signals**
 
 ### JSHINT - Javascript validator
 The testing of the javascript files in the static folder were done via [jshint.com](https://jshint.com/) since we are using ES6 featur.es the site should be configure to use ES6 new features since failure to do that will return warnings related to ES6 features. 
@@ -518,41 +515,28 @@ In the stripe_js file the only mentioned of an issue is more like an unnasigned 
 
 Other files only triggered a semi-colomn missing message in around two lines.
 
-### Bugs
-Although there are some bugs documented in the project board I thought to bring to light some major or at least the most notable bugs I found here. 
+### W3 HTML
+Here we catalog all the testing done using the W3 tool for HTML.
 
-**Major Bug: product image update**
-- When updating products on the site using the super user account, users encounter difficulties uploading images directly into the S3 bucket.
-The issue arises from problems with the required signature for submitting objects as PUT requests.
+#### Index page
+The index page had some minor and major errors regarding HTML. 
 
-**Fallback Solution:**
-- As a workaround, users can add the image URL instead of directly uploading images, enabling products to display images effectively.
-This workaround applies to both products and variants.
+#### Profile page
+The profile page had some minor issues. One of these was resolved while fixing the index page and was related to an incomplete meta tag added early in development, making it unrelated. Additionally, there was an informational box regarding a trailing slash at the end of a hidden input field. This input field appears to be added by code native to Django, so we will ignore this mention.
 
-**Ongoing Investigation:**
-- Efforts are underway to determine the necessary steps to ensure AWS allows PUT access to the project.
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/profile_page_w3.png)
 
----
+#### Product Creation Page
+At the moment of testing the product creation, the issue with the incomplete meta tag wasn't resolved. The warning was fixed once I eliminated the tag, which was just boilerplate. The second message is related to a trailing slash. As before, we will ignore it since it doesn't affect any other piece of HTML and is simply information for future development.
 
-**Major Bug: email confirmation**
-- Confirmation emails are not being sent when orders are completed, resulting in a 500 page error.
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/product_creation_w3.png)
 
-**Fallback Solution:**
-- Despite the email failure, user accounts are still being created, ensuring access to previous orders via the user profile.
+### W3 CSS - Jigsaw
+The jigsaw test returns several errors due to the usage of a third-party library
 
-**Ongoing Investigation:**
-- Possible cause: Last-minute changes to the confirmation template may have altered the template inheritance, leading to email sending failures.
 
----
-
-**Major Bug: Order email**
-- When an order is completed, emails containing confirmation details are not being sent, resulting in customers not receiving order confirmations.
-
-**Fallback Solution:**
-- Users experiencing this issue can sign in to their accounts to access previous orders via the user profile, which tracks order history.
-
-**Ongoing Investigation:**
-- The erratic behavior of message windows may be attributed to conflicts between the message-box class code and the code handling forms on the page. Refreshing the page could serve as a temporary workaround until a permanent fix is implemented.
+## Bugs
+For bugs please see the project board. There is a section that handles and catalogs all the bugs that the project experience previously and other bugs that might need to be fix in the future.
 
 ## Credits
 
