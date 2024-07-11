@@ -2,19 +2,19 @@
 	<div class="card">
 		<div class="card-image">
 		<a href="{% url 'product_details' product.id %}">
-		<figure class="image is-1by1 is-hoverable">
-			<img
-				{% if product.image %}
-					src="{{ product.image.url}}"
-				{% elif product.image_url %}
-					src="{{ product.image_url }}"
-				{% else %}
-					src="https://ci-project-5-joe-pins-be851091e775.s3.eu-north-1.amazonaws.com/static/media/no_image_found.svg"
-				{% endif %}
-				alt="Placeholder image"
-				class="is-hoverable"
-			>
-		</figure>
+			<figure class="image is-1by1 is-hoverable">
+				<img
+					{% if product.image %}
+						src="{{ product.image.url}}"
+					{% elif product.image_url %}
+						src="{{ product.image_url }}"
+					{% else %}
+						src="https://ci-project-5-joe-pins-be851091e775.s3.eu-north-1.amazonaws.com/static/media/no_image_found.svg"
+					{% endif %}
+					alt="Placeholder image"
+					class="is-hoverable"
+				>
+			</figure>
 		</a>
 		</div>
 

@@ -54,7 +54,7 @@
 									<div class="is-flex is-flex-direction-rows is-align-items-center">
 										<div class="cell">
 
-											<form action="" method="POST" class="update-form form" data-product-form="{% if item.is_variant %}variant{%else%}product{% endif %}_{{ item.product_or_variant.id }}">
+											<form action="/add_to_cart/" method="POST" class="update-form form" data-product-form="{% if item.is_variant %}variant{%else%}product{% endif %}_{{ item.product_or_variant.id }}">
 												{% csrf_token %}
 												<quantity-selector id="quantitySelector">
 													<div class="is-flex is-flex-direction-rows is-flex-wrap-nowrap is-justify-content-flex-start is-align-items-center is-align-content-space-between">
