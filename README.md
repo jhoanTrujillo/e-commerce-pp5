@@ -433,9 +433,14 @@ Ensure to securely store and manage the user's credentials:
 Due to time constraints, resolving all testing issues within this project has been challenging. However, I'm committed to documenting and analyzing each testing finding encountered during development, along with potential solutions. While the testing process may not be comprehensive, this section aims to provide insights into the testing journey, highlighting areas for improvement and future iterations.
 
 ### Speed Testing
-To evaluate the performance of this project, speed testing was conducted using https://pagespeed.web.dev/. This tool offers insights into the loading speed and optimization of web pages, helping to identify areas for improvement and enhance user experience.
+The initial speed testing on mobile was giving underwhelming performance values such as 75 on mobile due to a variety of blocking scripts loading before the content of the page such as stripe, bulma css, and others. I deferred a lot of scripts for the site to try to improve the performance and added lazy loading when possible to the images.
 
-The speed testing was done in the three main pages with big images as content:
+Although the performance is not exactly where I would like it, the improvements bring the site to an acceptable point. The site used for testing is https://pagespeed.web.dev/ here is the [link to our site](https://pagespeed.web.dev/analysis/https-ci-project-5-joe-pins-be851091e775-herokuapp-com/dcudkc8ai2?form_factor=mobile)
+
+Mobile
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/speed_test_mobile.png)
+Desktop
+![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/speed_test_desktop.png)
 
 **Index page:**
 Based on the performance analysis, the index page achieved a performance score of 61, with accessibility and best practices scoring 91 and 100 respectively. While the SEO score reached 91, there's still room for enhancement across all metrics, particularly in performance. According to site speed analytics, the primary areas for improvement lie in optimizing image delivery and reducing layout shifting on the front page. This can be addressed by adjusting the loading type of certain content to lazy loading and implementing caching mechanisms for the hero image data, thereby enhancing overall page performance and user experience.
@@ -543,8 +548,9 @@ Out of all the login pages, the only one with errors is the signup page. The sig
 ![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/signup_page_w3.png)
 
 ### W3 CSS - Jigsaw
-The jigsaw test returns several errors due to the usage of a third-party library
+The jigsaw checker returns a number of errors in each page all cause by the third-party library we are using. Bulma CSS, the library implements some CSS styling that isn't compliant with Jigsaw and provides several errors when declaring variables.
 
+The library works as expected and there are any issues other than compliance issues. This specific error won't be corrected as it was a choice to save time to use the bulma CSS library at the beginning of the project. 
 
 ## Bugs
 For bugs please see the project board. There is a section that handles and catalogs all the bugs that the project experience previously and other bugs that might need to be fix in the future.
