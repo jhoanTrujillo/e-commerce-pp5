@@ -442,6 +442,8 @@ Mobile
 Desktop
 ![](https://raw.githubusercontent.com/jhoanTrujillo/e-commerce-pp5/main/github_media/speed_test_desktop.png)
 
+Some improvements could be use in the accessibility area still and in the performance. Although the delay shouldn't be enough to pose an issue for customers visiting the site improving the performance since to be a must to get the site in optimal conditions for usage.
+
 **Index page:**
 Based on the performance analysis, the index page achieved a performance score of 61, with accessibility and best practices scoring 91 and 100 respectively. While the SEO score reached 91, there's still room for enhancement across all metrics, particularly in performance. According to site speed analytics, the primary areas for improvement lie in optimizing image delivery and reducing layout shifting on the front page. This can be addressed by adjusting the loading type of certain content to lazy loading and implementing caching mechanisms for the hero image data, thereby enhancing overall page performance and user experience.
 
@@ -551,6 +553,8 @@ Out of all the login pages, the only one with errors is the signup page. The sig
 The jigsaw checker returns a number of errors in each page all cause by the third-party library we are using. Bulma CSS, the library implements some CSS styling that isn't compliant with Jigsaw and provides several errors when declaring variables.
 
 The library works as expected and there are any issues other than compliance issues. This specific error won't be corrected as it was a choice to save time to use the bulma CSS library at the beginning of the project. 
+
+[current results in all pages provide 485 errors from bulma](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fci-project-5-joe-pins-be851091e775.herokuapp.com%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en) no issues related to our local css code were found.
 
 ## Bugs
 For bugs please see the project board. There is a section that handles and catalogs all the bugs that the project experience previously and other bugs that might need to be fix in the future.
